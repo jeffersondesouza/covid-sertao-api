@@ -2,9 +2,9 @@ const CityRepository = require('../../repository/city');
 
 module.exports = async (req, res) => {
   try {
-    const locations = await CityRepository.getCities();
+    const cities = await CityRepository.getCities();
 
-    res.send(locations);
+    res.send(cities);
   } catch (error) {
     res.send('not found');
   }
