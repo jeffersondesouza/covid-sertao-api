@@ -13,9 +13,9 @@ app.get('/', async (req, res) => {
 
 app.get('/api/v1/locations', async (req, res) => {
   try {
-    const location = await Location.findById('5e8babf51c9d44000083b976');
+    const locations = await Location.find();
 
-    res.send(location);
+    res.send(locations);
   } catch (error) {
     res.send('not found');
   }
