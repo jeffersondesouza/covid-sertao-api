@@ -11,15 +11,43 @@ app.get('/', async (req, res) => {
   res.send({ id: 1 });
 });
 
-
-app.get('/api/v1/locations', async (req, res) => {
+app.get('/api/v1/city', async (req, res) => {
   try {
-    const locations = await Location.find();
+    const locations = await Location.find({
+      _parent: { $exists: true },
+      isCity: true,
+    });
 
     res.send(locations);
   } catch (error) {
     res.send('not found');
   }
+});
+
+app.post('/api/v1/city', async (req, res) => {
+  try {
+    const { stateId, name, site, email, population, phones } = req.body;
+
+    const newCity = await new Location({
+      _parent: stateId,
+      name,
+      site,
+      email,
+      population,
+      phones,
+      logo: '',
+    }).save();
+
+    res.send(newCity);
+  } catch (error) {
+    res.send('Error').status(500);
+  }
+});
+
+app.get('/api/v1/city/:id', async (req, res) => {
+  const city = await Location.findById(req.params.id);
+
+  res.send(city);
 });
 
 const { PORT = 5000 } = process.env;
