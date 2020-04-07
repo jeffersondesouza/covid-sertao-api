@@ -1,26 +1,10 @@
-const mongoose = require('mongoose');
+/* Registerinrg the models before app initialization */
+require('./app/models/Case');
+require('./app/models/Location');
+require('./app/models/Phone');
+require('./app/models/Report');
 
-const app = require('./src/app');
-
-const Location = mongoose.model('locations');
-
-app.get('/', async (req, res) => {
-  /*   const locations = await Location.find();
-  console.log('locations:', locations);
- */
-  res.send({ id: 1 });
-});
-
-
-app.get('/api/v1/locations', async (req, res) => {
-  try {
-    const locations = await Location.find();
-
-    res.send(locations);
-  } catch (error) {
-    res.send('not found');
-  }
-});
+const app = require('./app');
 
 const { PORT = 5000 } = process.env;
 
