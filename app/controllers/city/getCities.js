@@ -1,13 +1,8 @@
-const mongoose = require('mongoose');
-
-const Location = mongoose.model('locations');
+const CityRepository = require('../../repository/city');
 
 module.exports = async (req, res) => {
   try {
-    const locations = await Location.find({
-      _parent: { $exists: true },
-      isCity: true,
-    });
+    const locations = await CityRepository.getCities();
 
     res.send(locations);
   } catch (error) {
