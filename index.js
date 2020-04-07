@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const app = require('./src/app');
+const app = require('./app');
 
 const Location = mongoose.model('locations');
 
@@ -48,6 +48,23 @@ app.get('/api/v1/city/:id', async (req, res) => {
   const city = await Location.findById(req.params.id);
 
   res.send(city);
+});
+
+app.put('/api/v1/city', async (req, res) => {
+  try {
+    const { id, population } = req.body;
+
+    const city = await Location.updateOne(
+      { _id: id },
+      {
+        population,
+      }
+    ).exec();
+
+    res.send(city);
+  } catch (error) {
+    res.send('Error').status(500);
+  }
 });
 
 const { PORT = 5000 } = process.env;
