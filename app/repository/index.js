@@ -1,5 +1,5 @@
-const cityRepository = require('./city');
+const LocationRepository = require('./city');
 
 module.exports = {
-  cityRepository,
+  LocationRepository,
 };

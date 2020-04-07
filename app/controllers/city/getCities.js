@@ -1,8 +1,8 @@
-const CityRepository = require('../../repository/city');
+const LocationRepository = require('../../repository/location');
 
 module.exports = async (req, res) => {
   try {
-    const cities = await CityRepository.getCities();
+    const cities = await LocationRepository.getCities();
 
     res.send(cities);
   } catch (error) {

@@ -16,17 +16,7 @@ const locationSchema = new Schema({
   logo: String,
   population: Number,
   phones: [Phone],
-  report: {
-    type: Report,
-    default: {
-      confirmed: 0,
-      suspects: 0,
-      negative: 0,
-      deaths: 0,
-      recovered: 0,
-      lastUpdate: 0,
-    },
-  },
+  report: Object,
 });
 
 mongoose.model('locations', locationSchema);

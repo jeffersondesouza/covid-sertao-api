@@ -1,4 +1,5 @@
 /* Registerinrg the models before app initialization */
+require('./app/models/Case');
 require('./app/models/Location');
 require('./app/models/Phone');
 require('./app/models/Report');
