@@ -1,15 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const keys = require('./config/keys');
+const envVariables = require('./services/envVariables');
 
-require('./models/Location');
-require('./models/Phone');
-require('./models/Recipient');
-require('./models/Report');
-require('./models/Survey');
-require('./models/User');
+const { cityRoutes } = require('./routes');
 
 mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
@@ -19,5 +16,15 @@ mongoose.connect(keys.mongoURI, {
 const app = express();
 
 app.use(bodyParser.json());
+
+cityRoutes(app);
+
+/* CLIENT Routes */
+if (envVariables.isProduction()) {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 module.exports = app;
