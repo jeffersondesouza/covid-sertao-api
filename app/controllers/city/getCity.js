@@ -1,9 +1,7 @@
-const mongoose = require('mongoose');
-
-const Location = mongoose.model('locations');
+const CityRepository = require('../../repository/city');
 
 module.exports = async (req, res) => {
-  const city = await Location.findById(req.params.id);
+  const city = await CityRepository.getCity(req.params.id);
 
   res.send(city);
 };

@@ -2,13 +2,15 @@ const mongoose = require('mongoose');
 
 const Location = mongoose.model('locations');
 
-const updateCity = async () => {
-  const cities = await Location.find({
-    _parent: { $exists: true },
-    isCity: true,
-  });
+const updateCity = async (params) => {
+  const { id, population } = params;
 
-  return cities;
+  return Location.updateOne(
+    { _id: id },
+    {
+      population,
+    }
+  ).exec();
 };
 
 module.exports = updateCity;

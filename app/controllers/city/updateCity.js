@@ -1,17 +1,8 @@
-const mongoose = require('mongoose');
-
-const Location = mongoose.model('locations');
+const CityRepository = require('../../repository/city');
 
 module.exports = async (req, res) => {
   try {
-    const { id, population } = req.body;
-
-    const city = await Location.updateOne(
-      { _id: id },
-      {
-        population,
-      }
-    ).exec();
+    const city = await CityRepository.updateCity(req.body);
 
     res.send(city);
   } catch (error) {
