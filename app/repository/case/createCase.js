@@ -17,7 +17,10 @@ const saveCase = async (params) => {
     symptoms,
   } = params;
 
-  const city = await LocationRepository.updateReport({ id: cityId, status });
+  const city = await LocationRepository.updateLocationReport({
+    id: cityId,
+    status,
+  });
 
   const newCase = await new Case({
     _cityId: cityId,

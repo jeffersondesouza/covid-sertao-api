@@ -13,6 +13,7 @@ const saveCity = async (params) => {
     population,
     phones,
     logo,
+    regionType: '6',
   }).save();
 };
 
