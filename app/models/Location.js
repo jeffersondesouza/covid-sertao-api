@@ -7,8 +7,8 @@ const { Schema } = mongoose;
 
 const locationSchema = new Schema({
   _parent: { type: Schema.Types.ObjectId, ref: 'Location' },
-  _microRegion: String,
-  _mesoRegion: String,
+  microRegion: String,
+  mesoRegion: String,
   name: String,
   site: String,
   email: String,
