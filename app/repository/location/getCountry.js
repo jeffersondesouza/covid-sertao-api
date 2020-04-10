@@ -3,9 +3,8 @@ const { RegionTypesEnum } = require('../../enums');
 
 const Location = mongoose.model('locations');
 
-const getCity = async (id) =>
+const getCity = async () =>
   Location.findOne({
-    _id: id,
     regionType: RegionTypesEnum.COUNTRY,
   }).then((data) => data || {});
 
