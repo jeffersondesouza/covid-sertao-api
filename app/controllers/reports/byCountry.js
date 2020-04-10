@@ -2,13 +2,13 @@
 const LocationRepository = require('../../repository/location');
 
 module.exports = async (req, res) => {
+  console.log('req:')
   try {
-    const city = await LocationRepository.getUfCity({
-      id: req.params.id,
-      uf: req.params.uf,
-    });
-
-    const { _id, name, report, updateAt, population } = city;
+    const country = await LocationRepository.getCountry(
+      '5e9065271c9d440000bce3e6'
+      );
+      
+    const { _id, name, report, updateAt, population } = country;
 
     res.send({
       id: _id,

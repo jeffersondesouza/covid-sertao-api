@@ -7,9 +7,13 @@ const {
 } = require('../controllers/reports');
 
 module.exports = (app) => {
-  app.get('/api/v1/reports/uf/:uf/city/:id', byCity);
+  app.get('/api/v1/report/country', byCountry);
   
-  /* app.get('/api/v1/reports/country', byCountry);
+  app.get('/api/v1/report/uf/:uf', byUf);
+
+  app.get('/api/v1/report/uf/:uf/city/:id', byCity);
+
+  /* 
 
   app.get('/api/v1/reports/macro/:id', byMacro);
 

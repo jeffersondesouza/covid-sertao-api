@@ -3,11 +3,10 @@ const { RegionTypesEnum } = require('../../enums');
 
 const Location = mongoose.model('locations');
 
-const getUfCity = async ({ id, uf }) =>
+const getUf = async (id) =>
   Location.findOne({
     _id: id,
-    regionType: RegionTypesEnum.CITY,
-    'region.uf': uf,
+    regionType: RegionTypesEnum.UF,
   }).then((data) => data || {});
 
-module.exports = getUfCity;
+module.exports = getUf;

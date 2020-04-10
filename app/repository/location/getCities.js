@@ -8,6 +8,6 @@ const getCities = async () =>
   Location.find({
     _parent: { $exists: true },
     regionType: RegionTypesEnum.CITY,
-  });
+  }).then((data) => data || []);
 
 module.exports = getCities;

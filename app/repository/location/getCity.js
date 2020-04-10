@@ -7,6 +7,6 @@ const getCity = async (id) =>
   Location.findOne({
     _id: id,
     regionType: RegionTypesEnum.CITY,
-  });
+  }).then((data) => data || {});
 
 module.exports = getCity;

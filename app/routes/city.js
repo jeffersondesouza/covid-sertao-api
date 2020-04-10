@@ -5,12 +5,6 @@ module.exports = (app) => {
 
   app.get('/api/v1/city/:id', getCity);
   
-  app.get('/api/v1/:uf/city', getCity);
-
-  app.get('/api/v1/:uf/city/:id', getCity);
-
-  app.get('/api/v1/:uf/:region', getCity);
-  
   app.post('/api/v1/city', saveCity);
 
   app.put('/api/v1/city', updateCity);
