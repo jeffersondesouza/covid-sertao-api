@@ -6,7 +6,7 @@ const path = require('path');
 const keys = require('./config/keys');
 const envVariables = require('./services/envVariables');
 
-const { cityRoutes, caseRoutes } = require('./routes');
+const { cityRoutes, caseRoutes, reportsRoutes } = require('./routes');
 
 mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 
 cityRoutes(app);
 caseRoutes(app);
+reportsRoutes(app);
 
 /* CLIENT Routes */
 if (envVariables.isProduction()) {
