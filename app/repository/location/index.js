@@ -6,8 +6,10 @@ const updateCity = require('./updateCity');
 const getCountry = require('./getCountry');
 const getUf = require('./getUf');
 const getUfs = require('./getUfs');
-const getUfRegion = require('./getUfRegion');
+const getUfRegionCases = require('./getUfRegionCases');
 const updateLocationReport = require('./updateLocationReport');
+const getUfRegions = require('./getUfRegions');
+const getUfRegion = require('./getUfRegion');
 
 module.exports = {
   getUf,
@@ -19,5 +21,7 @@ module.exports = {
   updateCity,
   updateLocationReport,
   getCountry,
-  getUfRegion,
+  getUfRegionCases,
+  getUfRegions,
+  getUfRegion
 };

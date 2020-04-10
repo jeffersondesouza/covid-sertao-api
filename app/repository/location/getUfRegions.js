@@ -4,9 +4,8 @@ const { RegionTypesEnum } = require('../../enums');
 
 const Location = mongoose.model('locations');
 
-const getUfRegions = async ({ id, uf }) => {
-  const regions = await Location.findOne({
-    _id: id,
+const getUfRegions = async ({ uf }) => {
+  const regions = await Location.find({
     $or: [
       { regionType: RegionTypesEnum.MESO_REGION },
       { regionType: RegionTypesEnum.MICRO_REGION },

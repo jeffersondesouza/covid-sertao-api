@@ -2,12 +2,11 @@ const LocationRepository = require('../../repository/location');
 
 module.exports = async (req, res) => {
   try {
-    const region = await LocationRepository.getUfRegionCases({
-      id: req.params.id,
+    const regions = await LocationRepository.getUfRegions({
       uf: req.params.uf,
     });
 
-    res.send(region);
+    res.send(regions);
   } catch (error) {
     res.send('Error').status(500);
   }
