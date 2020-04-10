@@ -2,12 +2,9 @@ const LocationRepository = require('../../repository/location');
 
 module.exports = async (req, res) => {
   try {
-    const city = await LocationRepository.getUfCity({
-      id: req.params.id,
-      uf: req.params.uf,
-    });
+    const uf = await LocationRepository.getUf(req.params.uf);
 
-    res.send(city);
+    res.send(uf);
   } catch (error) {
     res.send('Error').status(500);
   }
