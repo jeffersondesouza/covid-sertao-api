@@ -9,6 +9,6 @@ const getCities = async () =>
     _parent: { $exists: true },
     regionType: RegionTypesEnum.CITY,
   })
-    .select('_id phones uf name site email population')
+    .select('_id phones uf name site email population logo')
     .then((data) => data || []);
 module.exports = getCities;
