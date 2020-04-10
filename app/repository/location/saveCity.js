@@ -14,7 +14,7 @@ const saveCity = async (params) => {
     region,
   } = params;
 
-  return new Location({
+  const location = await new Location({
     _parent: stateId,
     name,
     site,
@@ -28,14 +28,16 @@ const saveCity = async (params) => {
       negative: 0,
       suspects: 0,
       deaths: 0,
-      recovered: 0
+      recovered: 0,
     },
     region: {
       ...region,
       uf: stateId,
       country: '5e90d1d01c9d4400000e879f',
     },
-  }).save();
+  });
+
+  return location.save()
 };
 
 module.exports = saveCity;
