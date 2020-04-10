@@ -19,6 +19,9 @@ const updateReport = async ({ id, status }) => {
       $inc: {
         [`report.${[filed]}`]: 1,
       },
+      $set: {
+        updateAt: new Date(),
+      },
     }
   ).exec();
 };

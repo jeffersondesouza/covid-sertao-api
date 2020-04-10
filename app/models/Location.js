@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Phone = require('./Phone');
-const Report = require('./Report');
 
 const { Schema } = mongoose;
 
@@ -17,6 +16,7 @@ const locationSchema = new Schema({
   population: Number,
   phones: [Phone],
   report: Object,
+  updateAt: Date,
 });
 
 mongoose.model('locations', locationSchema);
