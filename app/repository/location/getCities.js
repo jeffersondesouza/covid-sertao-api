@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
+const { RegionTypesEnum } = require('../../enums');
+
 const Location = mongoose.model('locations');
 
 const getCities = async () =>
   Location.find({
     _parent: { $exists: true },
-    isCity: true,
+    regionType: RegionTypesEnum.CITY,
   });
 
 module.exports = getCities;

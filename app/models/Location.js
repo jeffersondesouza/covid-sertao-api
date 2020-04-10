@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+
+const { RegionTypesEnum } = require('../enums');
 const Phone = require('./Phone');
 
 const { Schema } = mongoose;
@@ -7,8 +9,6 @@ const locationSchema = new Schema({
   _parent: { type: Schema.Types.ObjectId, ref: 'Location' },
   _microRegion: String,
   _mesoRegion: String,
-  isUf: { type: Boolean, default: false },
-  isCity: { type: Boolean, default: true },
   name: String,
   site: String,
   email: String,
@@ -17,6 +17,18 @@ const locationSchema = new Schema({
   phones: [Phone],
   report: Object,
   updateAt: Date,
+  regionType: {
+    type: String,
+    default: RegionTypesEnum.CITY,
+    enum: [
+      RegionTypesEnum.COUNTRY,
+      RegionTypesEnum.MACRO_REGION,
+      RegionTypesEnum.UF,
+      RegionTypesEnum.MESO_REGION,
+      RegionTypesEnum.MICRO_REGION,
+      RegionTypesEnum.CITY,
+    ],
+  },
 });
 
 mongoose.model('locations', locationSchema);
