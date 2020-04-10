@@ -56,12 +56,11 @@ const getUfRegion = async ({ id, uf }) => {
   );
 
   return {
-    region: ufRegion.region,
-    regionType: ufRegion.regionType,
-    name: ufRegion.name,
     _id: ufRegion._id,
     _parent: ufRegion._parent,
-    ...casesReport
+    name: ufRegion.name,
+    updateAt: new Date(),
+    ...casesReport,
   };
 };
 

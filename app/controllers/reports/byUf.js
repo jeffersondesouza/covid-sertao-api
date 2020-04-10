@@ -10,13 +10,13 @@ module.exports = async (req, res) => {
       return;
     }
 
-    const { _id, name, report, updateAt, population } = location;
+    const { _id, name, report, population } = location;
 
     res.send({
       id: _id,
       name,
       report,
-      updateAt,
+      updateAt: new Date(),
       population,
     });
   } catch (error) {
