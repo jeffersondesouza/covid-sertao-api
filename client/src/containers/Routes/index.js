@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Layout } from 'components';
+
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -7,19 +9,41 @@ const Login = () => <div>login</div>;
 const Dashboard = () => <div>dashboard</div>;
 const Page404 = () => <div>Page404</div>;
 
-const Layout = ({ children }) => (
-  <div style={{ background: 'pink' }}>{children}</div>
-);
-
-const LayoutPri = ({ children }) => (
-  <div style={{ background: 'lightblue' }}>{children}</div>
-);
-
 const Routes = () => {
   return (
     <Switch>
-      <PublicRoute exact path="/" component={Login} layout={Layout} />
-      <PrivateRoute exact path="/" component={Dashboard} layout={LayoutPri} />
+      <Redirect exact path="/" to="/login" />
+      <PublicRoute exact path="/login" component={Login} layout={Layout} />
+      <PrivateRoute
+        exact
+        path="/dashboard"
+        component={Dashboard}
+        layout={Layout}
+      />
+      <PrivateRoute
+        exact
+        path="/dashboard/cases"
+        component={Dashboard}
+        layout={Layout}
+      />
+      <PrivateRoute
+        exact
+        path="/dashboard/cases/add"
+        component={Dashboard}
+        layout={Layout}
+      />
+      <PrivateRoute
+        exact
+        path="/dashboard/members"
+        component={Dashboard}
+        layout={Layout}
+      />
+      <PrivateRoute
+        exact
+        path="/dashboard/members/add"
+        component={Dashboard}
+        layout={Layout}
+      />
       <Route path="*" component={Page404} />
     </Switch>
   );
