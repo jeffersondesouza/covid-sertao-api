@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
 import { Routes } from './containers';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -15,3 +18,11 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+/* 
+
+https://material-ui.com/store/previews/devias-kit/
+
+https://material-ui.com/getting-started/installation/
+
+*/
