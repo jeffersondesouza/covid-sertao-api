@@ -44,12 +44,12 @@ const Sidebar = props => {
 
   const pages = [
     {
-      title: 'Dashboard',
+      title: 'Início',
       href: '/dashboard',
       icon: <DashboardIcon />
     },
     {
-      title: 'Users',
+      title: 'Casos',
       href: '/users',
       icon: <PeopleIcon />
     },
@@ -69,11 +69,6 @@ const Sidebar = props => {
       icon: <TextFieldsIcon />
     },
     {
-      title: 'Icons',
-      href: '/icons',
-      icon: <ImageIcon />
-    },
-    {
       title: 'Account',
       href: '/account',
       icon: <AccountBoxIcon />
@@ -82,7 +77,12 @@ const Sidebar = props => {
       title: 'Settings',
       href: '/settings',
       icon: <SettingsIcon />
-    }
+    },
+    {
+      title: 'Icons',
+      href: '/icons',
+      icon: <ImageIcon />
+    },
   ];
 
   return (
@@ -103,7 +103,6 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
       </div>
     </Drawer>
   );
