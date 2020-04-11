@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable func-names */
 const proxy = require('http-proxy-middleware');
 
 module.exports = function(app) {

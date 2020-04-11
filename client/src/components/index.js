@@ -1,2 +1,3 @@
-export { default as DashBoardHeader } from './headers/DashBoardHeader';
-export { default as Layout } from './Layout';
+export { default as SearchInput } from './SearchInput';
+export { default as StatusBullet } from './StatusBullet';
+export { default as RouteWithLayout } from './RouteWithLayout';
