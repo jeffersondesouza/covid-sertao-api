@@ -1,10 +1,10 @@
 /* Registerinrg the models before app initialization */
-require('./app/models/Case');
-require('./app/models/Location');
-require('./app/models/Phone');
-require('./app/models/Report');
+require('./server/models/Case');
+require('./server/models/Location');
+require('./server/models/Phone');
+require('./server/models/Report');
 
-const app = require('./app');
+const app = require('./server');
 
 const { PORT = 5000 } = process.env;
 
