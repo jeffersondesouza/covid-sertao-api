@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     res.send('Error').status(500);
   }
 };
-
+/* 
 const CASE = {
   cityId: '5e8babf51c9d44000083b976',
   status: 1,
@@ -20,6 +20,5 @@ const CASE = {
   susId: '123345',
   address: 'Rua do meio, 345 (ed palmas, 201), Centro',
   symptoms: ['Dor de cabeça', '38 de febre', 'dor no corpo', 'tosse seca'],
-  /*   lastUpdate: '',
-  registeredAt: '', */
 };
+ */
