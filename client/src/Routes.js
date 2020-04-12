@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './view/components';
-import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
+import { Main as MainLayout, Minimal as MinimalLayout } from './view/layouts';
 
 import {
   Dashboard as DashboardView,
