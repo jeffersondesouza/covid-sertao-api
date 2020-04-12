@@ -8,38 +8,39 @@ const useStyles = makeStyles(theme => ({
     display: 'inline-block',
     borderRadius: '50%',
     flexGrow: 0,
-    flexShrink: 0
+    flexShrink: 0,
   },
   sm: {
     height: theme.spacing(1),
-    width: theme.spacing(1)
+    width: theme.spacing(1),
   },
   md: {
     height: theme.spacing(2),
-    width: theme.spacing(2)
+    width: theme.spacing(2),
   },
   lg: {
     height: theme.spacing(3),
-    width: theme.spacing(3)
+    width: theme.spacing(3),
   },
   neutral: {
-    backgroundColor: theme.palette.neutral
+    backgroundColor: theme.palette.neutral,
   },
   primary: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
   },
   info: {
-    backgroundColor: theme.palette.info.main
+    backgroundColor: theme.palette.info.main,
   },
   warning: {
-    backgroundColor: theme.palette.warning.main
+    backgroundColor: theme.palette.warning.main,
   },
   danger: {
-    backgroundColor: theme.palette.error.main
+    backgroundColor: theme.palette.error.main,
   },
   success: {
-    backgroundColor: theme.palette.success.main
-  }
+    backgroundColor: theme.palette.success.main,
+  },
+  black: { backgroundColor: theme.palette.black },
 }));
 
 const StatusBullet = props => {
@@ -54,7 +55,7 @@ const StatusBullet = props => {
         {
           [classes.root]: true,
           [classes[size]]: size,
-          [classes[color]]: color
+          [classes[color]]: color,
         },
         className
       )}
@@ -70,14 +71,15 @@ StatusBullet.propTypes = {
     'info',
     'success',
     'warning',
-    'danger'
+    'danger',
+    'black',
   ]),
-  size: PropTypes.oneOf(['sm', 'md', 'lg'])
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 StatusBullet.defaultProps = {
   size: 'md',
-  color: 'default'
+  color: 'default',
 };
 
 export default StatusBullet;

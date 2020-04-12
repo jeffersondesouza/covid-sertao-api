@@ -1,4 +1,4 @@
-export { default as Budget } from './Budget';
+export { default as CasesSumary } from './CasesSumary';
 export { default as LatestOrders } from './LatestOrders';
 export { default as LatestProducts } from './LatestProducts';
 export { default as LatestSales } from './LatestSales';
