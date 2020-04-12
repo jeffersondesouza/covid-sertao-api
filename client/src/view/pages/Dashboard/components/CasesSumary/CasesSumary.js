@@ -16,6 +16,7 @@ const statusColors = {
   primary: 'primary',
   info: 'info',
   success: 'success',
+  suspect: 'suspect',
   warning: 'warning',
   danger: 'danger',
   black: 'black',

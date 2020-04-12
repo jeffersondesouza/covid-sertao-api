@@ -18,7 +18,9 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { data, options } from './chart';
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    height: '100%',
+  },
   chartContainer: {
     height: 400,
     position: 'relative',
@@ -28,10 +30,13 @@ const useStyles = makeStyles(() => ({
   },
   select: {
     borderBottom: 'none !important',
+    textTransform: 'uppercase !important',
+    fontWeight: '500',
   },
   option: {
     display: 'block',
-    borderBottom: 'none !important'
+    borderBottom: 'none !important',
+    textTransform: 'uppercase !important',
   },
 }));
 
@@ -66,6 +71,7 @@ const LatestSales = props => {
               <Button
                 key={item.value}
                 value={item.value}
+                className={classes.option}
               >
                 {item.label}
               </Button>
@@ -80,12 +86,13 @@ const LatestSales = props => {
           <Bar data={data} options={options} />
         </div>
       </CardContent>
+      {/*
       <Divider />
-      <CardActions className={classes.actions}>
+        <CardActions className={classes.actions}>
         <Button color="primary" size="small" variant="text">
           Overview <ArrowRightIcon />
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };

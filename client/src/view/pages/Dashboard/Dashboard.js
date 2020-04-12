@@ -36,7 +36,7 @@ const Dashboard = () => {
           <CasesSumary title="Confirmados" color="danger" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Suspeitos" color="warning" />
+          <CasesSumary title="Suspeitos" color="suspect" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary title="Descartados" color="info" />
