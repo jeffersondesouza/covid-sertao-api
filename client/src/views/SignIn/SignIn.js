@@ -9,7 +9,7 @@ import {
   IconButton,
   TextField,
   Link,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -20,29 +20,29 @@ const schema = {
     presence: { allowEmpty: false, message: 'is required' },
     email: true,
     length: {
-      maximum: 64
-    }
+      maximum: 64,
+    },
   },
   password: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 128
-    }
-  }
+      maximum: 128,
+    },
+  },
 };
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.default,
-    height: '100%'
+    height: '100%',
   },
   grid: {
-    height: '100%'
+    height: '100%',
   },
   quoteContainer: {
     [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   quote: {
     backgroundColor: theme.palette.neutral,
@@ -50,31 +50,31 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
+    backgroundImage: 'url(/images/auth.png)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
   },
   quoteInner: {
     textAlign: 'center',
-    flexBasis: '600px'
+    flexBasis: '600px',
   },
   quoteText: {
     color: theme.palette.white,
-    fontWeight: 300
+    fontWeight: 600,
   },
   name: {
     marginTop: theme.spacing(3),
-    color: theme.palette.white
+    color: theme.palette.white,
   },
   bio: {
-    color: theme.palette.white
+    color: theme.palette.white,
   },
   contentContainer: {},
   content: {
     height: '100%',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   contentHeader: {
     display: 'flex',
@@ -82,18 +82,18 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(5),
     paddingBototm: theme.spacing(2),
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2)
+    paddingRight: theme.spacing(2),
   },
   logoImage: {
-    marginLeft: theme.spacing(4)
+    marginLeft: theme.spacing(4),
   },
   contentBody: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     [theme.breakpoints.down('md')]: {
-      justifyContent: 'center'
-    }
+      justifyContent: 'center',
+    },
   },
   form: {
     paddingLeft: 100,
@@ -102,27 +102,27 @@ const useStyles = makeStyles(theme => ({
     flexBasis: 700,
     [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2)
-    }
+      paddingRight: theme.spacing(2),
+    },
   },
   title: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   socialButtons: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   socialIcon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   sugestion: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   textField: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   signInButton: {
-    margin: theme.spacing(2, 0)
-  }
+    margin: theme.spacing(2, 0),
+  },
 }));
 
 const SignIn = props => {
@@ -134,7 +134,7 @@ const SignIn = props => {
     isValid: false,
     values: {},
     touched: {},
-    errors: {}
+    errors: {},
   });
 
   useEffect(() => {
@@ -143,7 +143,7 @@ const SignIn = props => {
     setFormState(formState => ({
       ...formState,
       isValid: errors ? false : true,
-      errors: errors || {}
+      errors: errors || {},
     }));
   }, [formState.values]);
 
@@ -161,12 +161,12 @@ const SignIn = props => {
         [event.target.name]:
           event.target.type === 'checkbox'
             ? event.target.checked
-            : event.target.value
+            : event.target.value,
       },
       touched: {
         ...formState.touched,
-        [event.target.name]: true
-      }
+        [event.target.name]: true,
+      },
     }));
   };
 
@@ -180,47 +180,22 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        className={classes.grid}
-        container
-      >
-        <Grid
-          className={classes.quoteContainer}
-          item
-          lg={5}
-        >
+      <Grid className={classes.grid} container>
+        <Grid className={classes.quoteContainer} item lg={5}>
           <div className={classes.quote}>
             <div className={classes.quoteInner}>
-              <Typography
-                className={classes.quoteText}
-                variant="h1"
-              >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
+              <Typography className={classes.quoteText} variant="h1">
+                Portal Covid Sertão
               </Typography>
               <div className={classes.person}>
-                <Typography
-                  className={classes.name}
-                  variant="body1"
-                >
-                  Takamaru Ayako
-                </Typography>
-                <Typography
-                  className={classes.bio}
-                  variant="body2"
-                >
-                  Manager at inVision
+                <Typography className={classes.name} variant="body1">
+                  Unidos na lutra contra a Covid-19
                 </Typography>
               </div>
             </div>
           </div>
         </Grid>
-        <Grid
-          className={classes.content}
-          item
-          lg={7}
-          xs={12}
-        >
+        <Grid className={classes.content} item lg={7} xs={12}>
           <div className={classes.content}>
             <div className={classes.contentHeader}>
               <IconButton onClick={handleBack}>
@@ -228,27 +203,14 @@ const SignIn = props => {
               </IconButton>
             </div>
             <div className={classes.contentBody}>
-              <form
-                className={classes.form}
-                onSubmit={handleSignIn}
-              >
-                <Typography
-                  className={classes.title}
-                  variant="h2"
-                >
+              <form className={classes.form} onSubmit={handleSignIn}>
+                <Typography className={classes.title} variant="h2">
                   Sign in
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                >
+                <Typography color="textSecondary" gutterBottom>
                   Sign in with social media
                 </Typography>
-                <Grid
-                  className={classes.socialButtons}
-                  container
-                  spacing={2}
-                >
+                <Grid className={classes.socialButtons} container spacing={2}>
                   <Grid item>
                     <Button
                       color="primary"
@@ -318,16 +280,9 @@ const SignIn = props => {
                 >
                   Sign in now
                 </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
+                <Typography color="textSecondary" variant="body1">
                   Don't have an account?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/sign-up"
-                    variant="h6"
-                  >
+                  <Link component={RouterLink} to="/sign-up" variant="h6">
                     Sign up
                   </Link>
                 </Typography>
@@ -341,7 +296,7 @@ const SignIn = props => {
 };
 
 SignIn.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default withRouter(SignIn);

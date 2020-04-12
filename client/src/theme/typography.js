@@ -3,7 +3,7 @@ import palette from './palette';
 export default {
   h1: {
     color: palette.text.primary,
-    fontWeight: 500,
+    fontWeight: 900,
     fontSize: '35px',
     letterSpacing: '-0.24px',
     lineHeight: '40px'
@@ -60,7 +60,7 @@ export default {
     color: palette.text.primary,
     fontSize: '14px',
     letterSpacing: '-0.05px',
-    lineHeight: '21px'
+    lineHeight: '21px',
   },
   body2: {
     color: palette.text.secondary,

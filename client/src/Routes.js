@@ -67,12 +67,12 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       />
-      <RouteWithLayout
+     {/*  <RouteWithLayout
         component={SignUpView}
         exact
         layout={MinimalLayout}
         path="/sign-up"
-      />
+      /> */}
       <RouteWithLayout
         component={SignInView}
         exact

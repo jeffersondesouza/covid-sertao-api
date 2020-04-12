@@ -210,8 +210,7 @@ const SignUp = props => {
                 className={classes.quoteText}
                 variant="h1"
               >
-                Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
-                they sold out High Life.
+               Cadastro
               </Typography>
               <div className={classes.person}>
                 <Typography
