@@ -18,7 +18,6 @@ import { Facebook as FacebookIcon, Google as GoogleIcon } from 'icons';
 const schema = {
   email: {
     presence: { allowEmpty: false, message: 'is required' },
-    email: true,
     length: {
       maximum: 64,
     },
@@ -172,7 +171,9 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
+    console.log(formState);
     history.push('/');
+    
   };
 
   const hasError = field =>
@@ -198,16 +199,16 @@ const SignIn = props => {
         <Grid className={classes.content} item lg={7} xs={12}>
           <div className={classes.content}>
             <div className={classes.contentHeader}>
-              <IconButton onClick={handleBack}>
+              {/*               <IconButton onClick={handleBack}>
                 <ArrowBackIcon />
-              </IconButton>
+              </IconButton> */}
             </div>
             <div className={classes.contentBody}>
               <form className={classes.form} onSubmit={handleSignIn}>
                 <Typography className={classes.title} variant="h2">
-                  Sign in
+                  Login
                 </Typography>
-                <Typography color="textSecondary" gutterBottom>
+                {/*                 <Typography color="textSecondary" gutterBottom>
                   Sign in with social media
                 </Typography>
                 <Grid className={classes.socialButtons} container spacing={2}>
@@ -232,7 +233,7 @@ const SignIn = props => {
                       Login with Google
                     </Button>
                   </Grid>
-                </Grid>
+                </Grid> 
                 <Typography
                   align="center"
                   className={classes.sugestion}
@@ -241,6 +242,8 @@ const SignIn = props => {
                 >
                   or login with email address
                 </Typography>
+                */}
+
                 <TextField
                   className={classes.textField}
                   error={hasError('email')}
@@ -248,7 +251,7 @@ const SignIn = props => {
                   helperText={
                     hasError('email') ? formState.errors.email[0] : null
                   }
-                  label="Email address"
+                  label="Email ou Telefone cadastrado"
                   name="email"
                   onChange={handleChange}
                   type="text"
@@ -262,7 +265,7 @@ const SignIn = props => {
                   helperText={
                     hasError('password') ? formState.errors.password[0] : null
                   }
-                  label="Password"
+                  label="Senha"
                   name="password"
                   onChange={handleChange}
                   type="password"
@@ -278,14 +281,15 @@ const SignIn = props => {
                   type="submit"
                   variant="contained"
                 >
-                  Sign in now
+                  Entrar
                 </Button>
+                {/* 
                 <Typography color="textSecondary" variant="body1">
                   Don't have an account?{' '}
                   <Link component={RouterLink} to="/sign-up" variant="h6">
                     Sign up
                   </Link>
-                </Typography>
+                </Typography> */}
               </form>
             </div>
           </div>

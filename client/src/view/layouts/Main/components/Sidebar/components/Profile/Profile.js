@@ -10,15 +10,15 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight: 'fit-content'
+    minHeight: 'fit-content',
   },
   avatar: {
     width: 60,
-    height: 60
+    height: 60,
   },
   name: {
-    marginTop: theme.spacing(1)
-  }
+    marginTop: theme.spacing(1),
+  },
 }));
 
 const Profile = props => {
@@ -27,16 +27,13 @@ const Profile = props => {
   const classes = useStyles();
 
   const user = {
-    name: 'Shen Zhi',
-    avatar: '/images/avatars/avatar_11.png',
-    bio: 'Brain Director'
+    name: 'Tereza Neuma',
+    avatar: '/images/avatars/avatar_icon.png',
+    bio: 'Santa Terezinha',
   };
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <Avatar
         alt="Person"
         className={classes.avatar}
@@ -44,10 +41,7 @@ const Profile = props => {
         src={user.avatar}
         to="/settings"
       />
-      <Typography
-        className={classes.name}
-        variant="h4"
-      >
+      <Typography className={classes.name} variant="h4">
         {user.name}
       </Typography>
       <Typography variant="body2">{user.bio}</Typography>
@@ -56,7 +50,7 @@ const Profile = props => {
 };
 
 Profile.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Profile;

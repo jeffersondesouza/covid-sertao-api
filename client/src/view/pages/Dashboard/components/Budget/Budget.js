@@ -64,6 +64,7 @@ const Budget = props => {
           justify="space-between"
         >
         <Grid
+          item
           lg={3}
           sm={6}
           xl={3}
@@ -78,13 +79,13 @@ const Budget = props => {
               BUDGET
             </Typography>
           </Grid>
-          <Grid xs={2}>
+          <Grid item xs={2}>
           <StatusBullet
             color={statusColors.refunded}
             size="sm"
           />
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <Typography variant="h3">$24,000</Typography>
           </Grid>
         </Grid>
