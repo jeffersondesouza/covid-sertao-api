@@ -77,7 +77,7 @@ const Routes = () => {
         component={SignInView}
         exact
         layout={MinimalLayout}
-        path="/sign-in"
+        path="/login"
       />
       <RouteWithLayout
         component={NotFoundView}

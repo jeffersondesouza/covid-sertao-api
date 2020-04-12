@@ -69,10 +69,10 @@ const LatestOrders = props => {
             size="small"
             variant="outlined"
           >
-            New entry
+            Novo Caso
           </Button>
         }
-        title="Latest Orders"
+        title="Últimos Casos"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -134,7 +134,7 @@ const LatestOrders = props => {
           size="small"
           variant="text"
         >
-          View all <ArrowRightIcon />
+          Ver todos <ArrowRightIcon />
         </Button>
       </CardActions>
     </Card>

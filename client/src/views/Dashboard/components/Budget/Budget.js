@@ -6,6 +6,14 @@ import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 
+import { StatusBullet } from 'components';
+
+const statusColors = {
+  delivered: 'success',
+  pending: 'info',
+  refunded: 'danger'
+};
+
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100%'
@@ -55,38 +63,31 @@ const Budget = props => {
           container
           justify="space-between"
         >
-          <Grid item>
-            <Typography
-              className={classes.title}
+        <Grid
+          lg={3}
+          sm={6}
+          xl={3}
+          xs={10}
+        >
+          <Typography
+            className={classes.title}
               color="textSecondary"
               gutterBottom
               variant="body2"
             >
               BUDGET
             </Typography>
+          </Grid>
+          <Grid xs={2}>
+          <StatusBullet
+            color={statusColors.refunded}
+            size="sm"
+          />
+          </Grid>
+          <Grid xs={12}>
             <Typography variant="h3">$24,000</Typography>
           </Grid>
-          <Grid item>
-            <Avatar className={classes.avatar}>
-              <MoneyIcon className={classes.icon} />
-            </Avatar>
-          </Grid>
         </Grid>
-        <div className={classes.difference}>
-          <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
-            12%
-          </Typography>
-          <Typography
-            className={classes.caption}
-            variant="caption"
-          >
-            Since last month
-          </Typography>
-        </div>
       </CardContent>
     </Card>
   );

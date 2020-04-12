@@ -48,12 +48,14 @@ const Topbar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton
-            className={classes.signOutButton}
-            color="inherit"
-          >
-            <InputIcon />
-          </IconButton>
+          <RouterLink to="/login">
+            <IconButton
+              className={classes.signOutButton}
+              color="inherit"
+              >
+              <InputIcon />
+            </IconButton>
+            </RouterLink>
         </Hidden>
         <Hidden lgUp>
           <IconButton
