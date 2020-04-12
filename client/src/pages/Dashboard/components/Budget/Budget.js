@@ -6,7 +6,7 @@ import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 
-import { StatusBullet } from 'components';
+import { StatusBullet } from 'view/components';
 
 const statusColors = {
   delivered: 'success',
