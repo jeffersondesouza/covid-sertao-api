@@ -11,11 +11,15 @@ import {
   UsersByDevice,
   LatestProducts,
   LatestOrders,
+  ProfileWelcome,
 } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4),
+  },
+  noPadding: {
+    paddingBottom: '0 !important',
   },
 }));
 
@@ -25,6 +29,9 @@ const Dashboard = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
+        <Grid item xs={12}  className={classes.noPadding}>
+          <ProfileWelcome />
+        </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary title="Confirmados" color="danger" />
         </Grid>
@@ -32,7 +39,7 @@ const Dashboard = () => {
           <CasesSumary title="Suspeitos" color="warning" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Descartados" color="info"/>
+          <CasesSumary title="Descartados" color="info" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary title="Recuperados" color="success" />
@@ -41,7 +48,7 @@ const Dashboard = () => {
           <CasesSumary title="Óbtos" color="black" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Isolamentos"  />
+          <CasesSumary title="Isolamentos" />
         </Grid>
         <Grid item lg={8} md={12} xl={9} xs={12}>
           <LatestSales />
