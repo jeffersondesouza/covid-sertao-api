@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CasesSumary = props => {
-  const { title, color, className, ...rest } = props;
+  const { title, color="neutral", className, ...rest } = props;
 
   const classes = useStyles();
 

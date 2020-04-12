@@ -41,6 +41,7 @@ const ProfileWelcome = () => {
           size="small"
           variant="outlined"
           className={classes.update}
+          disabled
         >
           Sem registros hoje
         </Button>
