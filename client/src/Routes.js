@@ -15,7 +15,7 @@ import {
   SignUp as SignUpView,
   SignIn as SignInView,
   NotFound as NotFoundView
-} from './pages';
+} from './view/pages';
 
 const Routes = () => {
   return (
