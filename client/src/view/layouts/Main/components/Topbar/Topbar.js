@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -11,30 +11,32 @@ import { Logo } from 'view/layouts/Logo';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: 'none',
   },
   flexGrow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   signOutButton: {
-    marginLeft: theme.spacing(1)
-  }
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 const Topbar = props => {
-  const { className, onSidebarOpen, ...rest } = props;
+  const { className, onSidebarOpen, history, ...rest } = props;
 
   const classes = useStyles();
 
   const [notifications] = useState([]);
 
+  const handleSignIn = event => {
+    event.preventDefault();
+    history.push('/login');
+  };
+
   return (
-    <AppBar
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <AppBar {...rest} className={clsx(classes.root, className)}>
       <Toolbar>
-        <RouterLink to="/">
+        <RouterLink to="/dashboard">
           <Logo />
         </RouterLink>
         <div className={classes.flexGrow} />
@@ -48,20 +50,16 @@ const Topbar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <RouterLink to="/login">
-            <IconButton
-              className={classes.signOutButton}
-              color="inherit"
-              >
-              <InputIcon />
-            </IconButton>
-            </RouterLink>
+          <IconButton
+            className={classes.signOutButton}
+            color="inherit"
+            onClick={handleSignIn}
+          >
+            <InputIcon />
+          </IconButton>
         </Hidden>
         <Hidden lgUp>
-          <IconButton
-            color="inherit"
-            onClick={onSidebarOpen}
-          >
+          <IconButton color="inherit" onClick={onSidebarOpen}>
             <MenuIcon />
           </IconButton>
         </Hidden>
@@ -72,7 +70,8 @@ const Topbar = props => {
 
 Topbar.propTypes = {
   className: PropTypes.string,
-  onSidebarOpen: PropTypes.func
+  onSidebarOpen: PropTypes.func,
+  history: PropTypes.object,
 };
 
-export default Topbar;
+export default withRouter(Topbar);

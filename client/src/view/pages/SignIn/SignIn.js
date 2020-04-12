@@ -172,8 +172,7 @@ const SignIn = props => {
   const handleSignIn = event => {
     event.preventDefault();
     console.log(formState);
-    history.push('/');
-    
+    history.push('/dashboard');
   };
 
   const hasError = field =>
