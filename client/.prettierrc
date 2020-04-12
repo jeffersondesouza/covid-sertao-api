@@ -1,10 +1,12 @@
 {
-  "bracketSpacing": true,
-  "jsxBracketSameLine": true,
+
+  "tabWidth": 2,
   "printWidth": 80,
   "singleQuote": true,
-  "trailingComma": "none",
-  "tabWidth": 2,
-  "useTabs": false,
-  "react/jsx-max-props-per-line": [1, { "when": "always" }]
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "parser": "babel",
+  "semi": true,
+  "react/jsx-max-props-per-line": [2, { "when": "always" }]
 }
