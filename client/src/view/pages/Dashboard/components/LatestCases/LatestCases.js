@@ -17,37 +17,38 @@ import {
   TableHead,
   TableRow,
   Tooltip,
-  TableSortLabel
+  TableSortLabel,
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import mockData from './data';
-import { StatusBullet } from 'view/components';
+import { StatusBullet, CasesList } from 'view/components';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {},
   content: {
-    padding: 0
+    padding: 0,
   },
   inner: {
-    minWidth: 800
+    minWidth: 800,
   },
   statusContainer: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   status: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   actions: {
-    justifyContent: 'flex-end'
-  }
+    justifyContent: 'flex-end',
+  },
 }));
 
 const statusColors = {
   delivered: 'success',
   pending: 'info',
-  refunded: 'danger'
+  refunded: 'danger',
 };
 
 const LatestCases = props => {
@@ -55,94 +56,34 @@ const LatestCases = props => {
 
   const classes = useStyles();
 
-  const [orders] = useState(mockData);
+  const [cases] = useState(mockData);
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={
-          <Button
-            color="primary"
-            size="small"
-            variant="outlined"
-          >
+          <Button color="primary" size="small" variant="outlined">
             Novo Caso
           </Button>
         }
         title="Últimos Casos"
       />
       <Divider />
-      <CardContent className={classes.content}>
-        <PerfectScrollbar>
-          <div className={classes.inner}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Order Ref</TableCell>
-                  <TableCell>Customer</TableCell>
-                  <TableCell sortDirection="desc">
-                    <Tooltip
-                      enterDelay={300}
-                      title="Sort"
-                    >
-                      <TableSortLabel
-                        active
-                        direction="desc"
-                      >
-                        Date
-                      </TableSortLabel>
-                    </Tooltip>
-                  </TableCell>
-                  <TableCell>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {orders.map(order => (
-                  <TableRow
-                    hover
-                    key={order.id}
-                  >
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
-                    <TableCell>
-                      {moment(order.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
-                    <TableCell>
-                      <div className={classes.statusContainer}>
-                        <StatusBullet
-                          className={classes.status}
-                          color={statusColors[order.status]}
-                          size="sm"
-                        />
-                        {order.status}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </PerfectScrollbar>
-      </CardContent>
+      <CasesList cases={cases} />
       <Divider />
       <CardActions className={classes.actions}>
-        <Button
-          color="primary"
-          size="small"
-          variant="text"
-        >
-          Ver todos <ArrowRightIcon />
-        </Button>
+        <Link to="/cases">
+          <Button color="primary" size="small" variant="text">
+            Ver todos <ArrowRightIcon />
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );
 };
 
 LatestCases.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default LatestCases;

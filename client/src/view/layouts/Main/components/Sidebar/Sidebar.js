@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -19,22 +19,22 @@ const useStyles = makeStyles(theme => ({
     width: 240,
     [theme.breakpoints.up('lg')]: {
       marginTop: 64,
-      height: 'calc(100% - 64px)'
-    }
+      height: 'calc(100% - 64px)',
+    },
   },
   root: {
     backgroundColor: theme.palette.white,
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
   },
   divider: {
-    margin: theme.spacing(2, 0)
+    margin: theme.spacing(2, 0),
   },
   nav: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const Sidebar = props => {
@@ -46,42 +46,42 @@ const Sidebar = props => {
     {
       title: 'Início',
       href: '/dashboard',
-      icon: <DashboardIcon />
+      icon: <DashboardIcon />,
     },
     {
       title: 'Casos',
-      href: '/users',
-      icon: <PeopleIcon />
+      href: '/cases',
+      icon: <AssignmentIcon />,
     },
     {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
+      title: 'Membros',
+      href: '/users',
+      icon: <PeopleIcon />,
     },
     {
       title: 'Authentication',
       href: '/sign-in',
-      icon: <LockOpenIcon />
+      icon: <LockOpenIcon />,
     },
     {
       title: 'Typography',
       href: '/typography',
-      icon: <TextFieldsIcon />
+      icon: <TextFieldsIcon />,
     },
     {
       title: 'Account',
       href: '/account',
-      icon: <AccountBoxIcon />
+      icon: <AccountBoxIcon />,
     },
     {
       title: 'Settings',
       href: '/settings',
-      icon: <SettingsIcon />
+      icon: <SettingsIcon />,
     },
     {
       title: 'Icons',
       href: '/icons',
-      icon: <ImageIcon />
+      icon: <ImageIcon />,
     },
   ];
 
@@ -93,16 +93,10 @@ const Sidebar = props => {
       open={open}
       variant={variant}
     >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+      <div {...rest} className={clsx(classes.root, className)}>
         <Profile />
         <Divider className={classes.divider} />
-        <SidebarNav
-          className={classes.nav}
-          pages={pages}
-        />
+        <SidebarNav className={classes.nav} pages={pages} />
       </div>
     </Drawer>
   );
@@ -112,7 +106,7 @@ Sidebar.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool.isRequired,
-  variant: PropTypes.string.isRequired
+  variant: PropTypes.string.isRequired,
 };
 
 export default Sidebar;
