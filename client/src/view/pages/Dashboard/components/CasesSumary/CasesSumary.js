@@ -9,6 +9,12 @@ import MoneyIcon from '@material-ui/icons/Money';
 import { StatusBullet } from 'view/components';
 
 const statusColors = {
+  confirmed: 'danger',
+  suspect: 'suspect',
+  negative: 'info',
+  cured: 'success',
+  death: 'black',
+
   delivered: 'success',
   pending: 'info',
   refunded: 'danger',
@@ -16,7 +22,6 @@ const statusColors = {
   primary: 'primary',
   info: 'info',
   success: 'success',
-  suspect: 'suspect',
   warning: 'warning',
   danger: 'danger',
   black: 'black',
@@ -67,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CasesSumary = props => {
-  const { title, color="neutral", className, ...rest } = props;
+  const { title, color = 'neutral', className, ...rest } = props;
 
   const classes = useStyles();
 

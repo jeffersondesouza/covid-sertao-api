@@ -33,19 +33,19 @@ const Dashboard = () => {
           <ProfileWelcome />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Confirmados" color="danger" />
+          <CasesSumary title="Confirmados" color="confirmed" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary title="Suspeitos" color="suspect" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Descartados" color="info" />
+          <CasesSumary title="Descartados" color="negative" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Recuperados" color="success" />
+          <CasesSumary title="Recuperados" color="cured" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Óbtos" color="black" />
+          <CasesSumary title="Óbtos" color="death" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary title="Isolamentos" />

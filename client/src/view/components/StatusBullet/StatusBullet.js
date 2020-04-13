@@ -34,9 +34,6 @@ const useStyles = makeStyles(theme => ({
   warning: {
     backgroundColor: theme.palette.warning.main,
   },
-  suspect: {
-    backgroundColor: theme.palette.cases.suspect,
-  },
   danger: {
     backgroundColor: theme.palette.error.main,
   },
@@ -44,11 +41,20 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.success.main,
   },
   black: { backgroundColor: theme.palette.black },
+  suspect: {
+    backgroundColor: theme.palette.cases.suspect,
+  },
+
+  confirmed: { backgroundColor: theme.palette.cases.confirmed },
+  suspect: { backgroundColor: theme.palette.cases.suspect },
+  cured: { backgroundColor: theme.palette.cases.cured },
+  death: { backgroundColor: theme.palette.cases.death },
+  negative: { backgroundColor: theme.palette.cases.negative },
 }));
 
 const StatusBullet = props => {
   const { className, size, color, ...rest } = props;
-  console.log('color:', color)
+  console.log('color:', color);
 
   const classes = useStyles();
 

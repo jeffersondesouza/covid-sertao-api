@@ -9,33 +9,54 @@ import {
   CardContent,
   IconButton,
   Divider,
-  Typography
+  Typography,
+  Grid,
 } from '@material-ui/core';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import TabletMacIcon from '@material-ui/icons/TabletMac';
+import { StatusBullet } from 'view/components';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100%'
+    height: '100%',
   },
   chartContainer: {
     position: 'relative',
-    height: '300px'
+    height: '300px',
   },
   stats: {
     marginTop: theme.spacing(2),
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   device: {
     textAlign: 'center',
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
   },
   deviceIcon: {
-    color: theme.palette.icon
-  }
+    color: theme.palette.icon,
+  },
+  legends: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: '1rem',
+  },
+  iconLegend: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginRight: '5px',
+    marginBottom: '10px',
+    minWidth: '6rem',
+  },
+  iconLegendLabel: {
+    flex: 1,
+    marginLeft: '5px',
+    textTransform: 'capitalize',
+  },
 }));
 
 const UsersByDevice = props => {
@@ -44,26 +65,30 @@ const UsersByDevice = props => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const MOCK_DATA = [
+    { id: 'confirmed', label: 'Confirmados', value: 5 },
+    { id: 'suspect', label: 'Suspeitos', value: 10 },
+    { id: 'cured', label: 'Recuperados', value: 15 },
+    { id: 'death', label: 'óbtos', value: 20 },
+    { id: 'negative', label: 'descartados', value: 25 },
+  ];
+
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
-        backgroundColor: [
-          theme.palette.primary.main,
-          theme.palette.error.main,
-          theme.palette.warning.main
-        ],
+        data: MOCK_DATA.map(item => item.value),
+        backgroundColor: MOCK_DATA.map(item => theme.palette.cases[item.id]),
         borderWidth: 8,
         borderColor: theme.palette.white,
-        hoverBorderColor: theme.palette.white
-      }
+        hoverBorderColor: theme.palette.white,
+      },
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['Confirmados', 'Suspeitos', 'Curados', 'Óbtos', 'Descartados'],
   };
 
   const options = {
     legend: {
-      display: false
+      display: false,
     },
     responsive: true,
     maintainAspectRatio: false,
@@ -79,68 +104,29 @@ const UsersByDevice = props => {
       backgroundColor: theme.palette.white,
       titleFontColor: theme.palette.text.primary,
       bodyFontColor: theme.palette.text.secondary,
-      footerFontColor: theme.palette.text.secondary
-    }
+      footerFontColor: theme.palette.text.secondary,
+    },
   };
 
-  const devices = [
-    {
-      title: 'Desktop',
-      value: '63',
-      icon: <LaptopMacIcon />,
-      color: theme.palette.primary.main
-    },
-    {
-      title: 'Tablet',
-      value: '15',
-      icon: <TabletMacIcon />,
-      color: theme.palette.error.main
-    },
-    {
-      title: 'Mobile',
-      value: '23',
-      icon: <PhoneIphoneIcon />,
-      color: theme.palette.warning.main
-    }
-  ];
-
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        action={
-          <IconButton size="small">
-            <RefreshIcon />
-          </IconButton>
-        }
-        title="Users By Device"
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardHeader title="Distribuição dos Casos" />
       <Divider />
       <CardContent>
         <div className={classes.chartContainer}>
-          <Doughnut
-            data={data}
-            options={options}
-          />
+          <Doughnut data={data} options={options} />
         </div>
-        <div className={classes.stats}>
-          {devices.map(device => (
-            <div
-              className={classes.device}
-              key={device.title}
-            >
-              <span className={classes.deviceIcon}>{device.icon}</span>
-              <Typography variant="body1">{device.title}</Typography>
-              <Typography
-                style={{ color: device.color }}
-                variant="h2"
-              >
-                {device.value}%
+
+        <div className={classes.legends}>
+          {MOCK_DATA.map(item => (
+            <div className={classes.iconLegend}>
+              <StatusBullet color={item.id} size="md" />
+              <Typography variant="caption" className={classes.iconLegendLabel}>
+                {item.label}
               </Typography>
             </div>
           ))}
+          <div className={classes.iconLegend} />
         </div>
       </CardContent>
     </Card>
@@ -148,7 +134,7 @@ const UsersByDevice = props => {
 };
 
 UsersByDevice.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default UsersByDevice;
