@@ -79,13 +79,10 @@ const CasesList = props => {
                       />
                     </div>
                   </TableCell>
+                  <TableCell>{item.situation}</TableCell>
                   <TableCell>{item.contact}</TableCell>
-                  <TableCell>
-                    {item.createdAt}
-                  </TableCell>
-                  <TableCell>
-                    {item.updateAt}
-                  </TableCell>
+                  <TableCell>{item.createdAt}</TableCell>
+                  <TableCell>{item.updateAt}</TableCell>
                   <TableCell>{item.monitoringDays}</TableCell>
                 </TableRow>
               ))}

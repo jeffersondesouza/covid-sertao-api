@@ -23,10 +23,11 @@ const TableHeader = () => (
       <TableCell sortDirection="desc">
         <Tooltip enterDelay={300} title="Ordenar por Status">
           <TableSortLabel active direction="desc">
-            Status
+            Tipo
           </TableSortLabel>
         </Tooltip>
       </TableCell>
+      <TableCell>Situação</TableCell>
       <TableCell>Contato</TableCell>
       <TableCell>Cadastrado</TableCell>
       <TableCell>Última atualização</TableCell>
