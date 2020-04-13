@@ -10,7 +10,7 @@ import {
   LatestSales,
   UsersByDevice,
   LatestProducts,
-  LatestOrders,
+  LatestCases,
   ProfileWelcome,
 } from './components';
 
@@ -57,7 +57,7 @@ const Dashboard = () => {
           <UsersByDevice />
         </Grid>
         <Grid item xs={12}>
-          <LatestOrders />
+          <LatestCases />
         </Grid>
       </Grid>
     </div>

@@ -1,5 +1,5 @@
 export { default as CasesSumary } from './CasesSumary';
-export { default as LatestOrders } from './LatestOrders';
+export { default as LatestCases } from './LatestCases';
 export { default as LatestProducts } from './LatestProducts';
 export { default as LatestSales } from './LatestSales';
 export { default as TasksProgress } from './TasksProgress';
