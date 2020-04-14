@@ -14,6 +14,8 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
 
+const isProduction = () => process.env.NODE_ENV === 'production';
+
 const useStyles = makeStyles(theme => ({
   drawer: {
     width: 240,
@@ -62,26 +64,31 @@ const Sidebar = props => {
       title: 'Authentication',
       href: '/sign-in',
       icon: <LockOpenIcon />,
+      hideOnProd: isProduction(),
     },
     {
       title: 'Typography',
       href: '/typography',
       icon: <TextFieldsIcon />,
+      hideOnProd: isProduction(),
     },
     {
       title: 'Account',
       href: '/account',
       icon: <AccountBoxIcon />,
+      hideOnProd: isProduction(),
     },
     {
       title: 'Settings',
       href: '/settings',
       icon: <SettingsIcon />,
+      hideOnProd: isProduction(),
     },
     {
       title: 'Icons',
       href: '/icons',
       icon: <ImageIcon />,
+      hideOnProd: isProduction(),
     },
   ];
 

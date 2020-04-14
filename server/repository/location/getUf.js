@@ -7,8 +7,6 @@ const getUf = async (id) =>
   Location.findOne({
     _id: id,
     regionType: RegionTypesEnum.UF,
-  })
-    .select('_id name population')
-    .then((data) => data || {});
+  }).then((data) => data || {});
 
 module.exports = getUf;

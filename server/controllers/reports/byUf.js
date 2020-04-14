@@ -4,6 +4,7 @@ const LocationRepository = require('../../repository/location');
 module.exports = async (req, res) => {
   try {
     const location = await LocationRepository.getUf(req.params.uf);
+    console.log('location:', location)
 
     if (!location) {
       res.send({});
