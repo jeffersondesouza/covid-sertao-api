@@ -79,7 +79,7 @@ material-react-dashboard
 	│	├── Dashboard
 	│	├── Icons
 	│	├── NotFound
-	│	├── ProductList
+	│	├── CasesList
 	│	├── Settings
 	│	├── SignIn
 	│	├── SignUp

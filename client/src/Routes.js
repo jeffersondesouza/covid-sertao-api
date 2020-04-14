@@ -6,7 +6,7 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './view/layouts';
 
 import {
   Dashboard as DashboardView,
-  ProductList as ProductListView,
+  CasesList as CasesListView,
   UserList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
@@ -14,17 +14,13 @@ import {
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
 } from './view/pages';
 
 const Routes = () => {
   return (
     <Switch>
-      <Redirect
-        exact
-        from="/"
-        to="/login"
-      />
+      <Redirect exact from="/" to="/login" />
       <RouteWithLayout
         component={DashboardView}
         exact
@@ -38,7 +34,7 @@ const Routes = () => {
         path="/users"
       />
       <RouteWithLayout
-        component={ProductListView}
+        component={CasesListView}
         exact
         layout={MainLayout}
         path="/cases"
@@ -67,7 +63,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       />
-     {/*  <RouteWithLayout
+      {/*  <RouteWithLayout
         component={SignUpView}
         exact
         layout={MinimalLayout}
