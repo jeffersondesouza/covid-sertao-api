@@ -20,20 +20,22 @@ const TableHeader = () => (
     <TableRow>
       {/* <TableCell>SUS</TableCell> */}
       <TableCell>Paciente</TableCell>
-      <TableCell sortDirection="desc">
+      <TableCell>Tipo</TableCell>
+      <TableCell>Situação</TableCell>
+      <TableCell>Contato</TableCell>
+      <TableCell>Registrado em</TableCell>
+      <TableCell>Atualização</TableCell>
+    </TableRow>
+  </TableHead>
+);
+
+export default TableHeader;
+
+/* <TableCell sortDirection="desc">
         <Tooltip enterDelay={300} title="Ordenar por Status">
           <TableSortLabel active direction="desc">
             Tipo
           </TableSortLabel>
         </Tooltip>
       </TableCell>
-      <TableCell>Situação</TableCell>
-      <TableCell>Contato</TableCell>
-      <TableCell>Cadastrado</TableCell>
-      <TableCell>Última atualização</TableCell>
-      <TableCell>Dias em Acompanhamento</TableCell>
-    </TableRow>
-  </TableHead>
-);
-
-export default TableHeader;
+       */

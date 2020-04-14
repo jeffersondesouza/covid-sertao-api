@@ -83,7 +83,6 @@ const CasesList = props => {
                   <TableCell>{item.contact}</TableCell>
                   <TableCell>{item.createdAt}</TableCell>
                   <TableCell>{item.updateAt}</TableCell>
-                  <TableCell>{item.monitoringDays}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
