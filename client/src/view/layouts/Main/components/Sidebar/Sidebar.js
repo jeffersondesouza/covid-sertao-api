@@ -61,27 +61,21 @@ const Sidebar = props => {
       icon: <PeopleIcon />,
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />,
+      title: 'Minha Conta',
+      href: '/account',
+      icon: <AccountBoxIcon />,
+      hideOnProd: isProduction(),
+    },
+    {
+      title: 'Configurações',
+      href: '/settings',
+      icon: <SettingsIcon />,
       hideOnProd: isProduction(),
     },
     {
       title: 'Typography',
       href: '/typography',
       icon: <TextFieldsIcon />,
-      hideOnProd: isProduction(),
-    },
-    {
-      title: 'Account',
-      href: '/account',
-      icon: <AccountBoxIcon />,
-      hideOnProd: isProduction(),
-    },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />,
       hideOnProd: isProduction(),
     },
     {

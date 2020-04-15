@@ -20,11 +20,13 @@ const TableHeader = () => (
     <TableRow>
       {/* <TableCell>SUS</TableCell> */}
       <TableCell>Paciente</TableCell>
-      <TableCell>Tipo</TableCell>
+      <TableCell align="center">Tipo</TableCell>
       <TableCell>Situação</TableCell>
       <TableCell>Contato</TableCell>
       <TableCell>Registrado em</TableCell>
       <TableCell>Atualização</TableCell>
+      <TableCell align="center">Dias de acompanhamento</TableCell>
+      <TableCell />
     </TableRow>
   </TableHead>
 );

@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 
 import { SearchInput } from 'view/components';
+import CasesFilter from '../CasesFilter';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -12,20 +13,27 @@ const useStyles = makeStyles(theme => ({
     height: '42px',
     display: 'flex',
     alignItems: 'center',
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
+  },
+  row2: {
+    height: '42px',
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(4),
   },
   spacer: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   importButton: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   exportButton: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   searchInput: {
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));
 
 const ProductsToolbar = props => {
@@ -34,33 +42,27 @@ const ProductsToolbar = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Add product
+        <Button color="primary" variant="contained" className={classes.btn}>
+          Novo Caso
         </Button>
       </div>
-      <div className={classes.row}>
+      <div className={classes.row2}>
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search product"
+          placeholder="Buscar por nome"
         />
+        <span className={classes.spacer} />
+        <CasesFilter />
       </div>
     </div>
   );
 };
 
 ProductsToolbar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default ProductsToolbar;

@@ -1,58 +1,71 @@
 import uuid from 'uuid/v1';
+import moment from 'moment';
 
 export default [
   {
     id: uuid(),
-    title: 'Dropbox',
-    description:
-      'Dropbox is a file hosting service that offers cloud storage, file synchronization, a personal cloud.',
-    imageUrl: '/images/products/product_1.png',
-    totalDownloads: '594',
-    updatedAt: '27/03/2019'
+    ref: '101349',
+    contact: '88-8888-9090',
+    name: 'Ekaterina Tankova',
+    situation: 'Internado',
+    createdAt: moment(1555016400000).format('DD/MM/YYYY'),
+    updateAt: moment(1555016400000).format('DD/MM/YYYY'),
+    monitoringDays: moment().diff(moment(1555016400000), 'days'),
+    status: 1,
   },
   {
     id: uuid(),
-    title: 'Medium Corporation',
-    description:
-      'Medium is an online publishing platform developed by Evan Williams, and launched in August 2012.',
-    imageUrl: '/images/products/product_2.png',
-    totalDownloads: '625',
-    createdAt: '31/03/2019'
+    ref: '101348',
+    contact: '88-8888-9090',
+    name: 'Cao Yu',
+    situation: 'Internado Fora',
+    createdAt: moment(1555016400000).format('DD/MM/YYYY'),
+    updateAt: moment(1555016400000).format('DD/MM/YYYY'),
+    monitoringDays: moment().diff(moment(1555016400000), 'days'),
+    status: 2,
   },
   {
     id: uuid(),
-    title: 'Slack',
-    description:
-      'Slack is a cloud-based set of team collaboration tools and services, founded by Stewart Butterfield.',
-    imageUrl: '/images/products/product_3.png',
-    totalDownloads: '857',
-    createdAt: '03/04/2019'
+    ref: '101347',
+    contact: '88-8888-9090',
+    name: 'Alexa Richardson',
+    situation: 'Quarentena',
+    createdAt: moment(1554930000000).format('DD/MM/YYYY'),
+    updateAt: moment(1554930000000).format('DD/MM/YYYY'),
+    monitoringDays: moment().diff(moment(1554930000000), 'days'),
+    status: 2,
   },
   {
     id: uuid(),
-    title: 'Lyft',
-    description:
-      'Lyft is an on-demand transportation company based in San Francisco, California.',
-    imageUrl: '/images/products/product_4.png',
-    totalDownloads: '406',
-    createdAt: '04/04/2019'
+    ref: '101346',
+    contact: '88-8888-9090',
+    name: 'Anje Keizer',
+    situation: 'Quarentena',
+    createdAt: moment(1554757200000).format('DD/MM/YYYY'),
+    updateAt: moment(1554757200000).format('DD/MM/YYYY'),
+    monitoringDays: moment().diff(moment(1554757200000), 'days'),
+    status: 1,
   },
   {
     id: uuid(),
-    title: 'GitHub',
-    description:
-      'GitHub is a web-based hosting service for version control of code using Git.',
-    imageUrl: '/images/products/product_5.png',
-    totalDownloads: '835',
-    createdAt: '04/04/2019'
+    ref: '101345',
+    contact: '88-8888-9090',
+    name: 'Clarke Gillebert',
+    situation: '',
+    createdAt: moment(1554670800000).format('DD/MM/YYYY'),
+    updateAt: moment(1554670800000).format('DD/MM/YYYY'),
+    monitoringDays: moment().diff(moment(1554670800000), 'days'),
+    status: 3,
   },
   {
     id: uuid(),
-    title: 'Squarespace',
-    description:
-      'Squarespace provides software as a service for website building and hosting. Headquartered in NYC.',
-    imageUrl: '/images/products/product_6.png',
-    totalDownloads: '835',
-    createdAt: '04/04/2019'
-  }
+    ref: '101344',
+    contact: '88-8888-9090',
+    name: 'Adam Denisov',
+    situation: 'Óbito',
+    createdAt: moment(1554670800000).format('DD/MM/YYYY'),
+    updateAt: moment(1554670800000).format('DD/MM/YYYY'),
+    monitoringDays: moment().diff(moment(1554670800000), 'days'),
+    status: 4,
+  },
 ];

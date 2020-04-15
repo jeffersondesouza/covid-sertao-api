@@ -4,6 +4,7 @@ import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import { Delete, Edit } from '@material-ui/icons';
 import {
   Card,
   CardActions,
@@ -17,6 +18,9 @@ import {
   TableRow,
   Tooltip,
   TableSortLabel,
+  IconButton,
+  Typography,
+  Grid,
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
@@ -34,12 +38,23 @@ const useStyles = makeStyles(theme => ({
   statusContainer: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   status: {
     marginRight: theme.spacing(1),
   },
   actions: {
     justifyContent: 'flex-end',
+  },
+  btnAction: {
+    position: 'relative',
+  },
+  btnDanger: {
+    color: theme.palette.error.light,
+  },
+  smallLabel: {
+    fontSize: '10px',
+    marginTop: '-10px',
   },
 }));
 
@@ -70,7 +85,7 @@ const CasesList = props => {
                 <TableRow hover key={item.id}>
                   {/* <TableCell>{item.ref}</TableCell> */}
                   <TableCell>{item.name}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">
                     <div className={classes.statusContainer}>
                       <StatusBullet
                         className={classes.status}
@@ -83,6 +98,27 @@ const CasesList = props => {
                   <TableCell>{item.contact}</TableCell>
                   <TableCell>{item.createdAt}</TableCell>
                   <TableCell>{item.updateAt}</TableCell>
+                  <TableCell align="center">{item.monitoringDays}</TableCell>
+                  <TableCell align="center">
+                    <Grid container>
+                      <div className={classes.btnAction}>
+                        <IconButton className={classes.btnDanger}>
+                          <Delete />
+                        </IconButton>
+                        <Typography className={classes.smallLabel}>
+                          Remover
+                        </Typography>
+                      </div>
+                      <div className={classes.btnAction}>
+                        <IconButton>
+                          <Edit />
+                        </IconButton>
+                        <Typography className={classes.smallLabel}>
+                          Editar
+                        </Typography>
+                      </div>
+                    </Grid>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
