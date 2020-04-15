@@ -16,29 +16,42 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TablePagination
+  TablePagination,
+  IconButton,
+  Grid,
 } from '@material-ui/core';
 
 import { getInitials } from 'helpers';
+import { Edit, Delete } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {},
   content: {
-    padding: 0
+    padding: 0,
   },
   inner: {
-    minWidth: 1050
+    minWidth: 1050,
   },
   nameContainer: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   avatar: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   actions: {
-    justifyContent: 'flex-end'
-  }
+    justifyContent: 'flex-end',
+  },
+  btnAction: {
+    position: 'relative',
+  },
+  btnDanger: {
+    color: theme.palette.error.light,
+  },
+  smallLabel: {
+    fontSize: '10px',
+    marginTop: '-10px',
+  },
 }));
 
 const UsersTable = props => {
@@ -93,32 +106,19 @@ const UsersTable = props => {
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent className={classes.content}>
         <PerfectScrollbar>
           <div className={classes.inner}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedUsers.length === users.length}
-                      color="primary"
-                      indeterminate={
-                        selectedUsers.length > 0 &&
-                        selectedUsers.length < users.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
+                  <TableCell>Membro</TableCell>
+                  <TableCell>Telefone</TableCell>
+                  <TableCell>Lotação</TableCell>
+                  <TableCell>Cargo</TableCell>
+                  <TableCell>Acesso</TableCell>
+                  <TableCell />
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -129,33 +129,37 @@ const UsersTable = props => {
                     key={user.id}
                     selected={selectedUsers.indexOf(user.id) !== -1}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={selectedUsers.indexOf(user.id) !== -1}
-                        color="primary"
-                        onChange={event => handleSelectOne(event, user.id)}
-                        value="true"
-                      />
-                    </TableCell>
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.avatarUrl}
-                        >
+                        <Avatar className={classes.avatar} src={user.avatarUrl}>
                           {getInitials(user.name)}
                         </Avatar>
                         <Typography variant="body1">{user.name}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
-                    </TableCell>
                     <TableCell>{user.phone}</TableCell>
-                    <TableCell>
-                      {moment(user.createdAt).format('DD/MM/YYYY')}
+                    <TableCell>{user.lotation}</TableCell>
+                    <TableCell>{user.job}</TableCell>
+                    <TableCell>{user.role}</TableCell>
+                    <TableCell align="center">
+                      <Grid container>
+                        <div className={classes.btnAction}>
+                          <IconButton className={classes.btnDanger}>
+                            <Delete />
+                          </IconButton>
+                          <Typography className={classes.smallLabel}>
+                            Remover
+                          </Typography>
+                        </div>
+                        <div className={classes.btnAction}>
+                          <IconButton>
+                            <Edit />
+                          </IconButton>
+                          <Typography className={classes.smallLabel}>
+                            Editar
+                          </Typography>
+                        </div>
+                      </Grid>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -181,7 +185,7 @@ const UsersTable = props => {
 
 UsersTable.propTypes = {
   className: PropTypes.string,
-  users: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired,
 };
 
 export default UsersTable;
