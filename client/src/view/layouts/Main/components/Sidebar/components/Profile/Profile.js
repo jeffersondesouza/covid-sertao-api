@@ -19,9 +19,10 @@ const useStyles = makeStyles(theme => ({
   name: {
     marginTop: '0px',
   },
-  city:{
+  city: {
     marginTop: '5px',
-  }
+    textAlign: 'center',
+  },
 }));
 
 const Profile = props => {
@@ -32,7 +33,7 @@ const Profile = props => {
   const user = {
     name: 'Tereza Neuma',
     avatar: '/images/avatars/avatar_icon.png',
-    bio: 'Santa Terezinha',
+    bio: 'Santa Terezinha - PE',
   };
 
   return (
@@ -44,8 +45,10 @@ const Profile = props => {
         src={user.avatar}
         to="/settings"
       />
-      <Typography className={classes.city} variant="body2">{user.bio}</Typography>
-      <Typography className={classes.name} variant="h4">
+      <Typography className={classes.city} variant="body2">
+        {user.bio}
+      </Typography>
+      <Typography className={classes.name} variant="h5">
         {user.name}
       </Typography>
     </div>
