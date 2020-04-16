@@ -4,8 +4,8 @@ const keys = require('../../config/keys');
 const CasesRepository = require('../../repository/case');
 
 module.exports = async (req, res) => {
-  console.log('req:', req.headers);
   const USER_FOUND = { id: 1 };
+
   const token = jwt.encode(USER_FOUND, keys.jwtSecret);
 
   const decoded = jwt.decode(token, keys.jwtSecret);
