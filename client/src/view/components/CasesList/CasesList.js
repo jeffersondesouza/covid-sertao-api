@@ -75,57 +75,59 @@ const CasesList = props => {
   const classes = useStyles();
 
   return (
-    <CardContent className={classes.content}>
-      <PerfectScrollbar>
-        <div className={classes.inner}>
-          <Table>
-            <TableHeader />
-            <TableBody>
-              {cases.map(item => (
-                <TableRow hover key={item.id}>
-                  {/* <TableCell>{item.ref}</TableCell> */}
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell align="center">
-                    <div className={classes.statusContainer}>
-                      <StatusBullet
-                        className={classes.status}
-                        color={statusColors[item.status]}
-                        size="sm"
-                      />
-                    </div>
-                  </TableCell>
-                  <TableCell>{item.situation}</TableCell>
-                  <TableCell>{item.contact}</TableCell>
-                  <TableCell>{item.createdAt}</TableCell>
-                  <TableCell>{item.updateAt}</TableCell>
-                  <TableCell align="center">{item.monitoringDays}</TableCell>
-                  <TableCell align="center">
-                    <Grid container>
-                      <div className={classes.btnAction}>
-                        <IconButton className={classes.btnDanger}>
-                          <Delete />
-                        </IconButton>
-                        <Typography className={classes.smallLabel}>
-                          Remover
-                        </Typography>
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <CardContent className={classes.content}>
+        <PerfectScrollbar>
+          <div className={classes.inner}>
+            <Table>
+              <TableHeader />
+              <TableBody>
+                {cases.map(item => (
+                  <TableRow hover key={item.id}>
+                    {/* <TableCell>{item.ref}</TableCell> */}
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell align="center">
+                      <div className={classes.statusContainer}>
+                        <StatusBullet
+                          className={classes.status}
+                          color={statusColors[item.status]}
+                          size="sm"
+                        />
                       </div>
-                      <div className={classes.btnAction}>
-                        <IconButton>
-                          <Edit />
-                        </IconButton>
-                        <Typography className={classes.smallLabel}>
-                          Editar
-                        </Typography>
-                      </div>
-                    </Grid>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      </PerfectScrollbar>
-    </CardContent>
+                    </TableCell>
+                    <TableCell>{item.situation}</TableCell>
+                    <TableCell>{item.contact}</TableCell>
+                    <TableCell>{item.createdAt}</TableCell>
+                    <TableCell>{item.updateAt}</TableCell>
+                    <TableCell align="center">{item.monitoringDays}</TableCell>
+                    <TableCell align="center">
+                      <Grid container>
+                        <div className={classes.btnAction}>
+                          <IconButton className={classes.btnDanger}>
+                            <Delete />
+                          </IconButton>
+                          <Typography className={classes.smallLabel}>
+                            Remover
+                          </Typography>
+                        </div>
+                        <div className={classes.btnAction}>
+                          <IconButton>
+                            <Edit />
+                          </IconButton>
+                          <Typography className={classes.smallLabel}>
+                            Editar
+                          </Typography>
+                        </div>
+                      </Grid>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </PerfectScrollbar>
+      </CardContent>
+    </Card>
   );
 };
 
