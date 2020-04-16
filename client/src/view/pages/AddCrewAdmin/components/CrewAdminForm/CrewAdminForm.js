@@ -53,7 +53,7 @@ const schema = {
   },
 };
 
-const CrewMemberForm = props => {
+const CrewAdminForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -265,11 +265,11 @@ const CrewMemberForm = props => {
   );
 };
 
-CrewMemberForm.propTypes = {
+CrewAdminForm.propTypes = {
   className: PropTypes.string,
 };
 
-export default CrewMemberForm;
+export default CrewAdminForm;
 
 const states = [
   {

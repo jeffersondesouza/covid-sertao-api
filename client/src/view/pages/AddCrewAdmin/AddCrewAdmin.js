@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography } from '@material-ui/core';
 
-import { CrewMemberForm } from './components';
+import { CrewAdminForm } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,7 @@ const AddCrewAdmin = () => {
           <Typography variant="h3">Novo Administrador</Typography>
         </Grid>
         <Grid item xs={12}>
-          <CrewMemberForm />
+          <CrewAdminForm />
         </Grid>
       </Grid>
     </div>

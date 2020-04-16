@@ -1,1 +1,1 @@
-export { default as CrewMemberForm } from './CrewMemberForm';
+export { default as CrewAdminForm } from './CrewAdminForm';
