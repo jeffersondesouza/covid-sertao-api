@@ -10,14 +10,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AddCrewMember = () => {
+const AddCrewAdmin = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Typography variant="h3">Adicionar Membro para Cidade</Typography>
+          <Typography variant="h3">Novo Administrador</Typography>
         </Grid>
         <Grid item xs={12}>
           <CrewMemberForm />
@@ -27,4 +27,4 @@ const AddCrewMember = () => {
   );
 };
 
-export default AddCrewMember;
+export default AddCrewAdmin;

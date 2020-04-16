@@ -62,7 +62,7 @@ const Sidebar = props => {
     },
     {
       title: 'Adicionar Admin',
-      href: '/add-city-member',
+      href: '/add-city-admin',
       icon: <AccountBoxIcon />,
     },
     {

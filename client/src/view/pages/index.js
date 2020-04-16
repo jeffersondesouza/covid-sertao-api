@@ -1,4 +1,5 @@
 export { default as AddCrewMember } from './AddCrewMember';
+export { default as AddCrewAdmin } from './AddCrewAdmin';
 export { default as Account } from './Account';
 export { default as Dashboard } from './Dashboard';
 export { default as Icons } from './Icons';

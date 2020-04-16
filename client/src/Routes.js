@@ -6,6 +6,7 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './view/layouts';
 
 import {
   AddCrewMember as AddCrewMemberView,
+  AddCrewAdmin as AddCrewAdminView,
   Dashboard as DashboardView,
   CasesList as CasesListView,
   UserList as UserListView,
@@ -42,10 +43,10 @@ const Routes = () => {
       />
 
       <RouteWithLayout
-        component={AddCrewMemberView}
+        component={AddCrewAdminView}
         exact
         layout={MainLayout}
-        path="/add-city-member"
+        path="/add-city-admin"
       />
 
       <RouteWithLayout

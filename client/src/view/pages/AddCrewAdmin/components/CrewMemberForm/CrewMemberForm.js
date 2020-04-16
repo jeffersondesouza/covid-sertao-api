@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import validate from 'validate.js';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -17,45 +18,73 @@ const useStyles = makeStyles(() => ({
   root: {},
 }));
 
+const schema = {
+  email: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 64,
+    },
+  },
+  password: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 128,
+    },
+  },
+};
+
 const CrewMemberForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA',
+  const [formState, setFormState] = useState({
+    isValid: false,
+    values: {},
+    touched: {},
+    errors: {},
   });
 
+  useEffect(() => {
+    const errors = validate(formState.values, schema);
+
+    setFormState(formState => ({
+      ...formState,
+      isValid: errors ? false : true,
+      errors: errors || {},
+    }));
+  }, [formState.values]);
+
   const handleChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+    event.persist();
+
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [event.target.name]:
+          event.target.type === 'checkbox'
+            ? event.target.checked
+            : event.target.value,
+      },
+      touched: {
+        ...formState.touched,
+        [event.target.name]: true,
+      },
+    }));
   };
 
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama',
-    },
-    {
-      value: 'new-york',
-      label: 'New York',
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco',
-    },
-  ];
+  const handleSave = event => {
+    event.preventDefault();
+    console.log(formState);
+  };
+
+  const hasError = field =>
+    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      <form autoComplete="off" noValidate>
+      <form onSubmit={handleSave}>
         <CardHeader
           title="Administrador de Cidade"
           subheader="Este membro fará parte da secretaria de saúde indicada"
@@ -65,94 +94,30 @@ const CrewMemberForm = props => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
+                error={hasError('email')}
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
-                margin="dense"
-                name="firstName"
-                onChange={handleChange}
-                required
-                value={values.firstName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Last name"
-                margin="dense"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Email Address"
-                margin="dense"
+                helperText={
+                  hasError('email') ? formState.errors.email[0] : null
+                }
+                label="Email ou Telefone cadastrado"
                 name="email"
                 onChange={handleChange}
-                required
-                value={values.email}
+                type="text"
+                value={formState.values.email || ''}
                 variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Phone Number"
                 margin="dense"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Country"
-                margin="dense"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
               />
             </Grid>
           </Grid>
-        </CardContent>
-        <Divider />
-        <CardActions>
-          <Button color="primary" variant="contained">
-            Save details
+          <Button
+            color="primary"
+            disabled={!formState.isValid}
+            type="submit"
+            variant="contained"
+          >
+            Salvar
           </Button>
-        </CardActions>
+        </CardContent>
       </form>
     </Card>
   );
@@ -163,3 +128,33 @@ CrewMemberForm.propTypes = {
 };
 
 export default CrewMemberForm;
+
+const states = [
+  {
+    value: 'alabama',
+    label: 'Alabama',
+  },
+  {
+    value: 'new-york',
+    label: 'New York',
+  },
+  {
+    value: 'san-francisco',
+    label: 'San Francisco',
+  },
+];
+
+const cities = [
+  {
+    value: '1',
+    label: 'Santa terezinha',
+  },
+  {
+    value: '2',
+    label: 'São José',
+  },
+  {
+    value: '3',
+    label: 'Triunfo',
+  },
+];

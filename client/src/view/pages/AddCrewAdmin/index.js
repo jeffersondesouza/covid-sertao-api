@@ -1,1 +1,1 @@
-export { default } from './AddCrewMember';
+export { default } from './AddCrewAdmin';
