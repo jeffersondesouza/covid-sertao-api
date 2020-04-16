@@ -7,7 +7,7 @@ const { Strategy } = passportJWT;
 
 const params = {
   secretOrKey: keys.jwtSecret,
-  jwtFromRequest: ExtractJwt.fromHeader('auth'),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('auth'),
 };
 
 module.exports = () => {
