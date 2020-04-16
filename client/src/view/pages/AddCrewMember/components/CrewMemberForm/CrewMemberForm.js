@@ -62,7 +62,7 @@ const CrewAdminForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf: 1 },
+    values: { uf: 1, role: '2' },
     touched: {},
     errors: {},
   });
@@ -214,19 +214,22 @@ const CrewAdminForm = props => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={
-                  <Radio
-                    color="primary"
-                    defaultChecked //
-                  />
-                }
-                label="Administrador"
+                control={<Radio color="primary" />}
+                label="Membro"
+                name="role"
+                value="2"
+                checked={formState.values.role === '2'}
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Radio color="primary" />}
-                label="Membro"
+                label="Administrador"
+                name="role"
+                value="1"
+                checked={formState.values.role === '1'}
+                onChange={handleChange}
               />
             </Grid>
           </Grid>
