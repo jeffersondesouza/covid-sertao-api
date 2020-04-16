@@ -16,19 +16,39 @@ import {
 
 const useStyles = makeStyles(() => ({
   root: {},
+  action: {
+    marginTop: '1.5rem',
+  },
 }));
 
 const schema = {
+  firstName: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  lastName: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  uf: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  city: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
   email: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  phone: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
     length: {
-      maximum: 64,
+      minimum: 8,
+      maximum: 9,
     },
   },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
+  cod: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
     length: {
-      maximum: 128,
+      minimum: 2,
+      maximum: 2,
     },
   },
 };
@@ -40,7 +60,7 @@ const CrewMemberForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: {},
+    values: { uf: 1 },
     touched: {},
     errors: {},
   });
@@ -86,7 +106,7 @@ const CrewMemberForm = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSave}>
         <CardHeader
-          title="Administrador de Cidade"
+          title="Administrador de Equipe"
           subheader="Este membro fará parte da secretaria de saúde indicada"
         />
         <Divider />
@@ -94,12 +114,136 @@ const CrewMemberForm = props => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
-                error={hasError('email')}
+                fullWidth
+                label="Selecione o Estado"
+                name="uf"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.uf}
+                variant="outlined"
+                margin="dense"
+                helperText={hasError('uf') ? 'Informe o Estado' : null}
+                error={hasError('uf')}
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                SelectProps={{ native: true }}
+                variant="outlined"
+              >
+                {states.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Selecione a Cidade"
+                name="city"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.city}
+                variant="outlined"
+                margin="dense"
+                helperText={hasError('city') ? 'Informe a Cidade' : null}
+                error={hasError('city')}
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                SelectProps={{ native: true }}
+                variant="outlined"
+              >
+                {cities.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
+              <TextField
+                error={hasError('firstName')}
                 fullWidth
                 helperText={
-                  hasError('email') ? formState.errors.email[0] : null
+                  hasError('firstName') ? 'Informe o nome do Usuário' : null
                 }
-                label="Email ou Telefone cadastrado"
+                label="Nome"
+                name="firstName"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.firstName || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                error={hasError('lastName')}
+                fullWidth
+                label="Sobrenome"
+                name="lastName"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.lastName || ''}
+                variant="outlined"
+                margin="dense"
+                helperText={hasError('lastName') ? 'Informe o sobrenome' : null}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={3}>
+            <Grid item md={2} xs={2}>
+              <TextField
+                error={hasError('cod')}
+                fullWidth
+                label="DDD"
+                placeholder="88"
+                name="cod"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.cod || ''}
+                variant="outlined"
+                margin="dense"
+                helperText={
+                  hasError('cod')
+                    ? 'Informe um DDD com dois número ex: 87'
+                    : null
+                }
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item md={4} xs={20}>
+              <TextField
+                error={hasError('phone')}
+                fullWidth
+                label="Telefone"
+                placeholder="98888-8888"
+                name="phone"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.phone || ''}
+                variant="outlined"
+                margin="dense"
+                helperText={
+                  hasError('phone') ? 'Informe o telefone do usuário' : null
+                }
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                error={hasError('email')}
+                fullWidth
+                helperText={hasError('email') ? 'Informe o email' : null}
+                label="Email"
                 name="email"
                 onChange={handleChange}
                 type="text"
@@ -109,14 +253,12 @@ const CrewMemberForm = props => {
               />
             </Grid>
           </Grid>
-          <Button
-            color="primary"
-            disabled={!formState.isValid}
-            type="submit"
-            variant="contained"
-          >
-            Salvar
-          </Button>
+
+          <Grid item className={classes.action}>
+            <Button color="primary" type="submit" variant="contained">
+              Salvar
+            </Button>
+          </Grid>
         </CardContent>
       </form>
     </Card>
@@ -146,15 +288,15 @@ const states = [
 
 const cities = [
   {
-    value: '1',
+    value: 1,
     label: 'Santa terezinha',
   },
   {
-    value: '2',
+    value: 2,
     label: 'São José',
   },
   {
-    value: '3',
+    value: 3,
     label: 'Triunfo',
   },
 ];

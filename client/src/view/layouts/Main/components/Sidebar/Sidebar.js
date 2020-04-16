@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Assignment, AssignmentInd } from '@material-ui/icons';
+
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -53,7 +54,7 @@ const Sidebar = props => {
     {
       title: 'Casos',
       href: '/cases',
-      icon: <AssignmentIcon />,
+      icon: <Assignment />,
     },
     {
       title: 'Membros',
@@ -63,7 +64,7 @@ const Sidebar = props => {
     {
       title: 'Adicionar Admin',
       href: '/add-city-admin',
-      icon: <AccountBoxIcon />,
+      icon: <AssignmentInd />,
     },
     {
       title: 'Minha Conta',
