@@ -61,6 +61,11 @@ const Sidebar = props => {
       icon: <PeopleIcon />,
     },
     {
+      title: 'Adicionar Admin',
+      href: '/add-city-member',
+      icon: <AccountBoxIcon />,
+    },
+    {
       title: 'Minha Conta',
       href: '/account',
       icon: <AccountBoxIcon />,
