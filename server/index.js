@@ -5,18 +5,26 @@ const path = require('path');
 
 const keys = require('./config/keys');
 const envVariables = require('./services/envVariables');
+const jwtAuth = require('./services/passport/jwt-strategy')();
 
-const { cityRoutes, caseRoutes, reportsRoutes } = require('./routes');
+const app = express();
+
+app.use(bodyParser.json());
+app.use(jwtAuth.initialize());
+
+const {
+  authRoutes,
+  cityRoutes,
+  caseRoutes,
+  reportsRoutes,
+} = require('./routes');
 
 mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-const app = express();
-
-app.use(bodyParser.json());
-
+authRoutes(app, jwtAuth.authenticate);
 cityRoutes(app);
 caseRoutes(app);
 reportsRoutes(app);
