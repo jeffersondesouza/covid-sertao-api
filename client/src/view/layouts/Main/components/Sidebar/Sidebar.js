@@ -58,12 +58,12 @@ const Sidebar = props => {
     },
     {
       title: 'Membros',
-      href: '/users',
+      href: '/members',
       icon: <PeopleIcon />,
     },
     {
       title: 'Adicionar Admin',
-      href: '/add-city-admin',
+      href: '/members/admin/add',
       icon: <AssignmentInd />,
     },
     {

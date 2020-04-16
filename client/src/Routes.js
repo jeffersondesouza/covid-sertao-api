@@ -29,12 +29,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/dashboard"
       />
-      <RouteWithLayout
-        component={UserListView}
-        exact
-        layout={MainLayout}
-        path="/users"
-      />
+
       <RouteWithLayout
         component={CasesListView}
         exact
@@ -43,10 +38,24 @@ const Routes = () => {
       />
 
       <RouteWithLayout
+        component={UserListView}
+        exact
+        layout={MainLayout}
+        path="/members"
+      />
+
+      <RouteWithLayout
+        component={AddCrewMemberView}
+        exact
+        layout={MainLayout}
+        path="/members/add"
+      />
+
+      <RouteWithLayout
         component={AddCrewAdminView}
         exact
         layout={MainLayout}
-        path="/add-city-admin"
+        path="/members/admin/add"
       />
 
       <RouteWithLayout

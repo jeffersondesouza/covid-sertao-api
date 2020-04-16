@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button, Typography } from '@material-ui/core';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import { SearchInput } from 'view/components';
 
@@ -38,9 +39,9 @@ const UsersToolbar = props => {
       <div className={classes.row}>
         <Typography variant="h2">Membros</Typography>
         <span className={classes.spacer} />
-        <Button color="primary" variant="contained">
-          Adicinar novo Membro
-        </Button>
+        <NavLink to="/members/add">
+          <Button variant="contained">Adicionar novo Membro</Button>
+        </NavLink>
       </div>
       <div className={classes.row}>
         <SearchInput

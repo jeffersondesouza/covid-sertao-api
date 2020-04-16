@@ -17,7 +17,7 @@ const AddCrewMember = () => {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Typography variant="h3">Adicionar Membro para Cidade</Typography>
+          <Typography variant="h3">Novo Membro</Typography>
         </Grid>
         <Grid item xs={12}>
           <CrewMemberForm />

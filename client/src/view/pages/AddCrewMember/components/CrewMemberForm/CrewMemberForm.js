@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import validate from 'validate.js';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -15,49 +16,97 @@ import {
 
 const useStyles = makeStyles(() => ({
   root: {},
+  action: {
+    marginTop: '1.5rem',
+  },
 }));
 
-const CrewMemberForm = props => {
+const schema = {
+  firstName: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  lastName: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  uf: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  city: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  email: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+  },
+  phone: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+    length: {
+      minimum: 8,
+      maximum: 9,
+    },
+  },
+  cod: {
+    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
+    length: {
+      minimum: 2,
+      maximum: 2,
+    },
+  },
+};
+
+const CrewAdminForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
-  const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA',
+  const [formState, setFormState] = useState({
+    isValid: false,
+    values: { uf: 1 },
+    touched: {},
+    errors: {},
   });
 
+  useEffect(() => {
+    const errors = validate(formState.values, schema);
+
+    setFormState(formState => ({
+      ...formState,
+      isValid: errors ? false : true,
+      errors: errors || {},
+    }));
+  }, [formState.values]);
+
   const handleChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value,
-    });
+    event.persist();
+
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [event.target.name]:
+          event.target.type === 'checkbox'
+            ? event.target.checked
+            : event.target.value,
+      },
+      touched: {
+        ...formState.touched,
+        [event.target.name]: true,
+      },
+    }));
   };
 
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama',
-    },
-    {
-      value: 'new-york',
-      label: 'New York',
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco',
-    },
-  ];
+  const handleSave = event => {
+    event.preventDefault();
+    console.log(formState);
+  };
+
+  const hasError = field =>
+    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
-      <form autoComplete="off" noValidate>
+      <form onSubmit={handleSave}>
         <CardHeader
-          title="Administrador de Cidade"
+          title="Membro da Equipe"
           subheader="Este membro fará parte da secretaria de saúde indicada"
         />
         <Divider />
@@ -65,101 +114,139 @@ const CrewMemberForm = props => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
+                error={hasError('firstName')}
                 fullWidth
-                helperText="Please specify the first name"
-                label="First name"
-                margin="dense"
+                helperText={
+                  hasError('firstName') ? 'Informe o nome do Usuário' : null
+                }
+                label="Nome"
                 name="firstName"
                 onChange={handleChange}
-                required
-                value={values.firstName}
+                type="text"
+                value={formState.values.firstName || ''}
                 variant="outlined"
+                margin="dense"
               />
             </Grid>
+
             <Grid item md={6} xs={12}>
               <TextField
+                error={hasError('lastName')}
                 fullWidth
-                label="Last name"
-                margin="dense"
+                label="Sobrenome"
                 name="lastName"
                 onChange={handleChange}
-                required
-                value={values.lastName}
+                type="text"
+                value={formState.values.lastName || ''}
                 variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Email Address"
                 margin="dense"
-                name="email"
-                onChange={handleChange}
-                required
-                value={values.email}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Phone Number"
-                margin="dense"
-                name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phone}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Select State"
-                margin="dense"
-                name="state"
-                onChange={handleChange}
-                required
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                value={values.state}
-                variant="outlined"
-              >
-                {states.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Country"
-                margin="dense"
-                name="country"
-                onChange={handleChange}
-                required
-                value={values.country}
-                variant="outlined"
+                helperText={hasError('lastName') ? 'Informe o sobrenome' : null}
               />
             </Grid>
           </Grid>
+
+          <Grid container spacing={3}>
+            <Grid item md={2} xs={2}>
+              <TextField
+                error={hasError('cod')}
+                fullWidth
+                label="DDD"
+                placeholder="88"
+                name="cod"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.cod || ''}
+                variant="outlined"
+                margin="dense"
+                helperText={
+                  hasError('cod')
+                    ? 'Informe um DDD com dois número ex: 87'
+                    : null
+                }
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item md={4} xs={20}>
+              <TextField
+                error={hasError('phone')}
+                fullWidth
+                label="Telefone"
+                placeholder="98888-8888"
+                name="phone"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.phone || ''}
+                variant="outlined"
+                margin="dense"
+                helperText={
+                  hasError('phone') ? 'Informe o telefone do usuário' : null
+                }
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                error={hasError('email')}
+                fullWidth
+                helperText={hasError('email') ? 'Informe o email' : null}
+                label="Email"
+                name="email"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.email || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+          </Grid>
+
+          <Grid item className={classes.action}>
+            <Button color="primary" type="submit" variant="contained">
+              Salvar
+            </Button>
+          </Grid>
         </CardContent>
-        <Divider />
-        <CardActions>
-          <Button color="primary" variant="contained">
-            Save details
-          </Button>
-        </CardActions>
       </form>
     </Card>
   );
 };
 
-CrewMemberForm.propTypes = {
+CrewAdminForm.propTypes = {
   className: PropTypes.string,
 };
 
-export default CrewMemberForm;
+export default CrewAdminForm;
+
+const states = [
+  {
+    value: 'alabama',
+    label: 'Alabama',
+  },
+  {
+    value: 'new-york',
+    label: 'New York',
+  },
+  {
+    value: 'san-francisco',
+    label: 'San Francisco',
+  },
+];
+
+const cities = [
+  {
+    value: 1,
+    label: 'Santa terezinha',
+  },
+  {
+    value: 2,
+    label: 'São José',
+  },
+  {
+    value: 3,
+    label: 'Triunfo',
+  },
+];
