@@ -41,9 +41,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.success.main,
   },
   black: { backgroundColor: theme.palette.black },
-  suspect: {
-    backgroundColor: theme.palette.cases.suspect,
-  },
 
   confirmed: { backgroundColor: theme.palette.cases.confirmed },
   suspect: { backgroundColor: theme.palette.cases.suspect },

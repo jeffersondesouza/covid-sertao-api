@@ -1,18 +1,8 @@
 import React from 'react';
 import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardContent,
-  Button,
-  Divider,
-  Table,
-  TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Tooltip,
-  TableSortLabel,
 } from '@material-ui/core';
 
 const TableHeader = () => (

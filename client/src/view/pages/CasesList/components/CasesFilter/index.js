@@ -2,10 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import {
-  Typography,
   FormControlLabel,
   Checkbox,
-  Grid,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -13,7 +11,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CasesFilter = props => {
-  const { className, ...rest } = props;
+  const { className } = props;
 
   const classes = useStyles();
 

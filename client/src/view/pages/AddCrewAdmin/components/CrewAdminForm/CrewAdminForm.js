@@ -7,7 +7,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Divider,
   Grid,
   Button,
@@ -127,7 +126,6 @@ const CrewAdminForm = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                variant="outlined"
               >
                 {states.map(option => (
                   <option key={option.value} value={option.value}>
@@ -151,7 +149,6 @@ const CrewAdminForm = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
-                variant="outlined"
               >
                 {cities.map(option => (
                   <option key={option.value} value={option.value}>
@@ -218,7 +215,7 @@ const CrewAdminForm = props => {
                 }}
               />
             </Grid>
-            <Grid item md={4} xs={20}>
+            <Grid item md={4} xs={12}>
               <TextField
                 error={hasError('phone')}
                 fullWidth

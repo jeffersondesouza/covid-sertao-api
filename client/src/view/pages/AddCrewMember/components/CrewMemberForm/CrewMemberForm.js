@@ -7,11 +7,13 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Divider,
   Grid,
   Button,
   TextField,
+  FormControlLabel,
+  Typography,
+  Radio,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -34,7 +36,7 @@ const schema = {
   city: {
     presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
   },
-  email: {
+  role: {
     presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
   },
   phone: {
@@ -128,7 +130,8 @@ const CrewAdminForm = props => {
                 margin="dense"
               />
             </Grid>
-
+          </Grid>
+          <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
                 error={hasError('lastName')}
@@ -144,7 +147,6 @@ const CrewAdminForm = props => {
               />
             </Grid>
           </Grid>
-
           <Grid container spacing={3}>
             <Grid item md={2} xs={2}>
               <TextField
@@ -168,7 +170,8 @@ const CrewAdminForm = props => {
                 }}
               />
             </Grid>
-            <Grid item md={4} xs={20}>
+
+            <Grid item md={4} xs={12}>
               <TextField
                 error={hasError('phone')}
                 fullWidth
@@ -188,11 +191,11 @@ const CrewAdminForm = props => {
                 }}
               />
             </Grid>
+          </Grid>
+          <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
-                error={hasError('email')}
                 fullWidth
-                helperText={hasError('email') ? 'Informe o email' : null}
                 label="Email"
                 name="email"
                 onChange={handleChange}
@@ -203,7 +206,49 @@ const CrewAdminForm = props => {
               />
             </Grid>
           </Grid>
+          <Grid container className={classes.action}>
+            <Grid item xs={12}>
+              <Typography gutterBottom variant="h6">
+                Autorização
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Radio
+                    color="primary"
+                    defaultChecked //
+                  />
+                }
+                label="Administrador"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Membro"
+              />
+            </Grid>
+          </Grid>
 
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Lotado em"
+                placeholder="ex: Hospital Central, Posto de Saúde etc "
+                name="lotation"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.lotation || ''}
+                variant="outlined"
+                margin="dense"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+          </Grid>
           <Grid item className={classes.action}>
             <Button color="primary" type="submit" variant="contained">
               Salvar

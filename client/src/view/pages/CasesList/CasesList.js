@@ -5,7 +5,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { CasesList } from 'view/components';
-import { ProductsToolbar, ProductCard } from './components';
+import { ProductsToolbar } from './components';
 import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
