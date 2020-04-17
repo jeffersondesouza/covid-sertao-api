@@ -2,25 +2,19 @@ import React, { useState, useReducer } from 'react';
 
 import { Provider, Consumer } from './createContext';
 
-import { LOGIN_REQUEST } from './ActionsTypes';
 import reducer from './reducer';
 import initialState from './state';
+import rootActions from './rootActions';
 
 function init(st) {
   return st;
 }
 
-const actions = dispatch => {};
-
 const ContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState, init);
 
-  const login = params => {
-    dispatch({ type: LOGIN_REQUEST, payload: params });
-  };
-
   return (
-    <Provider value={{ state, login }}>
+    <Provider value={{ state, ...rootActions(dispatch) }}>
       <Consumer>{() => props.children}</Consumer>
     </Provider>
   );
