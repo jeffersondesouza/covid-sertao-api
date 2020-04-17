@@ -11,9 +11,12 @@ module.exports = async (req, res) => {
       return res.send({ status: 401, msg: 'User not found' }).status(401);
     }
 
-    const token = jwt.encode(user, keys.jwtSecret);
+    const token = jwt.encode(
+      { ...user, expireAt: Date.now() + 300000 },
+      keys.jwtSecret
+    );
 
-    return res.send({ ...user.toObject(), token });
+    return res.send({ ...user, token });
   } catch (error) {
     return res.send({ status: 500, msg: 'User not found' }).status(500);
   }
