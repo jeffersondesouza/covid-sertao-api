@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
-import { makeStyles } from '@material-ui/styles';
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
 
+import { Context } from 'store/createContext';
+
+import useStyles from './styles';
+
 const schema = {
-  email: {
+  username: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 64,
@@ -20,108 +23,15 @@ const schema = {
   },
 };
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default,
-    height: '100%',
-  },
-  grid: {
-    height: '100%',
-  },
-  quoteContainer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  quote: {
-    backgroundColor: theme.palette.neutral,
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundImage: 'url(/images/auth.png)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-  },
-  quoteInner: {
-    textAlign: 'center',
-    flexBasis: '600px',
-  },
-  quoteText: {
-    color: theme.palette.white,
-    fontWeight: 600,
-  },
-  name: {
-    marginTop: theme.spacing(3),
-    color: theme.palette.white,
-  },
-  bio: {
-    color: theme.palette.white,
-  },
-  contentContainer: {},
-  content: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  contentHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: theme.spacing(5),
-    paddingBototm: theme.spacing(2),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-  },
-  logoImage: {
-    marginLeft: theme.spacing(4),
-  },
-  contentBody: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.down('md')]: {
-      justifyContent: 'center',
-    },
-  },
-  form: {
-    paddingLeft: 100,
-    paddingRight: 100,
-    paddingBottom: 125,
-    flexBasis: 700,
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2),
-    },
-  },
-  title: {
-    marginTop: theme.spacing(3),
-  },
-  socialButtons: {
-    marginTop: theme.spacing(3),
-  },
-  socialIcon: {
-    marginRight: theme.spacing(1),
-  },
-  sugestion: {
-    marginTop: theme.spacing(2),
-  },
-  textField: {
-    marginTop: theme.spacing(2),
-  },
-  signInButton: {
-    margin: theme.spacing(2, 0),
-  },
-}));
-
 const SignIn = props => {
   const { history } = props;
-
   const classes = useStyles();
+
+  const { state, login, dispatch } = useContext(Context);
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: {},
+    values: { username: 'joao', password: '123' },
     touched: {},
     errors: {},
   });
@@ -157,8 +67,10 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    console.log(formState);
-    history.push('/dashboard');
+    login(formState.values);
+
+    /*     console.log(formState);
+    history.push('/dashboard'); */
   };
 
   const hasError = field =>
@@ -166,6 +78,7 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
+      {state.count}
       <Grid className={classes.grid} container>
         <Grid className={classes.quoteContainer} item lg={5}>
           <div className={classes.quote}>
@@ -231,25 +144,25 @@ const SignIn = props => {
 
                 <TextField
                   className={classes.textField}
-                  error={hasError('email')}
+                  error={hasError('username')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('username')
+                      ? 'Informe o email ou telefone cadastrado'
+                      : ''
                   }
                   label="Email ou Telefone cadastrado"
-                  name="email"
+                  name="username"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.username || ''}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
                   error={hasError('password')}
                   fullWidth
-                  helperText={
-                    hasError('password') ? formState.errors.password[0] : null
-                  }
+                  helperText={hasError('password') ? 'Infome sua senha' : ''}
                   label="Senha"
                   name="password"
                   onChange={handleChange}
