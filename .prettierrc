@@ -2,5 +2,10 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": true,
-  "trailingComma": "es5"
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "parser": "babel",
+  "react/jsx-max-props-per-line": [2, { "when": "always" }]
 }

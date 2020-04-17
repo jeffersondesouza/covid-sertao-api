@@ -125,6 +125,7 @@ const CasesList = props => {
 
 CasesList.propTypes = {
   className: PropTypes.string,
+  cases: PropTypes.array,
 };
 
 export default CasesList;
