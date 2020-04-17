@@ -1,11 +1,14 @@
 import Switch from 'helpers/functions/Switch';
 
-import { LOGIN_REQUEST } from './modules/auth/ActionsTypes';
-import { loginRequest } from './modules/auth/rerducer/login';
+import auth from './modules/auth/ActionsTypes';
+
+import * as login from './modules/auth/reducer/login';
 
 function reducer(state = {}, action) {
   return Switch.on(action.type, state, action.payload)
-    .case(LOGIN_REQUEST, loginRequest)
+    .case(auth.LOGIN_REQUEST, login.request)
+    .case(auth.LOGIN_SUCCESS, login.success)
+    .case(auth.LOGIN_FAILURE, login.failure)
     .default(state);
 }
 

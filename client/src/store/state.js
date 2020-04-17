@@ -1,1 +1,8 @@
-export default { count: 0 };
+export default {
+  auth: {
+    role: 3,
+  },
+  case: {},
+  location: {},
+  member: {},
+};

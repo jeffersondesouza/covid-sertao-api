@@ -10,7 +10,11 @@ const login = async (params) => {
     $and: [{ password }, { $or: [{ email: username }, { phone: username }] }],
   }).select('-password');
 
-  return user.toObject();
+  if (user) {
+    return user.toObject();
+  }
+
+  return null;
 };
 
 module.exports = login;

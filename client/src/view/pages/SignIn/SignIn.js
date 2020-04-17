@@ -27,11 +27,15 @@ const SignIn = props => {
   const { history } = props;
   const classes = useStyles();
 
-  const { state, login, dispatch } = useContext(Context);
+  const {
+    state: { auth },
+    login,
+  } = useContext(Context);
 
+  console.log('auth:', auth);
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { username: 'joao', password: '123' },
+    values: { username: '83987928967', password: 'Senha123' },
     touched: {},
     errors: {},
   });
@@ -45,6 +49,12 @@ const SignIn = props => {
       errors: errors || {},
     }));
   }, [formState.values]);
+
+  useEffect(() => {
+    if (auth.isLogged) {
+      history.push('/dashboard');
+    }
+  }, [auth.isLogged]);
 
   const handleChange = event => {
     event.persist();
@@ -68,9 +78,6 @@ const SignIn = props => {
   const handleSignIn = event => {
     event.preventDefault();
     login(formState.values);
-
-    /*     console.log(formState);
-    history.push('/dashboard'); */
   };
 
   const hasError = field =>
@@ -78,7 +85,6 @@ const SignIn = props => {
 
   return (
     <div className={classes.root}>
-      {state.count}
       <Grid className={classes.grid} container>
         <Grid className={classes.quoteContainer} item lg={5}>
           <div className={classes.quote}>
@@ -173,7 +179,7 @@ const SignIn = props => {
                 <Button
                   className={classes.signInButton}
                   color="primary"
-                  disabled={!formState.isValid}
+                  disabled={!formState.isValid || auth.isLoggingIn}
                   fullWidth
                   size="large"
                   type="submit"

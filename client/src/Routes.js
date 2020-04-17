@@ -17,16 +17,25 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
 } from './view/pages';
+import { LoggedGuard } from 'view/guards';
 
 const Routes = () => {
   return (
     <Switch>
       <Redirect exact from="/" to="/login" />
       <RouteWithLayout
-        component={DashboardView}
+        component={SignInView}
         exact
-        layout={MainLayout}
+        layout={MinimalLayout}
+        path="/login"
+      />
+
+      <RouteWithLayout
+        exact
         path="/dashboard"
+        layout={MainLayout}
+        component={DashboardView}
+        guard={LoggedGuard}
       />
 
       <RouteWithLayout
@@ -87,12 +96,7 @@ const Routes = () => {
         layout={MinimalLayout}
         path="/sign-up"
       /> */}
-      <RouteWithLayout
-        component={SignInView}
-        exact
-        layout={MinimalLayout}
-        path="/login"
-      />
+
       <RouteWithLayout
         component={NotFoundView}
         exact

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     const user = await AuthRepository.login(req.body);
 
     if (!user) {
-      return res.send({ status: 401, msg: 'User not found' }).status(401);
+      return res.status(401).send('User not found');
     }
 
     const token = jwt.encode(
@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
 
     return res.send({ ...user, token });
   } catch (error) {
-    return res.send({ status: 500, msg: 'User not found' }).status(500);
+    return res.status(500).send('Internal server error');
   }
 };
 
