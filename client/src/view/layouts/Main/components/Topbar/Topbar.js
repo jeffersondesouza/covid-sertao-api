@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -8,6 +8,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import { Logo } from 'view/layouts/Logo';
+
+import { Context } from 'store/createContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +30,13 @@ const Topbar = props => {
 
   const [notifications] = useState([]);
 
+  const {
+    state: { auth },
+    logout,
+  } = useContext(Context);
+
   const handleSignIn = event => {
+    logout();
     event.preventDefault();
     history.push('/login');
   };

@@ -14,7 +14,7 @@ const ContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, initialState, init);
 
   return (
-    <Provider value={{ state, ...rootActions(dispatch) }}>
+    <Provider value={{ state, ...rootActions(dispatch), dispatch }}>
       <Consumer>{() => props.children}</Consumer>
     </Provider>
   );

@@ -1,3 +1,12 @@
+export const logout = state => ({
+  auth: {
+    role: 3,
+  },
+  case: {},
+  location: {},
+  member: {},
+});
+
 export const request = (state, payload) => ({
   ...state,
   auth: {

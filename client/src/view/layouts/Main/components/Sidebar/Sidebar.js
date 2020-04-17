@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Divider, Drawer } from '@material-ui/core';
+import {
+  Divider,
+  Drawer,
+  IconButton,
+  Hidden,
+  Badge,
+  Button,
+} from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import { Assignment, AssignmentInd } from '@material-ui/icons';
+import MenuIcon from '@material-ui/icons/Menu';
+import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
+import InputIcon from '@material-ui/icons/Input';
 
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { Context } from 'store/createContext';
 
 import { Profile, SidebarNav } from './components';
 
@@ -37,10 +49,22 @@ const useStyles = makeStyles(theme => ({
   nav: {
     marginBottom: theme.spacing(2),
   },
+  icon: {
+    color: theme.palette.icon,
+    width: 24,
+    height: 24,
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: theme.spacing(1),
+  },
+  btnLogout: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+  },
 }));
 
 const Sidebar = props => {
-  const { open, variant, onClose, className, ...rest } = props;
+  const { open, variant, onClose, history, className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -91,6 +115,17 @@ const Sidebar = props => {
     },
   ];
 
+  const {
+    state: { auth },
+    logout,
+  } = useContext(Context);
+
+  const handleLogout = event => {
+    logout();
+    event.preventDefault();
+    history.push('/login');
+  };
+
   return (
     <Drawer
       anchor="left"
@@ -103,6 +138,17 @@ const Sidebar = props => {
         <Profile />
         <Divider className={classes.divider} />
         <SidebarNav className={classes.nav} pages={pages} />
+        <Hidden lgUp>
+          <Divider />
+          <Button
+            variant="text"
+            className={classes.btnLogout}
+            onClick={handleLogout}
+          >
+            <InputIcon className={classes.icon} color="inherit" />
+            Sair
+          </Button>
+        </Hidden>
       </div>
     </Drawer>
   );
@@ -115,4 +161,4 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired,
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);

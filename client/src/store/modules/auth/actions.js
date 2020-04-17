@@ -22,7 +22,7 @@ const login = dispatch => async params => {
   }
 };
 
-const verifyToken = dispatch => async params => {
+const verifyToken = dispatch => async () => {
   dispatch({ type: Types.VERIFY_TOKEN_REQUEST });
 
   try {
@@ -41,7 +41,13 @@ const verifyToken = dispatch => async params => {
   }
 };
 
+const logout = dispatch => async () => {
+  dispatch({ type: Types.LOGOUT });
+  const token = cookieStore.deleteMany([TOKEN]);
+};
+
 export default dispatch => ({
   login: login(dispatch),
   verifyToken: verifyToken(dispatch),
+  logout: logout(dispatch),
 });
