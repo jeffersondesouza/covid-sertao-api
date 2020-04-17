@@ -12,13 +12,13 @@ const params = {
 
 module.exports = () => {
   const strategy = new Strategy(params, (payload, done) => {
-    const user = { id: 1 };
+    const user = payload;
 
     if (!user) {
       return done(new Error('User not found'), null);
     }
 
-    return done(null, { user });
+    return done(null, user);
   });
 
   passport.use(strategy);
