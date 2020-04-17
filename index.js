@@ -3,6 +3,7 @@ require('./server/models/Case');
 require('./server/models/Location');
 require('./server/models/Phone');
 require('./server/models/Report');
+require('./server/models/User');
 
 const app = require('./server');
 

@@ -13,12 +13,16 @@ module.exports = async (req, res) => {
 
     const token = jwt.encode(user, keys.jwtSecret);
 
+    /*   
+    const decoded = jwt.decode(token, keys.jwtSecret);
+   */
     return res.send({ ...user.toObject(), token });
   } catch (error) {
     return res.send({ status: 500, msg: 'User not found' }).status(500);
   }
 };
 
+/*    */
 /* 
 const CASE = {
   cityId: '5e8babf51c9d44000083b976',
