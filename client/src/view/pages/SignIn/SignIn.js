@@ -32,7 +32,6 @@ const SignIn = props => {
     login,
   } = useContext(Context);
 
-  console.log('auth:', auth);
   const [formState, setFormState] = useState({
     isValid: false,
     values: { username: '83987928967', password: 'Senha123' },

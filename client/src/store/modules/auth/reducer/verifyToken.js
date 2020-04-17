@@ -2,8 +2,7 @@ export const request = (state, payload) => ({
   ...state,
   auth: {
     ...state.auth,
-    isLoggingIn: true,
-    isLogged: false,
+    isVerifyingToken: true,
     tokenVerifyFail: false,
   },
 });
@@ -12,7 +11,7 @@ export const success = (state, payload) => ({
   ...state,
   auth: {
     ...state.auth,
-    isLoggingIn: false,
+    isVerifyingToken: false,
     isLogged: true,
   },
 });
@@ -21,7 +20,8 @@ export const failure = (state, payload) => ({
   ...state,
   auth: {
     ...state.auth,
-    isLoggingIn: false,
+    isVerifyingToken: false,
+    tokenVerifyFail: true,
     isLogged: false,
   },
 });
