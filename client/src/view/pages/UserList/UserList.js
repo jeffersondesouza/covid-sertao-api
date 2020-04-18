@@ -14,10 +14,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     marginTop: theme.spacing(2),
   },
-  alert: {
-    marginTop: '3rem',
-    textAlign: 'center',
-  },
 }));
 
 const UserList = () => {
@@ -26,18 +22,13 @@ const UserList = () => {
   const { loadUfs, cleanUpUser, loadCities, saveUser } = useContext(Context);
 
   const users = useSelector(state => state.user.users);
+  const isLoadingUsers = useSelector(state => state.user.isLoadingUsers);
 
   return (
     <div className={classes.root}>
       <UsersToolbar />
       <div className={classes.content}>
-        {users.length ? (
-          <UsersTable users={users} />
-        ) : (
-          <Typography variant="body1" className={classes.alert}>
-            Sem Usuários Cadastrados
-          </Typography>
-        )}
+        <UsersTable users={users} isLoading={isLoadingUsers} />
       </div>
     </div>
   );

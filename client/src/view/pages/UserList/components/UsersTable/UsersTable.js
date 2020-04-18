@@ -15,6 +15,7 @@ import {
   Typography,
   IconButton,
   Grid,
+  CircularProgress,
   // TablePagination,
   // CardActions,
 } from '@material-ui/core';
@@ -50,10 +51,14 @@ const useStyles = makeStyles(theme => ({
     fontSize: '10px',
     marginTop: '-10px',
   },
+  alert: {
+    marginTop: '3rem',
+    textAlign: 'center',
+  },
 }));
 
 const UsersTable = props => {
-  const { className, users, ...rest } = props;
+  const { className, users, isLoading, ...rest } = props;
 
   const classes = useStyles();
 
@@ -68,6 +73,22 @@ const UsersTable = props => {
   const handleRowsPerPageChange = event => {
     setRowsPerPage(event.target.value);
   };
+
+  if (isLoading) {
+    return (
+      <div className={classes.alert}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (!users.length) {
+    return (
+      <Typography variant="body1" className={classes.alert}>
+        Sem Usuários Cadastrados
+      </Typography>
+    );
+  }
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -149,6 +170,7 @@ const UsersTable = props => {
 
 UsersTable.propTypes = {
   className: PropTypes.string,
+  isLoading: PropTypes.bool,
   users: PropTypes.array.isRequired,
 };
 
