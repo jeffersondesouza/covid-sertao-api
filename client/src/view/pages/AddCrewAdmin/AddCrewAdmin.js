@@ -16,10 +16,7 @@ const useStyles = makeStyles(theme => ({
 const AddCrewAdmin = () => {
   const classes = useStyles();
 
-  const auth = useSelector(state => state.auth);
-  console.log('auth:', auth)
   const user = useSelector(state => state.auth.currentUser);
-  console.log('user:', user)
 
   if (!user.isSuperUser) {
     return <Redirect to="/dashboard" />;
