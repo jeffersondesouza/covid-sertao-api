@@ -8,6 +8,6 @@ module.exports = async (req, res) => {
     return res.status(401).send('Not Authorized');
   }
 
-  const users = await UserRepository.loadUsersCrew(_city);
+  const users = await UserRepository.loadUsersCrew(_city, req.user._id);
   return res.send(users || []);
 };

@@ -4,8 +4,11 @@ const { UserRolesEnum } = require('../../enums');
 
 const User = mongoose.model('users');
 
-const loadUsers = async (cityId) => {
+const loadUsers = async (cityId, userId) => {
   const users = await User.find({
+    _id: {
+      $not: { $eq: userId },
+    },
     $and: [
       {
         _city: cityId,
