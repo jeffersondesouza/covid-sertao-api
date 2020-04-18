@@ -151,6 +151,9 @@ const CrewAdminForm = props => {
                 value={formState.values.firstname || ''}
                 variant="outlined"
                 margin="dense"
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
           </Grid>
@@ -167,11 +170,14 @@ const CrewAdminForm = props => {
                 variant="outlined"
                 margin="dense"
                 helperText={hasError('lastname') ? 'Informe o sobrenome' : null}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
           </Grid>
           <Grid container spacing={3}>
-            <Grid item md={2} xs={2}>
+            <Grid item xs={1}>
               <TextField
                 error={hasError('cod')}
                 fullWidth
@@ -194,7 +200,7 @@ const CrewAdminForm = props => {
               />
             </Grid>
 
-            <Grid item md={4} xs={12}>
+            <Grid item xs={11} md={5}>
               <TextField
                 error={hasError('phone')}
                 fullWidth
@@ -226,6 +232,9 @@ const CrewAdminForm = props => {
                 value={formState.values.email || ''}
                 variant="outlined"
                 margin="dense"
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
           </Grid>
@@ -248,6 +257,25 @@ const CrewAdminForm = props => {
               />
             </Grid>
           </Grid>
+
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Função"
+                name="job"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.job || ''}
+                variant="outlined"
+                margin="dense"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </Grid>
+          </Grid>
+
           <Grid item className={classes.action}>
             <Button color="primary" type="submit" variant="contained">
               Salvar
@@ -264,33 +292,3 @@ CrewAdminForm.propTypes = {
 };
 
 export default CrewAdminForm;
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama',
-  },
-  {
-    value: 'new-york',
-    label: 'New York',
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco',
-  },
-];
-
-const cities = [
-  {
-    value: 1,
-    label: 'Santa terezinha',
-  },
-  {
-    value: 2,
-    label: 'São José',
-  },
-  {
-    value: 3,
-    label: 'Triunfo',
-  },
-];
