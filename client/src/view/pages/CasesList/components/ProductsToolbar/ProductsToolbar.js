@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { Button } from '@material-ui/core';
+import { Button, Typography, Grid } from '@material-ui/core';
 
 import { SearchInput } from 'view/components';
 import CasesFilter from '../CasesFilter';
@@ -16,9 +16,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   row2: {
-    height: '42px',
-    display: 'flex',
-    alignItems: 'center',
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(4),
   },
@@ -44,19 +41,23 @@ const ProductsToolbar = props => {
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.row}>
+        <Typography variant="h2">Casos</Typography>
         <span className={classes.spacer} />
         <Button color="primary" variant="contained" className={classes.btn}>
           Novo Caso
         </Button>
       </div>
-      <div className={classes.row2}>
-        <SearchInput
-          className={classes.searchInput}
-          placeholder="Buscar por nome"
-        />
-        <span className={classes.spacer} />
-        <CasesFilter />
-      </div>
+      <Grid container className={classes.row2}>
+        <Grid item xs={12}>
+          <CasesFilter />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <SearchInput
+            className={classes.searchInput}
+            placeholder="Buscar por nome"
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };
