@@ -9,6 +9,8 @@ import * as verifyToken from './modules/auth/reducer/verifyToken';
 import * as loadCities from './modules/locations/reducer/loadCities';
 import * as loadUfs from './modules/locations/reducer/loadUfs';
 import * as saveUser from './modules/user/reducer/saveUser';
+import * as loadUsers from './modules/user/reducer/loadUsers';
+
 
 function reducer(state = {}, action) {
   return Switch.on(action.type, state, action.payload)
@@ -31,6 +33,10 @@ function reducer(state = {}, action) {
     .case(userTypes.SAVE_USER_REQUEST, saveUser.request)
     .case(userTypes.SAVE_USER_SUCCESS, saveUser.success)
     .case(userTypes.SAVE_USER_FAILURE, saveUser.failure)
+
+    .case(userTypes.LOAD_USERS_REQUEST, loadUsers.request)
+    .case(userTypes.LOAD_USERS_SUCCESS, loadUsers.success)
+    .case(userTypes.LOAD_USERS_FAILURE, loadUsers.failure)
 
     .default(state);
 }

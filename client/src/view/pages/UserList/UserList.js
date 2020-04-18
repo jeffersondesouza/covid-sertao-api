@@ -26,7 +26,7 @@ const UserList = () => {
 
   useEffect(() => {
     loadUsers();
-  }, [loadUsers]);
+  }, []);
 
   return (
     <div className={classes.root}>

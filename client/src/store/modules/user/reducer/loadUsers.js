@@ -12,7 +12,7 @@ export const success = (state, payload) => ({
   user: {
     ...state.user,
     isLoadingUsers: false,
-    users: [...payLoad],
+    users: [...payload],
   },
 });
 
