@@ -10,6 +10,7 @@ import * as loadCities from './modules/locations/reducer/loadCities';
 import * as loadUfs from './modules/locations/reducer/loadUfs';
 import * as saveUser from './modules/user/reducer/saveUser';
 import * as loadUsersCrew from './modules/user/reducer/loadUsersCrew';
+import * as deleteCrewUser from './modules/user/reducer/deleteCrewUser';
 
 
 function reducer(state = {}, action) {
@@ -37,6 +38,11 @@ function reducer(state = {}, action) {
     .case(userTypes.LOAD_USERS_REQUEST, loadUsersCrew.request)
     .case(userTypes.LOAD_USERS_SUCCESS, loadUsersCrew.success)
     .case(userTypes.LOAD_USERS_FAILURE, loadUsersCrew.failure)
+
+    .case(userTypes.DELETE_CREW_USER_REQUEST, deleteCrewUser.request)
+    .case(userTypes.DELETE_CREW_USER_SUCCESS, deleteCrewUser.success)
+    .case(userTypes.DELETE_CREW_USER_FAILURE, deleteCrewUser.failure)
+    
 
     .default(state);
 }

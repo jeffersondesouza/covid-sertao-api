@@ -5,6 +5,8 @@ export const cleanUp = (state, payload) => ({
     isSavingUser: false,
     saveUserSuccess: false,
     saveUserFail: false,
+    deleteUserSuccess: false,
+    deleteUserFail: false,
   },
 });
 
