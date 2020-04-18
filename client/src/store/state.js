@@ -8,5 +8,7 @@ export default {
     ufs: [],
   },
   member: {},
-  user: {},
+  user: {
+    users: [],
+  },
 };

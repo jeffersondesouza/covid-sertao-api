@@ -5,7 +5,6 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
-  CardActions,
   CardContent,
   Avatar,
   Table,
@@ -14,9 +13,10 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TablePagination,
   IconButton,
   Grid,
+  // TablePagination,
+  // CardActions,
 } from '@material-ui/core';
 
 import { getInitials } from 'helpers';
@@ -60,7 +60,6 @@ const UsersTable = props => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
-
 
   const handlePageChange = (event, page) => {
     setPage(page);
@@ -133,7 +132,7 @@ const UsersTable = props => {
           </div>
         </PerfectScrollbar>
       </CardContent>
-      <CardActions className={classes.actions}>
+      {/*  <CardActions className={classes.actions}>
         <TablePagination
           component="div"
           count={users.length}
@@ -143,7 +142,7 @@ const UsersTable = props => {
           rowsPerPage={rowsPerPage}
           rowsPerPageOptions={[5, 10, 25]}
         />
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };
