@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
 const loadUsers = async (userId) => {
-  const users = await User.findOne({
+  const deleteUser = await User.deleteOne({
     _id: userId,
   });
 
-  return users;
+  return deleteUser.deletedCount === 1;
 };
 
 module.exports = loadUsers;
