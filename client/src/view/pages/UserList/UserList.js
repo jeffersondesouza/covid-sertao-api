@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { UsersToolbar, UsersTable } from './components';
@@ -19,10 +19,14 @@ const useStyles = makeStyles(theme => ({
 const UserList = () => {
   const classes = useStyles();
 
-  const { loadUfs, cleanUpUser, loadCities, saveUser } = useContext(Context);
+  const { loadUfs, cleanUpUser, loadUsers } = useContext(Context);
 
   const users = useSelector(state => state.user.users);
   const isLoadingUsers = useSelector(state => state.user.isLoadingUsers);
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
 
   return (
     <div className={classes.root}>
