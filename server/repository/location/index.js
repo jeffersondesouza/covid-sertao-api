@@ -23,5 +23,5 @@ module.exports = {
   getCountry,
   getUfRegionCases,
   getUfRegions,
-  getUfRegion
+  getUfRegion,
 };
