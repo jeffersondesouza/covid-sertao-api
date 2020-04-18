@@ -1,3 +1,5 @@
+import { UserCrew } from 'models';
+
 export const request = (state, payload) => ({
   ...state,
   user: {
@@ -7,12 +9,12 @@ export const request = (state, payload) => ({
   },
 });
 
-export const success = (state, payload) => ({
+export const success = (state, payload = []) => ({
   ...state,
   user: {
     ...state.user,
     isLoadingUsers: false,
-    users: [...payload],
+    users: payload.map(UserCrew),
   },
 });
 

@@ -1,13 +1,7 @@
 import { CurrentUser } from 'models';
+import INITAL_STATE from './../../../state';
 
-export const logout = state => ({
-  auth: {
-    role: 3,
-  },
-  case: {},
-  location: {},
-  member: {},
-});
+export const logout = state => INITAL_STATE;
 
 export const request = (state, payload) => ({
   ...state,
