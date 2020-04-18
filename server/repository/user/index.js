@@ -1,5 +1,5 @@
-const loadUsers = require('./loadUsers');
+const loadUsersCrew = require('./loadUsersCrew');
 
 module.exports = {
-  loadUsers,
+  loadUsersCrew,
 };

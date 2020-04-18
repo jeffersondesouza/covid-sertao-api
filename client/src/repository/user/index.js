@@ -1,2 +1,2 @@
 export { default as saveUserQuery } from './saveUserQuery';
-export { default as loadUsersQuery } from './loadUsersQuery';
+export { default as loadCrewUsersQuery } from './loadCrewUsersQuery';
