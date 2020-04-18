@@ -16,15 +16,20 @@ const useStyles = makeStyles(theme => ({
 const AddCrewAdmin = () => {
   const classes = useStyles();
 
-  const { loadUfs } = useContext(Context);
+  const { loadUfs, loadCities } = useContext(Context);
 
   const user = useSelector(state => state.auth.currentUser);
   const ufs = useSelector(state => state.location.ufs);
-  console.log('ufs:', ufs)
+  const cities = useSelector(state => state.location.cities);
+  const loading = useSelector(
+    state => state.location.isLoadingUfs || state.location.isLoadingCities
+  );
 
   useEffect(() => {
     loadUfs();
   }, []);
+
+  const handleLoadUfCities = uf => loadCities(uf);
 
   if (!user.isSuperUser) {
     return <Redirect to="/dashboard" />;
@@ -37,7 +42,12 @@ const AddCrewAdmin = () => {
           <Typography variant="h3">Novo Administrador</Typography>
         </Grid>
         <Grid item xs={12}>
-          <CrewAdminForm />
+          <CrewAdminForm
+            ufs={ufs}
+            cities={cities}
+            loading={loading}
+            onLoadUfCities={handleLoadUfCities}
+          />
         </Grid>
       </Grid>
     </div>

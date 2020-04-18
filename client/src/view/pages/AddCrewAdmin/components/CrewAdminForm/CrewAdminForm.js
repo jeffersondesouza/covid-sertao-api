@@ -15,6 +15,12 @@ import {
 
 const useStyles = makeStyles(() => ({
   root: {},
+  select: {
+    textTransform: 'capitalize',
+    option: {
+      textTransform: 'capitalize',
+    },
+  },
   action: {
     marginTop: '1.5rem',
   },
@@ -53,16 +59,46 @@ const schema = {
 };
 
 const CrewAdminForm = props => {
-  const { className, ...rest } = props;
+  const {
+    ufs = [],
+    cities = [],
+    loading,
+    className,
+    onSaveAdmin,
+    onLoadUfCities,
+    ...rest
+  } = props;
 
   const classes = useStyles();
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf: 1 },
+    values: {},
     touched: {},
     errors: {},
   });
+
+  useEffect(() => {
+    if (!ufs.length) {
+      return;
+    }
+
+    const uf = ufs[0]._id;
+
+    onLoadUfCities(uf);
+
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        uf,
+      },
+      touched: {
+        ...formState.touched,
+        uf: true,
+      },
+    }));
+  }, [ufs]);
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -73,6 +109,13 @@ const CrewAdminForm = props => {
       errors: errors || {},
     }));
   }, [formState.values]);
+
+  const handleChangeUf = event => {
+    const uf = event.target.value;
+    onLoadUfCities(uf);
+
+    handleChange(event);
+  };
 
   const handleChange = event => {
     event.persist();
@@ -94,8 +137,9 @@ const CrewAdminForm = props => {
   };
 
   const handleSave = event => {
-    event.preventDefault();
-    console.log(formState);
+    if (formState.isValid) {
+      onSaveAdmin(formState.values);
+    }
   };
 
   const hasError = field =>
@@ -116,7 +160,7 @@ const CrewAdminForm = props => {
                 fullWidth
                 label="Selecione o Estado"
                 name="uf"
-                onChange={handleChange}
+                onChange={handleChangeUf}
                 type="text"
                 value={formState.values.uf}
                 variant="outlined"
@@ -126,12 +170,16 @@ const CrewAdminForm = props => {
                 select
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
+                className={classes.select}
               >
-                {states.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                <>
+                  <option>Selecione seu Estado</option>
+                  {[...ufs].map(option => (
+                    <option key={option._id} value={option._id}>
+                      {option.name.toUpperCase()}
+                    </option>
+                  ))}
+                </>
               </TextField>
             </Grid>
             <Grid item md={6} xs={12}>
@@ -150,15 +198,18 @@ const CrewAdminForm = props => {
                 // eslint-disable-next-line react/jsx-sort-props
                 SelectProps={{ native: true }}
               >
-                {cities.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                <>
+                  <option>Selecione sua Cidade</option>
+                  {cities.map(option => (
+                    <option key={option._id} value={option._id}>
+                      {option.name.toUpperCase()}
+                    </option>
+                  ))}
+                </>
               </TextField>
             </Grid>
           </Grid>
-
+          {/* NAME */}
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
@@ -192,6 +243,35 @@ const CrewAdminForm = props => {
             </Grid>
           </Grid>
 
+          {/* FUNCTION */}
+          <Grid container spacing={3}>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Lotado em"
+                name="lotation"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.lotation || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Cargo"
+                name="job"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.job || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+          </Grid>
+
+          {/* CONTACT */}
           <Grid container spacing={3}>
             <Grid item md={2} xs={2}>
               <TextField
@@ -252,7 +332,12 @@ const CrewAdminForm = props => {
           </Grid>
 
           <Grid item className={classes.action}>
-            <Button color="primary" type="submit" variant="contained">
+            <Button
+              color="primary"
+              type="submit"
+              variant="contained"
+              disabled={loading}
+            >
               Salvar
             </Button>
           </Grid>
@@ -264,36 +349,7 @@ const CrewAdminForm = props => {
 
 CrewAdminForm.propTypes = {
   className: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default CrewAdminForm;
-
-const states = [
-  {
-    value: 'alabama',
-    label: 'Alabama',
-  },
-  {
-    value: 'new-york',
-    label: 'New York',
-  },
-  {
-    value: 'san-francisco',
-    label: 'San Francisco',
-  },
-];
-
-const cities = [
-  {
-    value: 1,
-    label: 'Santa terezinha',
-  },
-  {
-    value: 2,
-    label: 'São José',
-  },
-  {
-    value: 3,
-    label: 'Triunfo',
-  },
-];

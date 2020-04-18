@@ -1,7 +1,6 @@
-export default data => {
+export default ({ uf }) => {
   return {
-    method: 'POST',
-    url: '/api/v1/auth/login',
-    data,
+    method: 'GET',
+    url: `/api/v1/location/uf/${uf}/city`,
   };
 };

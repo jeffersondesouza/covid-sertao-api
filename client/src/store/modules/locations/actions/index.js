@@ -10,21 +10,20 @@ const loadUfs = (dispatch, state) => async () => {
 
   try {
     const token = selectToken(state);
-    
+
     const { data } = await request(loadUfsQuery({ token }));
     dispatch({ type: Types.LOAD_UFS_SUCCESS, payload: data });
-
   } catch (error) {
     console.log('error:', error);
     dispatch({ type: Types.LOAD_UFS_FAILURE });
   }
 };
 
-const loadCities = dispatch => async () => {
-  dispatch({ type: Types.LOAD_CITIES_REQUEST });
-
+const loadCities = (dispatch, state) => async uf => {
   try {
-    const { data } = await request(loadCitiesQuery());
+    const token = selectToken(state);
+
+    const { data } = await request(loadCitiesQuery({ uf }));
 
     dispatch({ type: Types.LOAD_CITIES_SUCCESS, payload: data });
   } catch (error) {
