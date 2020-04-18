@@ -5,6 +5,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { Context, useSelector } from 'store/createContext';
 
 import { CrewAdminForm } from './components';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,8 +16,14 @@ const useStyles = makeStyles(theme => ({
 const AddCrewAdmin = () => {
   const classes = useStyles();
 
-  const state = useSelector();
-  console.log('state:', state)
+  const auth = useSelector(state => state.auth);
+  console.log('auth:', auth)
+  const user = useSelector(state => state.auth.currentUser);
+  console.log('user:', user)
+
+  if (!user.isSuperUser) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <div className={classes.root}>

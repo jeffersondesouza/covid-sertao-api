@@ -1,3 +1,5 @@
+import { CurrentUser } from 'models';
+
 export const logout = state => ({
   auth: {
     role: 3,
@@ -18,12 +20,11 @@ export const request = (state, payload) => ({
 });
 
 export const success = (state, payload) => {
-  console.log('payload:', payload)
-
   return {
     ...state,
     auth: {
       ...state.auth,
+      currentUser: CurrentUser(payload),
       isLoggingIn: false,
       isLogged: true,
     },
