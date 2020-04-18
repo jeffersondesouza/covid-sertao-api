@@ -350,6 +350,7 @@ const CrewAdminForm = props => {
 CrewAdminForm.propTypes = {
   className: PropTypes.string,
   loading: PropTypes.bool,
+  onSaveAdmin: PropTypes.func,
 };
 
 export default CrewAdminForm;

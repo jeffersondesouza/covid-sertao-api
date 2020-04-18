@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 const AddCrewAdmin = () => {
   const classes = useStyles();
 
-  const { loadUfs, loadCities } = useContext(Context);
+  const { loadUfs, loadCities, saveAdmin } = useContext(Context);
 
   const user = useSelector(state => state.auth.currentUser);
   const ufs = useSelector(state => state.location.ufs);
@@ -30,6 +30,8 @@ const AddCrewAdmin = () => {
   }, []);
 
   const handleLoadUfCities = uf => loadCities(uf);
+
+  const handleSaveAdmin = values => saveAdmin(values);
 
   if (!user.isSuperUser) {
     return <Redirect to="/dashboard" />;
@@ -47,6 +49,7 @@ const AddCrewAdmin = () => {
             cities={cities}
             loading={loading}
             onLoadUfCities={handleLoadUfCities}
+            onSaveAdmin={handleSaveAdmin}
           />
         </Grid>
       </Grid>
