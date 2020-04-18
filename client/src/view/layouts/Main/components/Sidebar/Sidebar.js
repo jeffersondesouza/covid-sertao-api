@@ -80,7 +80,7 @@ const Sidebar = props => {
       icon: <Assignment />,
     },
     {
-      title: 'Membros',
+      title: 'Equipe',
       href: '/members',
       icon: <PeopleIcon />,
     },
