@@ -17,14 +17,18 @@ export const request = (state, payload) => ({
   },
 });
 
-export const success = (state, payload) => ({
-  ...state,
-  auth: {
-    ...state.auth,
-    isLoggingIn: false,
-    isLogged: true,
-  },
-});
+export const success = (state, payload) => {
+  console.log('payload:', payload)
+
+  return {
+    ...state,
+    auth: {
+      ...state.auth,
+      isLoggingIn: false,
+      isLogged: true,
+    },
+  };
+};
 
 export const failure = (state, payload) => ({
   ...state,

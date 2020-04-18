@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography } from '@material-ui/core';
 
+import { Context, useSelector } from 'store/createContext';
+
 import { CrewAdminForm } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -12,6 +14,9 @@ const useStyles = makeStyles(theme => ({
 
 const AddCrewAdmin = () => {
   const classes = useStyles();
+
+  const state = useSelector();
+  console.log('state:', state)
 
   return (
     <div className={classes.root}>

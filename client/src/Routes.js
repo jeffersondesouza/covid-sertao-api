@@ -43,6 +43,7 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/cases"
+        guard={LoggedGuard}
       />
 
       <RouteWithLayout
@@ -50,6 +51,7 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/members"
+        guard={LoggedGuard}
       />
 
       <RouteWithLayout
@@ -57,6 +59,7 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/members/add"
+        guard={LoggedGuard}
       />
 
       <RouteWithLayout
@@ -64,6 +67,7 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/members/admin/add"
+        guard={LoggedGuard}
       />
 
       <RouteWithLayout
