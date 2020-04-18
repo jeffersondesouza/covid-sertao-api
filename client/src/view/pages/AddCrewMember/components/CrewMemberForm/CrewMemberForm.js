@@ -55,17 +55,36 @@ const schema = {
   },
 };
 
-const CrewAdminForm = props => {
-  const { className, ...rest } = props;
+const CrewMemberForm = props => {
+  const {
+    className,
+    city,
+    uf,
+    saveSuccess,
+    isSavingUser,
+    onSaveMember,
+    ...rest
+  } = props;
 
   const classes = useStyles();
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf: 1, role: '2' },
+    values: { uf, city, role: '2' },
     touched: {},
     errors: {},
   });
+
+  useEffect(() => {
+    if (saveSuccess) {
+      setFormState({
+        isValid: false,
+        values: { uf, city, role: '2' },
+        touched: {},
+        errors: {},
+      });
+    }
+  }, [saveSuccess]);
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -98,7 +117,10 @@ const CrewAdminForm = props => {
 
   const handleSave = event => {
     event.preventDefault();
-    console.log(formState);
+    console.log('formState:', formState);
+    if (formState.isValid) {
+      onSaveMember(formState.values);
+    }
   };
 
   const hasError = field =>
@@ -277,7 +299,12 @@ const CrewAdminForm = props => {
           </Grid>
 
           <Grid item className={classes.action}>
-            <Button color="primary" type="submit" variant="contained">
+            <Button
+              color="primary"
+              type="submit"
+              variant="contained"
+              disabled={isSavingUser}
+            >
               Salvar
             </Button>
           </Grid>
@@ -287,8 +314,13 @@ const CrewAdminForm = props => {
   );
 };
 
-CrewAdminForm.propTypes = {
+CrewMemberForm.propTypes = {
   className: PropTypes.string,
+  city: PropTypes.string,
+  uf: PropTypes.string,
+  isSavingUser: PropTypes.bool,
+  saveSuccess: PropTypes.bool,
+  onSaveMember: PropTypes.func,
 };
 
-export default CrewAdminForm;
+export default CrewMemberForm;

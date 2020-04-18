@@ -26,8 +26,8 @@ const AddCrewAdmin = () => {
   const user = useSelector(state => state.auth.currentUser);
   const ufs = useSelector(state => state.location.ufs);
   const cities = useSelector(state => state.location.cities);
-  const saveSuccess = useSelector(state => state.location.saveUserSuccess);
-  const saveFail = useSelector(state => state.location.saveUserFail);
+  const saveSuccess = useSelector(state => state.user.saveUserSuccess);
+  const saveFail = useSelector(state => state.user.saveUserFail);
 
   useEffect(() => {
     loadUfs();
