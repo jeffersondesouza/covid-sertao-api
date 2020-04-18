@@ -73,7 +73,15 @@ const CrewAdminForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: {},
+    values: {
+      firstName: 'firstName',
+      lastName: 'lastName',
+      lotation: 'lotation',
+      job: 'job',
+      cod: 'cod',
+      phone: 'phone',
+      email: 'email',
+    },
     touched: {},
     errors: {},
   });
@@ -138,7 +146,7 @@ const CrewAdminForm = props => {
 
   const handleSave = event => {
     event.preventDefault();
-    console.log('formState:', formState)
+    console.log('formState:', formState);
 
     if (formState.isValid) {
       onSaveAdmin(formState.values);
