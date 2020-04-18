@@ -137,6 +137,9 @@ const CrewAdminForm = props => {
   };
 
   const handleSave = event => {
+    event.preventDefault();
+    console.log('formState:', formState)
+
     if (formState.isValid) {
       onSaveAdmin(formState.values);
     }

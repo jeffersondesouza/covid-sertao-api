@@ -76,7 +76,9 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    login(formState.values);
+    if (formState.isValid) {
+      login(formState.values);
+    }
   };
 
   const hasError = field =>

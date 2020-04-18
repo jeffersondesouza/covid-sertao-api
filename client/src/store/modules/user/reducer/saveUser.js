@@ -2,8 +2,9 @@ export const request = (state, payload) => ({
   ...state,
   location: {
     ...state.location,
-    isLoadingUfs: true,
-    ufs: [],
+    isSavingUser: true,
+    saveUserSuccess: false,
+    saveUserFail: false,
   },
 });
 
@@ -11,8 +12,9 @@ export const success = (state, payload) => ({
   ...state,
   location: {
     ...state.location,
-    isLoadingUfs: false,
-    ufs: [...payload],
+    isSavingUser: false,
+    saveUserSuccess: true,
+    saveUserFail: false,
   },
 });
 
@@ -20,6 +22,8 @@ export const failure = (state, payload) => ({
   ...state,
   location: {
     ...state.location,
-    isLoadingUfs: false,
+    isSavingUser: false,
+    saveUserSuccess: false,
+    saveUserFail: true,
   },
 });
