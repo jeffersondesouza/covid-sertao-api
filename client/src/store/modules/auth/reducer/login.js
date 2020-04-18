@@ -24,6 +24,7 @@ export const success = (state, payload) => {
     ...state,
     auth: {
       ...state.auth,
+      token: payload.token,
       currentUser: CurrentUser(payload),
       isLoggingIn: false,
       isLogged: true,

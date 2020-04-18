@@ -32,7 +32,8 @@ const verifyToken = dispatch => async () => {
     }
 
     const { data } = await request(verifyTokenQuery({ token }));
-    dispatch({ type: Types.LOGIN_SUCCESS, payload: data });
+
+    dispatch({ type: Types.LOGIN_SUCCESS, payload: { ...data, token } });
     dispatch({ type: Types.VERIFY_TOKEN_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: Types.VERIFY_TOKEN_FAILURE });

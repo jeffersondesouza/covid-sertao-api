@@ -3,6 +3,9 @@ export default {
     role: 3,
   },
   case: {},
-  location: {},
+  location: {
+    cities: [],
+    ufs: [],
+  },
   member: {},
 };
