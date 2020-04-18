@@ -16,6 +16,8 @@ import {
   Settings as SettingsView,
   SignIn as SignInView,
   NotFound as NotFoundView,
+  NewCase as NewCaseView,
+  
 } from './view/pages';
 import { LoggedGuard } from 'view/guards';
 
@@ -43,6 +45,14 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/cases"
+        guard={LoggedGuard}
+      />
+
+      <RouteWithLayout
+        component={NewCaseView}
+        exact
+        layout={MainLayout}
+        path="/cases/new"
         guard={LoggedGuard}
       />
 

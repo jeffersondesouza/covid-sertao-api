@@ -6,6 +6,7 @@ import { Button, Typography, Grid } from '@material-ui/core';
 
 import { SearchInput } from 'view/components';
 import CasesFilter from '../CasesFilter';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -43,9 +44,11 @@ const ProductsToolbar = props => {
       <div className={classes.row}>
         <Typography variant="h2">Casos</Typography>
         <span className={classes.spacer} />
-        <Button color="primary" variant="contained" className={classes.btn}>
-          Novo Caso
-        </Button>
+        <Link to="/cases/new">
+          <Button color="primary" variant="contained" className={classes.btn}>
+            Novo Caso
+          </Button>
+        </Link>
       </div>
       <Grid container className={classes.row2}>
         <Grid item xs={12}>

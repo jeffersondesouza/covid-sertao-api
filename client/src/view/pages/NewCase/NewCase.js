@@ -8,7 +8,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
 }));
 
@@ -34,9 +34,9 @@ const AddCrewMember = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={4}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h3">Novo Membro</Typography>
+          <Typography variant="h3">Novo Caso</Typography>
         </Grid>
         {saveSuccess && (
           <Grid item xs={12}>
