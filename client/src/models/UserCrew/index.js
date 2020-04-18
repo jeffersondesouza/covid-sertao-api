@@ -13,7 +13,6 @@ const role = role => {
 };
 
 const phone = phoneNumber => {
-  console.log('phoneNumber:', phoneNumber);
   const cod = phoneNumber.slice(0, 2);
   const phone = phoneNumber.slice(2);
 

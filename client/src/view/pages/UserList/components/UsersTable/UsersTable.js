@@ -58,7 +58,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UsersTable = props => {
-  const { className, users, isLoading, ...rest } = props;
+  const {
+    className,
+    users,
+    isLoading,
+    onSelectEdit,
+    onSelectDelete,
+    ...rest
+  } = props;
 
   const classes = useStyles();
 
@@ -133,7 +140,10 @@ const UsersTable = props => {
                     <TableCell align="center">
                       <Grid container>
                         <div className={classes.btnAction}>
-                          <IconButton className={classes.btnDanger}>
+                          <IconButton
+                            className={classes.btnDanger}
+                            onClick={onSelectDelete(user.id)}
+                          >
                             <Delete />
                           </IconButton>
                           <Typography className={classes.smallLabel}>
@@ -141,7 +151,7 @@ const UsersTable = props => {
                           </Typography>
                         </div>
                         <div className={classes.btnAction}>
-                          <IconButton>
+                          <IconButton onClick={onSelectEdit(user.id)}>
                             <Edit />
                           </IconButton>
                           <Typography className={classes.smallLabel}>

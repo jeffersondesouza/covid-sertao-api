@@ -43,11 +43,24 @@ const UserList = () => {
     setUsers(filteredUsers);
   };
 
+  const handleSelectDelete = id => () => {
+    console.log('id:', id);
+  };
+
+  const handleSelectEdit = id => () => {
+    console.log('id:', id);
+  };
+
   return (
     <div className={classes.root}>
       <UsersToolbar onChange={handleChange} />
       <div className={classes.content}>
-        <UsersTable users={users} isLoading={isLoadingUsers} />
+        <UsersTable
+          users={users}
+          isLoading={isLoadingUsers}
+          onSelectDelete={handleSelectDelete}
+          onSelectEdit={handleSelectEdit}
+        />
       </div>
     </div>
   );
