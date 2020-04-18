@@ -36,15 +36,7 @@ const ProfileWelcome = () => {
         </Typography>
       </Grid>
       <Grid item>
-        <Button
-          color="primary"
-          size="small"
-          variant="outlined"
-          className={classes.update}
-          disabled
-        >
-          Sem registros hoje
-        </Button>
+   
         <IconButton size="small">
           <RefreshIcon />
         </IconButton>

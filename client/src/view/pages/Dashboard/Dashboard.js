@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 
 import {
   CasesSumary,
@@ -13,6 +13,7 @@ import {
   LatestCases,
   ProfileWelcome,
 } from './components';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +21,11 @@ const useStyles = makeStyles(theme => ({
   },
   noPadding: {
     paddingBottom: '0 !important',
+  },
+  editCard: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));
 
@@ -29,7 +35,7 @@ const Dashboard = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
-        <Grid item xs={12}  className={classes.noPadding}>
+        <Grid item xs={12} className={classes.noPadding}>
           <ProfileWelcome />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
@@ -47,8 +53,17 @@ const Dashboard = () => {
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary title="Óbtos" color="death" />
         </Grid>
-        <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Isolamentos" />
+        <Grid item lg={2} sm={6} xl={3} xs={12} className={classes.editCard}>
+          <NavLink to="/members/add">
+            <Button
+              color="primary"
+              size="small"
+              variant="outlined"
+              className={classes.update}
+            >
+              Editar
+            </Button>
+          </NavLink>
         </Grid>
         <Grid item lg={8} md={12} xl={9} xs={12}>
           <LatestSales />
