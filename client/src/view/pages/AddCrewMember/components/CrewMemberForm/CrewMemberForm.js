@@ -24,10 +24,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const schema = {
-  firstName: {
+  firstname: {
     presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
   },
-  lastName: {
+  lastname: {
     presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
   },
   uf: {
@@ -116,16 +116,16 @@ const CrewAdminForm = props => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
-                error={hasError('firstName')}
+                error={hasError('firstname')}
                 fullWidth
                 helperText={
-                  hasError('firstName') ? 'Informe o nome do Usuário' : null
+                  hasError('firstname') ? 'Informe o nome do Usuário' : null
                 }
                 label="Nome"
-                name="firstName"
+                name="firstname"
                 onChange={handleChange}
                 type="text"
-                value={formState.values.firstName || ''}
+                value={formState.values.firstname || ''}
                 variant="outlined"
                 margin="dense"
               />
@@ -134,16 +134,16 @@ const CrewAdminForm = props => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
-                error={hasError('lastName')}
+                error={hasError('lastname')}
                 fullWidth
                 label="Sobrenome"
-                name="lastName"
+                name="lastname"
                 onChange={handleChange}
                 type="text"
-                value={formState.values.lastName || ''}
+                value={formState.values.lastname || ''}
                 variant="outlined"
                 margin="dense"
-                helperText={hasError('lastName') ? 'Informe o sobrenome' : null}
+                helperText={hasError('lastname') ? 'Informe o sobrenome' : null}
               />
             </Grid>
           </Grid>

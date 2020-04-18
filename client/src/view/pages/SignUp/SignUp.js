@@ -16,13 +16,13 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const schema = {
-  firstName: {
+  firstname: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 32
     }
   },
-  lastName: {
+  lastname: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 32
@@ -260,30 +260,30 @@ const SignUp = props => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('firstName')}
+                  error={hasError('firstname')}
                   fullWidth
                   helperText={
-                    hasError('firstName') ? formState.errors.firstName[0] : null
+                    hasError('firstname') ? formState.errors.firstname[0] : null
                   }
                   label="First name"
-                  name="firstName"
+                  name="firstname"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.firstName || ''}
+                  value={formState.values.firstname || ''}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
-                  error={hasError('lastName')}
+                  error={hasError('lastname')}
                   fullWidth
                   helperText={
-                    hasError('lastName') ? formState.errors.lastName[0] : null
+                    hasError('lastname') ? formState.errors.lastname[0] : null
                   }
                   label="Last name"
-                  name="lastName"
+                  name="lastname"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.lastName || ''}
+                  value={formState.values.lastname || ''}
                   variant="outlined"
                 />
                 <TextField

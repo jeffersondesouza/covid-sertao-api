@@ -23,8 +23,8 @@ const AccountDetails = props => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
+    firstname: 'Shen',
+    lastname: 'Zhi',
     email: 'shen.zhi@devias.io',
     phone: '',
     state: 'Alabama',
@@ -82,10 +82,10 @@ const AccountDetails = props => {
                 helperText="Please specify the first name"
                 label="First name"
                 margin="dense"
-                name="firstName"
+                name="firstname"
                 onChange={handleChange}
                 required
-                value={values.firstName}
+                value={values.firstname}
                 variant="outlined"
               />
             </Grid>
@@ -98,10 +98,10 @@ const AccountDetails = props => {
                 fullWidth
                 label="Last name"
                 margin="dense"
-                name="lastName"
+                name="lastname"
                 onChange={handleChange}
                 required
-                value={values.lastName}
+                value={values.lastname}
                 variant="outlined"
               />
             </Grid>

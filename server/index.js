@@ -24,10 +24,10 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 
-authRoutes(app, jwtAuth.authenticate);
 cityRoutes(app);
 caseRoutes(app);
 reportsRoutes(app);
+authRoutes(app, jwtAuth.authenticate);
 
 /* CLIENT Routes */
 if (envVariables.isProduction()) {
