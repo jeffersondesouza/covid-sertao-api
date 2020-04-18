@@ -8,17 +8,7 @@ const getCity = async (id) =>
     _id: id,
     regionType: RegionTypesEnum.CITY,
   })
-    .then((data) => data || {})
-    .then((city) => {
-      return {
-        id: city.id,
-        phones: city.phones,
-        uf: city.uf,
-        name: city.name,
-        site: city.site,
-        email: city.email,
-        population: city.population,
-      };
-    });
+    .select('id phones uf name site email population logo')
+    .then((data) => data || {});
 
 module.exports = getCity;

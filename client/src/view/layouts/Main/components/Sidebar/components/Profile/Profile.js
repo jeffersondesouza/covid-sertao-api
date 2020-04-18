@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
 
+import { Context, useSelector } from 'store/createContext';
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -29,12 +31,7 @@ const Profile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-
-  const user = {
-    name: 'Tereza Neuma',
-    avatar: '/images/avatars/avatar_icon.png',
-    bio: 'Santa Terezinha - PE',
-  };
+  const user = useSelector(state => state.auth.currentUser);
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -46,7 +43,7 @@ const Profile = props => {
         to="/settings"
       />
       <Typography className={classes.city} variant="body2">
-        {user.bio}
+        {user.city.name}
       </Typography>
       <Typography className={classes.name} variant="h5">
         {user.name}

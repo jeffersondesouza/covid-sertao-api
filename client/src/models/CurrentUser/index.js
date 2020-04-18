@@ -1,6 +1,8 @@
 import { Maybe } from 'helpers/functors';
 import UserRoles from 'enums/UserRolesEnum';
 
+const avatar = '/images/avatars/avatar_icon.png';
+
 const EMPTY = {
   _id: {},
   city: { name: '' },
@@ -38,9 +40,11 @@ const CurrentUSer = params => {
     registeredAt: user.registeredAt,
     firstname: user.firstname,
     lastname: user.lastname,
+    name:`${user.firstname} ${user.lastname}`,
     phone: user.phone,
     email: user.email,
     expireAt: user.expireAt,
+    avatar: city.logo || avatar,
   };
 };
 
