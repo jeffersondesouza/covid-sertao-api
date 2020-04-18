@@ -3,7 +3,7 @@ import { headersAuth } from 'helpers/http';
 export default ({ token }) => {
   return {
     method: 'GET',
-    url: `/api/v1/auth/users`,
+    url: `/api/v1/user`,
     headers: headersAuth(token),
   };
 };

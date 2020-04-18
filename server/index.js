@@ -17,6 +17,7 @@ const {
   cityRoutes,
   caseRoutes,
   reportsRoutes,
+  userRoutes,
 } = require('./routes');
 
 mongoose.connect(keys.mongoURI, {
@@ -28,6 +29,7 @@ cityRoutes(app);
 caseRoutes(app);
 reportsRoutes(app);
 authRoutes(app, jwtAuth.authenticate);
+userRoutes(app, jwtAuth.authenticate);
 
 /* CLIENT Routes */
 if (envVariables.isProduction()) {
