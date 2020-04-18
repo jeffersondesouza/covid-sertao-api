@@ -116,7 +116,11 @@ const UsersTable = props => {
                   >
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar className={classes.avatar} src={user.avatarUrl}>
+                        <Avatar
+                          className={classes.avatar}
+                          src={user.avatarUrl}
+                          style={{ backgroundColor: '#3b5c66' }}
+                        >
                           {getInitials(user.name)}
                         </Avatar>
                         <Typography variant="body1">{user.name}</Typography>
