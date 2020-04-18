@@ -51,7 +51,7 @@ const Dashboard = () => {
           <CasesSumary title="Recuperados" color="cured" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Óbtos" color="death" />
+          <CasesSumary title="Óbitos" color="death" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12} className={classes.editCard}>
           <NavLink to="/members/add">

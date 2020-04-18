@@ -55,7 +55,7 @@ const SidebarNav = props => {
     <List {...rest} className={clsx(classes.root, className)}>
       {pages.map(
         page =>
-          !page.hideOnProd && (
+          !page.hide && (
             <ListItem className={classes.item} disableGutters key={page.title}>
               <Button
                 activeClassName={classes.active}

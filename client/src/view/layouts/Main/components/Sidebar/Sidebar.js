@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
 import {
   Divider,
   Drawer,
@@ -22,49 +21,18 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { Context } from 'store/createContext';
+
+import { Context, useSelector } from 'store/createContext';
 
 import { Profile, SidebarNav } from './components';
+import useStyles from './styles';
 
 const isProduction = () => process.env.NODE_ENV === 'production';
 
-const useStyles = makeStyles(theme => ({
-  drawer: {
-    width: 240,
-    [theme.breakpoints.up('lg')]: {
-      marginTop: 64,
-      height: 'calc(100% - 64px)',
-    },
-  },
-  root: {
-    backgroundColor: theme.palette.white,
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
-  divider: {
-    margin: theme.spacing(2, 0),
-  },
-  nav: {
-    marginBottom: theme.spacing(2),
-  },
-  icon: {
-    color: theme.palette.icon,
-    width: 24,
-    height: 24,
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: theme.spacing(1),
-  },
-  btnLogout: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-  },
-}));
-
 const Sidebar = props => {
   const { open, variant, onClose, history, className, ...rest } = props;
+
+  const user = useSelector(state => state.auth.currentUser);
 
   const classes = useStyles();
 
@@ -85,33 +53,40 @@ const Sidebar = props => {
       icon: <PeopleIcon />,
     },
     {
-      title: 'Adicionar Admin',
+      title: 'Novo Membro',
+      href: '/members/add',
+      icon: <AssignmentInd />,
+      hide: !user.isAdmin
+    },
+    {
+      title: 'Novo Administrador',
       href: '/members/admin/add',
       icon: <AssignmentInd />,
+      hide: !user.isSuperUser,
     },
     {
       title: 'Minha Conta',
       href: '/account',
       icon: <AccountBoxIcon />,
-      hideOnProd: isProduction(),
+      hide: isProduction(),
     },
     {
       title: 'Configurações',
       href: '/settings',
       icon: <SettingsIcon />,
-      hideOnProd: isProduction(),
+      hide: isProduction(),
     },
     {
       title: 'Typography',
       href: '/typography',
       icon: <TextFieldsIcon />,
-      hideOnProd: isProduction(),
+      hide: isProduction(),
     },
     {
       title: 'Icons',
       href: '/icons',
       icon: <ImageIcon />,
-      hideOnProd: isProduction(),
+      hide: isProduction(),
     },
   ];
 

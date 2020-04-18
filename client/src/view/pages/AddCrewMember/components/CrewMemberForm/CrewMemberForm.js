@@ -113,6 +113,29 @@ const CrewAdminForm = props => {
         />
         <Divider />
         <CardContent>
+          <Grid container>
+            <Grid item xs={12} md={2}>
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Membro"
+                name="role"
+                value="2"
+                checked={formState.values.role === '2'}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Administrador"
+                name="role"
+                value="1"
+                checked={formState.values.role === '1'}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
@@ -203,33 +226,6 @@ const CrewAdminForm = props => {
                 value={formState.values.email || ''}
                 variant="outlined"
                 margin="dense"
-              />
-            </Grid>
-          </Grid>
-          <Grid container className={classes.action}>
-            <Grid item xs={12}>
-              <Typography gutterBottom variant="h6">
-                Autorização
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Membro"
-                name="role"
-                value="2"
-                checked={formState.values.role === '2'}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Administrador"
-                name="role"
-                value="1"
-                checked={formState.values.role === '1'}
-                onChange={handleChange}
               />
             </Grid>
           </Grid>
