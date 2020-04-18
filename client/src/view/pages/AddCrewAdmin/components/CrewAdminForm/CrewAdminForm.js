@@ -73,15 +73,7 @@ const CrewAdminForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: {
-      firstname: 'firstname',
-      lastname: 'lastname',
-      lotation: 'lotation',
-      job: 'job',
-      cod: '22',
-      phone: '11111111',
-      email: 'email@email.com',
-    },
+    values: {},
     touched: {},
     errors: {},
   });

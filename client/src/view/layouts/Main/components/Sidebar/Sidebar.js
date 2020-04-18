@@ -51,12 +51,13 @@ const Sidebar = props => {
       title: 'Equipe',
       href: '/members',
       icon: <PeopleIcon />,
+      hide: !user.isAdmin,
     },
     {
       title: 'Novo Membro',
       href: '/members/add',
       icon: <AssignmentInd />,
-      hide: !user.isAdmin
+      hide: !user.isAdmin,
     },
     {
       title: 'Novo Administrador',
