@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 const AddCrewAdmin = () => {
   const classes = useStyles();
 
-  const { loadUfs, loadCities, saveAdmin } = useContext(Context);
+  const { loadUfs, loadCities, saveUserAdmin } = useContext(Context);
 
   const user = useSelector(state => state.auth.currentUser);
   const ufs = useSelector(state => state.location.ufs);
@@ -31,7 +31,7 @@ const AddCrewAdmin = () => {
 
   const handleLoadUfCities = uf => loadCities(uf);
 
-  const handleSaveAdmin = values => saveAdmin(values);
+  const handleSaveAdmin = values => saveUserAdmin(values);
 
   if (!user.isSuperUser) {
     return <Redirect to="/dashboard" />;
