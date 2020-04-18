@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { UsersToolbar, UsersTable } from './components';
+import { UsersToolbar, UsersTable, UserDialog } from './components';
 import mockData from './data';
 
 import { Context, useSelector } from 'store/createContext';
@@ -18,13 +18,14 @@ const useStyles = makeStyles(theme => ({
 
 const UserList = () => {
   const classes = useStyles();
+  const [users, setUsers] = useState([]);
+  const [deletingUser, setDeletingUser] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  const { loadUfs, cleanUpUser, loadUsers } = useContext(Context);
+  const { loadUsers, deleteCrewUser } = useContext(Context);
 
   const usersList = useSelector(state => state.user.users);
   const isLoadingUsers = useSelector(state => state.user.isLoadingUsers);
-
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     loadUsers();
@@ -43,8 +44,19 @@ const UserList = () => {
     setUsers(filteredUsers);
   };
 
+  const handleConfirmDelete = () => {
+    deleteCrewUser(deletingUser.id);
+  };
+
+  const handleClose = () => {
+    setDeletingUser(null);
+    setOpen(false);
+  };
+
   const handleSelectDelete = id => () => {
-    console.log('id:', id);
+    const user = usersList.find(user => user.id === id);
+    setDeletingUser(user);
+    setOpen(true);
   };
 
   const handleSelectEdit = id => () => {
@@ -62,6 +74,12 @@ const UserList = () => {
           onSelectEdit={handleSelectEdit}
         />
       </div>
+      <UserDialog
+        open={open}
+        user={deletingUser}
+        onClose={handleClose}
+        onConfirmDelete={handleConfirmDelete}
+      />
     </div>
   );
 };

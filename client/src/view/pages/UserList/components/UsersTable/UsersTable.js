@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  name: {
+    textTransform: 'capitalize',
+  },
   avatar: {
     marginRight: theme.spacing(2),
   },
@@ -130,7 +133,9 @@ const UsersTable = props => {
                         >
                           {getInitials(user.name)}
                         </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
+                        <Typography variant="body1" className={classes.name}>
+                          {user.name}
+                        </Typography>
                       </div>
                     </TableCell>
                     <TableCell>{user.phone}</TableCell>
