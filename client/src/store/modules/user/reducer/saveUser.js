@@ -1,3 +1,13 @@
+export const cleanUp = (state, payload) => ({
+  ...state,
+  user: {
+    ...state.user,
+    isSavingUser: false,
+    saveUserSuccess: false,
+    saveUserFail: false,
+  },
+});
+
 export const request = (state, payload) => ({
   ...state,
   user: {

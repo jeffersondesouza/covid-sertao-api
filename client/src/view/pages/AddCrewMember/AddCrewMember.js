@@ -15,9 +15,8 @@ const useStyles = makeStyles(theme => ({
 const AddCrewMember = () => {
   const classes = useStyles();
 
-  const { saveUser } = useContext(Context);
+  const { saveUser, cleanUpUser } = useContext(Context);
   const auth = useSelector(state => state.auth);
-  console.log('auth:', auth)
   const user = useSelector(state => state.auth.currentUser);
   const saveSuccess = useSelector(state => state.user.saveUserSuccess);
   const saveFail = useSelector(state => state.user.saveUserFail);
@@ -26,6 +25,12 @@ const AddCrewMember = () => {
   const handleSaveMember = user => {
     saveUser(user);
   };
+
+  useEffect(() => {
+    return () => {
+      cleanUpUser();
+    };
+  }, [cleanUpUser]);
 
   return (
     <div className={classes.root}>

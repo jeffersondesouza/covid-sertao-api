@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 const AddCrewAdmin = () => {
   const classes = useStyles();
 
-  const { loadUfs, loadCities, saveUser } = useContext(Context);
+  const { loadUfs, cleanUpUser, loadCities, saveUser } = useContext(Context);
 
   const loading = useSelector(
     state => state.location.isLoadingUfs || state.location.isLoadingCities
@@ -31,6 +31,9 @@ const AddCrewAdmin = () => {
 
   useEffect(() => {
     loadUfs();
+    return () => {
+      cleanUpUser();
+    };
   }, []);
 
   const handleLoadUfCities = uf => loadCities(uf);

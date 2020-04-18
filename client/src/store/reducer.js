@@ -27,6 +27,7 @@ function reducer(state = {}, action) {
     .case(locationsTypes.LOAD_UFS_SUCCESS, loadUfs.success)
     .case(locationsTypes.LOAD_UFS_FAILURE, loadUfs.failure)
 
+    .case(userTypes.CLEAN_UP, saveUser.cleanUp)
     .case(userTypes.SAVE_USER_REQUEST, saveUser.request)
     .case(userTypes.SAVE_USER_SUCCESS, saveUser.success)
     .case(userTypes.SAVE_USER_FAILURE, saveUser.failure)

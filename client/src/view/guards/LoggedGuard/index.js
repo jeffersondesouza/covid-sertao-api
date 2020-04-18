@@ -13,8 +13,6 @@ const LoggedGuard = props => {
     verifyToken,
   } = useContext(Context);
   
-  console.log('auth:', auth)
-
   useEffect(() => {
     if (auth.isLogged) {
       setIsVerifyingAuth(false);
