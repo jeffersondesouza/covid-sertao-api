@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { Context, useSelector } from 'store/createContext';
 
@@ -11,6 +12,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4),
   },
+  alerts: {},
 }));
 
 const AddCrewAdmin = () => {
@@ -18,12 +20,14 @@ const AddCrewAdmin = () => {
 
   const { loadUfs, loadCities, saveUser } = useContext(Context);
 
-  const user = useSelector(state => state.auth.currentUser);
-  const ufs = useSelector(state => state.location.ufs);
-  const cities = useSelector(state => state.location.cities);
   const loading = useSelector(
     state => state.location.isLoadingUfs || state.location.isLoadingCities
   );
+  const user = useSelector(state => state.auth.currentUser);
+  const ufs = useSelector(state => state.location.ufs);
+  const cities = useSelector(state => state.location.cities);
+  const saveSuccess = useSelector(state => state.location.saveUserSuccess);
+  const saveFail = useSelector(state => state.location.saveUserFail);
 
   useEffect(() => {
     loadUfs();
@@ -43,6 +47,23 @@ const AddCrewAdmin = () => {
         <Grid item xs={12}>
           <Typography variant="h3">Novo Administrador</Typography>
         </Grid>
+
+        <Grid item xs={12}>
+          {saveSuccess && (
+            <Alert severity="success">
+              <AlertTitle>Sucesso</AlertTitle>
+              Usuário adicionado com sucesso
+            </Alert>
+          )}
+          {saveFail && (
+            <Alert severity="error">
+              <AlertTitle>Erro</AlertTitle>O usuário não pôde ser criado.
+              Certifique-se que o email ou telefone nao estão em uso por outro
+              membro da equipe
+            </Alert>
+          )}
+        </Grid>
+
         <Grid item xs={12}>
           <CrewAdminForm
             ufs={ufs}
