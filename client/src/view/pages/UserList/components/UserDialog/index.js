@@ -25,14 +25,28 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.white,
     backgroundColor: theme.palette.error.main,
     borderColor: theme.palette.error.main,
+    '&$hover': {
+      backgroundColor: theme.palette.error.light,
+      borderColor: theme.palette.error.light,
+    },
   },
 }));
 
-const UserDialog = ({ open, user, onClose, onConfirmDelete }) => {
+const UserDialog = ({
+  open,
+  user,
+  isDeletingUser,
+  onClose,
+  onConfirmDelete,
+}) => {
   const classes = useStyles();
 
   return (
-    <Dialog onClose={onClose} aria-labelledby="simple-dialog-title" open={open}>
+    <Dialog
+      onClose={onClose}
+      aria-labelledby="simple-dialog-title"
+      open={open}
+    >
       <DialogTitle id="simple-dialog-title">
         Tem certeza que deseja deletar o usuário?
       </DialogTitle>
@@ -53,6 +67,7 @@ const UserDialog = ({ open, user, onClose, onConfirmDelete }) => {
         <Button
           variant="outlined"
           className={classes.delete}
+          disabled={isDeletingUser}
           onClick={onConfirmDelete}
         >
           Deletar

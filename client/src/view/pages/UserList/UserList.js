@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useReducer } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 import { UsersToolbar, UsersTable, UserDialog } from './components';
-import mockData from './data';
 
 import { Context, useSelector } from 'store/createContext';
 import { Typography } from '@material-ui/core';
@@ -22,18 +21,36 @@ const UserList = () => {
   const [deletingUser, setDeletingUser] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const { loadUsers, deleteCrewUser } = useContext(Context);
+  const { loadUsers, deleteCrewUser, cleanUpUser } = useContext(Context);
 
   const usersList = useSelector(state => state.user.users);
   const isLoadingUsers = useSelector(state => state.user.isLoadingUsers);
+  const isDeletingUser = useSelector(state => state.user.isDeletingUser);
+  const deleteUserSuccess = useSelector(state => state.user.deleteUserSuccess);
+  const deleteUserFail = useSelector(state => state.user.deleteUserFail);
 
   useEffect(() => {
     loadUsers();
+    return () => {
+      cleanUpUser();
+    };
   }, []);
 
   useEffect(() => {
     setUsers(usersList);
   }, [usersList]);
+
+  useEffect(() => {
+    if (deleteUserSuccess) {
+      const filteredUsers = usersList.filter(
+        user => user.id !== deletingUser.id
+      );
+
+      setUsers(filteredUsers);
+      setDeletingUser(null);
+      setOpen(false);
+    }
+  }, [deleteUserSuccess]);
 
   const handleChange = filter => {
     const name = filter.toLowerCase();
@@ -49,8 +66,10 @@ const UserList = () => {
   };
 
   const handleClose = () => {
-    setDeletingUser(null);
-    setOpen(false);
+    if (!isDeletingUser) {
+      setDeletingUser(null);
+      setOpen(false);
+    }
   };
 
   const handleSelectDelete = id => () => {
