@@ -35,7 +35,7 @@ const AddCrewAdmin = () => {
 
   const handleLoadUfCities = uf => loadCities(uf);
 
-  const handleSaveAdmin = user => saveUser(user);
+  const handleSaveAdmin = user => saveUser({ ...user, role: 1 });
 
   if (!user.isSuperUser) {
     return <Redirect to="/dashboard" />;

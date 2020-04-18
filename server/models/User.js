@@ -14,6 +14,8 @@ const userSchema = new Schema({
   phone: String,
   email: String,
   lotation: String,
+  job: String,
+  password: String,
   role: {
     type: Number,
     enum: [

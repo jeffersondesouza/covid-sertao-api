@@ -5,8 +5,11 @@ module.exports = async (req, res) => {
     return res.status(401).send('Auth Error');
   }
 
-  const newUser = AuthRepository.saveUser(req.body);
+  const newUser = await AuthRepository.saveUser(req.body);
 
+  if (!newUser) {
+    return res.status(401).send('Could not create user');
+  }
 
-  return res.send(req.body);
+  return res.send(newUser);
 };
