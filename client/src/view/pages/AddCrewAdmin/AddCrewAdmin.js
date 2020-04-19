@@ -48,7 +48,7 @@ const AddCrewAdmin = () => {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Typography variant="h3">Novo Administrador</Typography>
+          <Typography variant="h3">Novo Gestor</Typography>
         </Grid>
 
         <Grid item xs={12}>

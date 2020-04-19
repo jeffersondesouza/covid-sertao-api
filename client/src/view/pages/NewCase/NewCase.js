@@ -30,13 +30,13 @@ const AddCrewMember = () => {
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h3">Novo Caso</Typography>
+          <Typography variant="h3">Nova Notificação</Typography>
         </Grid>
         <Alerts success={saveSuccess} fail={saveFail} />
         <Grid item xs={12}>
           <CaseForm
-            title="Registar Caso ou Suspeito"
-            subheader="Após slavar, o boletim de sua cidade será automaticamente atualiza"
+            title="Caso de SRAG, Confirmados ou Suspeito para o COVID"
+            subheader="Após salvar, o boletim de sua cidade será automaticamente atualizado"
             city={user.city._id}
             uf={user.uf._id}
             isSavingUser={isSavingUser}

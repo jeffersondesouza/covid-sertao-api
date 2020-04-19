@@ -4,7 +4,7 @@ import UserRoles from 'enums/UserRolesEnum';
 const role = role => {
   const RolesNames = {
     0: 'Super Usuário',
-    1: 'Administrador',
+    1: 'Gestor',
     2: 'Membro',
     DEFAULT: 'Usuário',
   };

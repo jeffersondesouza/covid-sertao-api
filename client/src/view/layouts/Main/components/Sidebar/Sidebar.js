@@ -43,7 +43,12 @@ const Sidebar = props => {
       icon: <DashboardIcon />,
     },
     {
-      title: 'Casos',
+      title: 'Notificações',
+      href: '/cases',
+      icon: <Assignment />,
+    },
+    {
+      title: 'Monitoramentos',
       href: '/cases',
       icon: <Assignment />,
     },
@@ -60,7 +65,7 @@ const Sidebar = props => {
       hide: !user.isAdmin,
     },
     {
-      title: 'Novo Administrador',
+      title: 'Novo Gestor',
       href: '/members/admin/add',
       icon: <AssignmentInd />,
       hide: !user.isSuperUser,

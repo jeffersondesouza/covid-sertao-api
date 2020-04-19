@@ -42,11 +42,11 @@ const ProductsToolbar = props => {
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.row}>
-        <Typography variant="h2">Casos</Typography>
+        <Typography variant="h2">Notificações</Typography>
         <span className={classes.spacer} />
         <Link to="/cases/new">
           <Button color="primary" variant="contained" className={classes.btn}>
-            Novo Caso
+            Nova Notificação
           </Button>
         </Link>
       </div>

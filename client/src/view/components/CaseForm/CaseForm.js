@@ -133,28 +133,53 @@ const CaseForm = props => {
       <form onSubmit={handleSave}>
         <CardHeader title={title} subheader={subheader} />
         <Divider />
+
+        {/* TYPE */}
         <CardContent>
           <Grid container>
-            <Grid item xs={12} md={2}>
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Membro"
-                name="role"
-                value="2"
-                checked={formState.values.role === '2'}
-                onChange={handleChange}
-              />
+            <Grid item xs={12}>
+              <Typography variant="body1">Tipo</Typography>
             </Grid>
-            <Grid item xs={12} md={3}>
-              <FormControlLabel
-                control={<Radio color="primary" />}
-                label="Administrador"
-                name="role"
-                value="1"
-                checked={formState.values.role === '1'}
-                onChange={handleChange}
-              />
-            </Grid>
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              label="Confirmado"
+              name="role"
+              value="1"
+              checked={formState.values.role === '1'}
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              label="Suspeito"
+              name="role"
+              value="2"
+              checked={formState.values.role === '2'}
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              label="Descartado"
+              name="role"
+              value="3"
+              checked={formState.values.role === '3'}
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              label="Negativo"
+              name="role"
+              value="4"
+              checked={formState.values.role === '4'}
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              label="Óbito"
+              name="role"
+              value="5"
+              checked={formState.values.role === '5'}
+              onChange={handleChange}
+            />
           </Grid>
 
           <Grid container spacing={3}>

@@ -47,10 +47,10 @@ const LatestCases = props => {
       <CardHeader
         action={
           <Button color="primary" size="small" variant="outlined">
-            Novo Caso
+            Nova Notificação
           </Button>
         }
-        title="Últimos Casos"
+        title="Últimas Notificações"
       />
       <Divider />
       <CasesList cases={cases} />

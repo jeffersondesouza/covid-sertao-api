@@ -149,7 +149,7 @@ const CrewMemberForm = props => {
             <Grid item xs={12} md={3}>
               <FormControlLabel
                 control={<Radio color="primary" />}
-                label="Administrador"
+                label="Gestor"
                 name="role"
                 value="1"
                 checked={formState.values.role === '1'}

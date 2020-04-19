@@ -151,7 +151,7 @@ const CrewAdminForm = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSave}>
         <CardHeader
-          title="Administrador de Equipe"
+          title="Gestor de Equipe"
           subheader="Este membro fará parte da secretaria de saúde indicada"
         />
         <Divider />
