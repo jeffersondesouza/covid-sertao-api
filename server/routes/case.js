@@ -1,17 +1,15 @@
-const { createCase } = require('../controllers/case');
+const { createCase, loadCases } = require('../controllers/case');
 
-module.exports = (app) => {
-  app.post('/api/v1/case', createCase);
+module.exports = (app, authenticate) => {
+  app.post('/api/v1/case', authenticate, createCase);
 
-  app.get('/api/v1/case', (req, res) => {
+  app.get('/api/v1/case', authenticate, loadCases);
+
+  app.get('/api/v1/case/:id', authenticate, (req, res) => {
     res.send('ok');
   });
 
-  app.get('/api/v1/case/:id', (req, res) => {
-    res.send('ok');
-  });
-
-  app.put('/api/v1/case', (req, res) => {
+  app.put('/api/v1/case', authenticate, (req, res) => {
     res.send('ok');
   });
 };
