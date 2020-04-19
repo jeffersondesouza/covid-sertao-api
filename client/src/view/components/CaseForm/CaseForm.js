@@ -32,6 +32,9 @@ const useStyles = makeStyles(() => ({
   container: {
     margin: '0 auto',
   },
+  formGroup: {
+    marginBottom: '1rem',
+  },
   fieldsetSmall: {
     marginBottom: '1rem',
   },
@@ -74,7 +77,7 @@ const CaseForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf, city, risckFactor: [], symptoms: [] },
+    values: { uf, city, risckFactor: [], symptoms: [], birthday: null },
     touched: {},
     errors: {},
   });
@@ -100,13 +103,23 @@ const CaseForm = props => {
     }));
   }, [formState.values]);
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+  const handleDateChange = name => date => {
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [name]: date,
+      },
+      touched: {
+        ...formState.touched,
+        [name]: true,
+      },
+    }));
   };
 
   const handleChangeAdd = event => {
     event.persist();
-    
+
     setFormState(formState => {
       const name = event.target.name;
       const value = event.target.value;
@@ -186,9 +199,9 @@ const CaseForm = props => {
                   id="date-picker-dialog"
                   label="Data de Nascimento"
                   format="dd/MM/yyyy"
-                  value={selectedDate}
+                  value={formState.values.birthday}
                   name="birthday"
-                  onChange={handleDateChange}
+                  onChange={handleDateChange('birthday')}
                   variant="outlined"
                   margin="dense"
                   KeyboardButtonProps={{
@@ -207,6 +220,7 @@ const CaseForm = props => {
                 value={formState.values.docId || ''}
                 variant="outlined"
                 margin="dense"
+                disabled={formState.values.noCPF}
               />
             </Grid>
             <Grid item xs={6} className={classes.checkboxGroup}>
@@ -225,16 +239,17 @@ const CaseForm = props => {
                 name="sus"
                 onChange={handleChange}
                 type="text"
-                value={formState.values.docId || ''}
+                value={formState.values.sus || ''}
                 variant="outlined"
                 margin="dense"
+                disabled={formState.values.noSUS}
               />
             </Grid>
             <Grid item xs={6} spacing={2} className={classes.checkboxGroup}>
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="Não possui"
-                name="noSus"
+                name="noSUS"
                 onChange={handleChange}
               />
             </Grid>
@@ -253,8 +268,8 @@ const CaseForm = props => {
                 control={<Radio color="primary" />}
                 label="Não"
                 name="healthyWorker"
-                value="2"
-                checked={formState.values.healthyWorker === '2'}
+                value="0"
+                checked={formState.values.healthyWorker === '0'}
                 onChange={handleChange}
               />
             </Grid>
@@ -415,20 +430,31 @@ const CaseForm = props => {
                   onChange={handleChange}
                 />
               </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Isolamento por Precaução"
+                  name="covidStatus"
+                  value="6"
+                  checked={formState.values.covidStatus === '4'}
+                  onChange={handleChange}
+                />
+              </Grid>
             </Grid>
           </Grid>
 
           {/* Dados Clínicos e Epidemiológicos  */}
           <FieldSetHeader title="Dados Clínicos e Epidemiológicos" />
           <Grid container className={classes.fieldset}>
-            <Grid container>
+            <Grid container className={classes.formGroup}>
               <Grid item xs={12}>
                 <Typography variant="body2">
                   Histórico de viagem para cidade com confirmação de casos nos
                   último 14 dias?
                 </Typography>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
@@ -441,12 +467,12 @@ const CaseForm = props => {
                   control={<Radio color="primary" />}
                   label="Não"
                   name="travelFromFocus"
-                  value="2"
-                  checked={formState.values.travelFromFocus === '2'}
+                  value="0"
+                  checked={formState.values.travelFromFocus === '0'}
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
                   label="Nome da Cidade"
@@ -456,18 +482,19 @@ const CaseForm = props => {
                   value={formState.values.focusTravelCity || ''}
                   variant="outlined"
                   margin="dense"
+                  disabled={formState.values.travelFromFocus !== '1'}
                 />
               </Grid>
             </Grid>
 
-            <Grid container>
+            <Grid container className={classes.formGroup}>
               <Grid item xs={12}>
                 <Typography variant="body2">
                   Contato direto com pessoas vindas de cidade com confirmação de
                   casos nos último 14 dias?
                 </Typography>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
@@ -480,26 +507,27 @@ const CaseForm = props => {
                   control={<Radio color="primary" />}
                   label="Não"
                   name="infectedContact"
-                  value="2"
-                  checked={formState.values.infectedContact === '2'}
+                  value="0"
+                  checked={formState.values.infectedContact === '0'}
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
                   label="Nome da Cidade"
-                  name="name"
+                  name="infectedContactCity"
                   onChange={handleChange}
                   type="text"
                   value={formState.values.name || ''}
                   variant="outlined"
                   margin="dense"
+                  disabled={formState.values.infectedContact !== '1'}
                 />
               </Grid>
             </Grid>
 
-            <Grid container>
+            <Grid container className={classes.formGroup}>
               <Grid item xs={12}>
                 <Typography variant="body2">Sintomático?</Typography>
               </Grid>
@@ -516,21 +544,21 @@ const CaseForm = props => {
                   control={<Radio color="primary" />}
                   label="Não"
                   name="symptomatic"
-                  value="2"
-                  checked={formState.values.symptomatic === '2'}
+                  value="0"
+                  checked={formState.values.symptomatic === '0'}
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12} md={12}>
+              <Grid item xs={12} md={12} className={classes.formGroup}>
                 <Typography variant="body2">Início dos sintomas</Typography>
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
                   <KeyboardDatePicker
                     margin="normal"
                     id="date-picker-dialog"
                     format="dd/MM/yyyy"
-                    value={selectedDate}
-                    name="symptomaticInit"
-                    onChange={handleDateChange}
+                    name="symptomsInit"
+                    value={formState.values.symptomsInit}
+                    onChange={handleDateChange('symptomsInit')}
                     variant="outlined"
                     margin="dense"
                     KeyboardButtonProps={{
@@ -540,7 +568,8 @@ const CaseForm = props => {
                 </MuiPickersUtilsProvider>
               </Grid>
             </Grid>
-            <Grid container>
+
+            <Grid container className={classes.formGroup}>
               <Grid item xs={12}>
                 <Typography variant="body2">Sinais e Sintomas</Typography>
               </Grid>
@@ -633,7 +662,7 @@ const CaseForm = props => {
               </Grid>
             </Grid>
 
-            <Grid container>
+            <Grid container className={classes.formGroup}>
               <Grid item xs={12}>
                 <Typography variant="body2">
                   Possui fatores de risco/comorbidades
@@ -784,7 +813,7 @@ const CaseForm = props => {
               </Grid>
             </Grid>
 
-            <Grid container>
+            <Grid container className={classes.formGroup}>
               <Grid item xs={12}>
                 <Typography variant="body2">
                   Recebeu vacina contra Gripe na última campanha
@@ -794,7 +823,7 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
-                  name="healthyWorker"
+                  name="lastVactination"
                   value="1"
                   checked={formState.values.healthyWorker === '1'}
                   onChange={handleChange}
@@ -802,9 +831,9 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Não"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  name="lastVactination"
+                  value="0"
+                  checked={formState.values.healthyWorker === '0'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -815,8 +844,8 @@ const CaseForm = props => {
                     margin="normal"
                     id="date-picker-dialog"
                     format="dd/MM/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={formState.values.lastVactinationAt}
+                    onChange={handleDateChange('lastVactinationAt')}
                     variant="outlined"
                     margin="dense"
                     KeyboardButtonProps={{
@@ -825,6 +854,16 @@ const CaseForm = props => {
                   />
                 </MuiPickersUtilsProvider>
               </Grid>
+            </Grid>
+            <Grid item className={classes.action}>
+              <Button
+                color="primary"
+                type="submit"
+                variant="contained"
+                // disabled={loading}
+              >
+                Salvar
+              </Button>
             </Grid>
           </Grid>
         </CardContent>
