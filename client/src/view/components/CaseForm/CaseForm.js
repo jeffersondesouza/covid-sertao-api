@@ -180,7 +180,7 @@ const CaseForm = props => {
           {/* DADOS DO PACIENTE */}
           <FieldSetHeader title="Dados do Paciente" />
           <Grid container spacing={2} className={classes.fieldsetSmall}>
-            <Grid item xs={12} md={6} spacing={2}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
                 label="Nome completo"
@@ -245,7 +245,7 @@ const CaseForm = props => {
                 disabled={formState.values.noSUS}
               />
             </Grid>
-            <Grid item xs={6} spacing={2} className={classes.checkboxGroup}>
+            <Grid item xs={6} className={classes.checkboxGroup}>
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="Não possui"

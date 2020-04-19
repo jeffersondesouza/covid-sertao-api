@@ -3,6 +3,7 @@ import Switch from 'helpers/functions/Switch';
 import * as authTypes from './modules/auth/ActionsTypes';
 import * as locationsTypes from './modules/locations/ActionsTypes';
 import * as userTypes from './modules/user/ActionsTypes';
+import * as casesTypes from './modules/case/ActionsTypes';
 
 import * as login from './modules/auth/reducer/login';
 import * as verifyToken from './modules/auth/reducer/verifyToken';
@@ -11,6 +12,10 @@ import * as loadUfs from './modules/locations/reducer/loadUfs';
 import * as saveUser from './modules/user/reducer/saveUser';
 import * as loadUsersCrew from './modules/user/reducer/loadUsersCrew';
 import * as deleteCrewUser from './modules/user/reducer/deleteCrewUser';
+import * as saveCase from './modules/case/reducer/saveCase';
+import * as loadCases from './modules/case/reducer/loadCases';
+import * as updateCase from './modules/case/reducer/updateCase';
+
 
 
 function reducer(state = {}, action) {
@@ -42,7 +47,18 @@ function reducer(state = {}, action) {
     .case(userTypes.DELETE_CREW_USER_REQUEST, deleteCrewUser.request)
     .case(userTypes.DELETE_CREW_USER_SUCCESS, deleteCrewUser.success)
     .case(userTypes.DELETE_CREW_USER_FAILURE, deleteCrewUser.failure)
-    
+
+    .case(casesTypes.SAVE_CASE_REQUEST, saveCase.request)
+    .case(casesTypes.SAVE_CASE_SUCCESS, saveCase.success)
+    .case(casesTypes.SAVE_CASE_FAILURE, saveCase.failure)
+
+    .case(casesTypes.LOAD_CASES_REQUEST, loadCases.request)
+    .case(casesTypes.LOAD_CASES_SUCCESS, loadCases.success)
+    .case(casesTypes.LOAD_CASES_FAILURE, loadCases.failure)
+
+    .case(casesTypes.UPDATE_REQUEST, updateCase.request)
+    .case(casesTypes.UPDATE_SUCCESS, updateCase.success)
+    .case(casesTypes.UPDATE_FAILURE, updateCase.failure)
 
     .default(state);
 }

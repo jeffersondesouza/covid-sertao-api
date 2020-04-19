@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 const AddCrewMember = () => {
   const classes = useStyles();
 
-  const { saveUser, cleanUpUser } = useContext(Context);
+  const { saveCase } = useContext(Context);
   const auth = useSelector(state => state.auth);
   const user = useSelector(state => state.auth.currentUser);
   const saveSuccess = useSelector(state => state.user.saveUserSuccess);
@@ -23,7 +23,7 @@ const AddCrewMember = () => {
   const isSavingUser = useSelector(state => state.user.isSavingUser);
 
   const handleSaveMember = caseNotification => {
-    console.log(caseNotification)
+    saveCase(caseNotification);
   };
 
   return (
