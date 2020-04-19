@@ -74,7 +74,7 @@ const CaseForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf, city, role: '2' },
+    values: { uf, city, risckFactor: [], symptoms: [] },
     touched: {},
     errors: {},
   });
@@ -83,7 +83,7 @@ const CaseForm = props => {
     if (saveSuccess) {
       setFormState({
         isValid: false,
-        values: { uf, city, role: '2' },
+        values: { uf, city, risckFactor: [], symptoms: [] },
         touched: {},
         errors: {},
       });
@@ -106,21 +106,26 @@ const CaseForm = props => {
 
   const handleChangeAdd = event => {
     event.persist();
+    
+    setFormState(formState => {
+      const name = event.target.name;
+      const value = event.target.value;
+      const checked = event.target.checked;
 
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value,
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true,
-      },
-    }));
+      let values = formState.values[name].filter(item => item !== value);
+
+      return {
+        ...formState,
+        values: {
+          ...formState.values,
+          [name]: checked ? [...values, value] : values,
+        },
+        touched: {
+          ...formState.touched,
+          [name]: true,
+        },
+      };
+    });
   };
 
   const handleChange = event => {
@@ -466,17 +471,17 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
-                  name="conataminedContact"
+                  name="infectedContact"
                   value="1"
-                  checked={formState.values.conataminedContact === '1'}
+                  checked={formState.values.infectedContact === '1'}
                   onChange={handleChange}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Não"
-                  name="conataminedContact"
+                  name="infectedContact"
                   value="2"
-                  checked={formState.values.conataminedContact === '2'}
+                  checked={formState.values.infectedContact === '2'}
                   onChange={handleChange}
                 />
               </Grid>
