@@ -20,10 +20,12 @@ const useStyles = makeStyles(theme => ({
   },
   name: {
     marginTop: '0px',
+    textTransform: 'capitalize',
   },
   city: {
     marginTop: '5px',
     textAlign: 'center',
+    textTransform: 'capitilized',
   },
 }));
 

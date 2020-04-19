@@ -32,8 +32,11 @@ const useStyles = makeStyles(() => ({
   container: {
     margin: '0 auto',
   },
+  fieldsetSmall: {
+    marginBottom: '1rem',
+  },
   fieldset: {
-    marginBottom: '1.5rem',
+    marginBottom: '2rem',
   },
   fieldcaption: {
     marginBottom: '15px',
@@ -44,6 +47,10 @@ const useStyles = makeStyles(() => ({
   checkboxGroup: {
     display: 'flex',
     paddingLeft: '1.5rem',
+  },
+  nospacing: {
+    background: 'pink',
+    marginBottom: 0,
   },
 }));
 
@@ -165,7 +172,7 @@ const CaseForm = props => {
         {/* DADOS DO PACIENTE */}
         <CardContent>
           <FieldSetHeader title="Dados do Paciente" />
-          <Grid container spacing={2}>
+          <Grid container spacing={2} className={classes.fieldsetSmall}>
             <Grid item xs={12} md={6} spacing={2}>
               <TextField
                 fullWidth
@@ -178,7 +185,7 @@ const CaseForm = props => {
                 margin="dense"
               />
             </Grid>
-            <Grid item xs={12} md={6} spacing={2}>
+            <Grid item xs={12} md={6}>
               <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
                 <KeyboardDatePicker
                   margin="normal"
@@ -207,7 +214,7 @@ const CaseForm = props => {
                 margin="dense"
               />
             </Grid>
-            <Grid item xs={6} spacing={2} className={classes.checkboxGroup}>
+            <Grid item xs={6} className={classes.checkboxGroup}>
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="Não possui"
@@ -236,6 +243,19 @@ const CaseForm = props => {
                 onChange={handleChange}
               />
             </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Observações"
+                name="docId"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.docId || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
             <Grid item xs={12}>
               <Typography variant="body2">É profissional da Saúde?</Typography>
               <FormControlLabel
@@ -255,148 +275,92 @@ const CaseForm = props => {
                 onChange={handleChange}
               />
             </Grid>
-
-            {/* ############################## */}
-            {/* ############################## */}
-            {/* ############################## */}
-            {/* ############################## */}
-            {/* ############################## */}
-
-            <Grid item xs={12}>
-              <Typography variant="body1">Tipo</Typography>
-            </Grid>
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Confirmado"
-              name="role"
-              value="1"
-              checked={formState.values.role === '1'}
-              onChange={handleChange}
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Suspeito"
-              name="role"
-              value="2"
-              checked={formState.values.role === '2'}
-              onChange={handleChange}
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Descartado"
-              name="role"
-              value="3"
-              checked={formState.values.role === '3'}
-              onChange={handleChange}
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Negativo"
-              name="role"
-              value="4"
-              checked={formState.values.role === '4'}
-              onChange={handleChange}
-            />
-            <FormControlLabel
-              control={<Radio color="primary" />}
-              label="Óbito"
-              name="role"
-              value="5"
-              checked={formState.values.role === '5'}
-              onChange={handleChange}
-            />
           </Grid>
 
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                error={hasError('firstname')}
-                fullWidth
-                helperText={
-                  hasError('firstname') ? 'Informe o nome do Usuário' : null
-                }
-                label="Nome"
-                name="firstname"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.firstname || ''}
-                variant="outlined"
-                margin="dense"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                error={hasError('lastname')}
-                fullWidth
-                label="Sobrenome"
-                name="lastname"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.lastname || ''}
-                variant="outlined"
-                margin="dense"
-                helperText={hasError('lastname') ? 'Informe o sobrenome' : null}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={1}>
-              <TextField
-                error={hasError('cod')}
-                fullWidth
-                label="DDD"
-                placeholder="88"
-                name="cod"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.cod || ''}
-                variant="outlined"
-                margin="dense"
-                helperText={
-                  hasError('cod')
-                    ? 'Informe um DDD com dois número ex: 87'
-                    : null
-                }
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
+          {/* CONTATOS  */}
+          <FieldSetHeader title="Contatos" />
+          <Grid container className={classes.fieldset}>
+            <Grid container spacing={1}>
+              <Grid item xs={1}>
+                <TextField
+                  error={hasError('cod')}
+                  fullWidth
+                  label="DDD"
+                  placeholder="88"
+                  name="cod"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.cod || ''}
+                  variant="outlined"
+                  margin="dense"
+                  helperText={
+                    hasError('cod')
+                      ? 'Informe um DDD com dois número ex: 87'
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
 
-            <Grid item xs={11} md={5}>
-              <TextField
-                error={hasError('phone')}
-                fullWidth
-                label="Telefone"
-                placeholder="98888-8888"
-                name="phone"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.phone || ''}
-                variant="outlined"
-                margin="dense"
-                helperText={
-                  hasError('phone') ? 'Informe o telefone do usuário' : null
-                }
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+              <Grid item xs={11} md={5}>
+                <TextField
+                  error={hasError('phone')}
+                  fullWidth
+                  label="Telefone"
+                  placeholder="98888-8888"
+                  name="phone"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.phone || ''}
+                  variant="outlined"
+                  margin="dense"
+                  helperText={
+                    hasError('phone') ? 'Informe o telefone do usuário' : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} md={5}>
+                <TextField
+                  fullWidth
+                  label="Rua"
+                  name="email"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.email || ''}
+                  variant="outlined"
+                  margin="dense"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item md={1}>
+                <TextField
+                  fullWidth
+                  label="Número"
+                  name="email"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.email || ''}
+                  variant="outlined"
+                  margin="dense"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                label="Email"
+                label="Bairro"
                 name="email"
                 onChange={handleChange}
                 type="text"
@@ -410,16 +374,94 @@ const CaseForm = props => {
             </Grid>
           </Grid>
 
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
+          {/* Dados Clínicos e Epidemiológicos  */}
+          <FieldSetHeader title="Dados Clínicos e Epidemiológicos" />
+          <Grid container>
+            <Grid container spacing={1}>
+              <Grid item xs={1}>
+                <TextField
+                  error={hasError('cod')}
+                  fullWidth
+                  label="DDD"
+                  placeholder="88"
+                  name="cod"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.cod || ''}
+                  variant="outlined"
+                  margin="dense"
+                  helperText={
+                    hasError('cod')
+                      ? 'Informe um DDD com dois número ex: 87'
+                      : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={11} md={5}>
+                <TextField
+                  error={hasError('phone')}
+                  fullWidth
+                  label="Telefone"
+                  placeholder="98888-8888"
+                  name="phone"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.phone || ''}
+                  variant="outlined"
+                  margin="dense"
+                  helperText={
+                    hasError('phone') ? 'Informe o telefone do usuário' : null
+                  }
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={1}>
+              <Grid item xs={12} md={5}>
+                <TextField
+                  fullWidth
+                  label="Rua"
+                  name="email"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.email || ''}
+                  variant="outlined"
+                  margin="dense"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item md={1}>
+                <TextField
+                  fullWidth
+                  label="Número"
+                  name="email"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.email || ''}
+                  variant="outlined"
+                  margin="dense"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                label="Lotado em"
-                placeholder="ex: Hospital Central, Posto de Saúde etc "
-                name="lotation"
+                label="Bairro"
+                name="email"
                 onChange={handleChange}
                 type="text"
-                value={formState.values.lotation || ''}
+                value={formState.values.email || ''}
                 variant="outlined"
                 margin="dense"
                 InputLabelProps={{
@@ -427,35 +469,6 @@ const CaseForm = props => {
                 }}
               />
             </Grid>
-          </Grid>
-
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Função"
-                name="job"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.job || ''}
-                variant="outlined"
-                margin="dense"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid item className={classes.action}>
-            <Button
-              color="primary"
-              type="submit"
-              variant="contained"
-              disabled={isSavingUser}
-            >
-              Salvar
-            </Button>
           </Grid>
         </CardContent>
       </form>
