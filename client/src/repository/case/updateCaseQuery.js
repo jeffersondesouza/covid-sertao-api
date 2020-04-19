@@ -1,9 +1,10 @@
 import { headersAuth } from 'helpers/http';
 
-export default ({ token, userId }) => {
+export default ({ token, data }) => {
   return {
-    method: 'DELETE',
-    url: `/api/v1/user/crew/${userId}`,
+    method: 'PUT',
+    url: `/api/v1/case`,
     headers: headersAuth(token),
+    data,
   };
 };

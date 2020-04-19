@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -6,7 +6,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { CasesList } from 'view/components';
 import { ProductsToolbar } from './components';
-import mockData from './data';
+import { Context, useSelector } from 'store/createContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +26,22 @@ const useStyles = makeStyles(theme => ({
 const CasesListPage = () => {
   const classes = useStyles();
 
-  const [cases] = useState(mockData);
+  const [cases, setCases] = useState([]);
+
+  const { loadCases } = useContext(Context);
+
+  const caseNotifications = useSelector(state => state.cases.caseNotifications);
+  console.log('caseNotifications:', caseNotifications)
+
+
+  useEffect(() => {
+    loadCases();
+  }, []);
+
+  useEffect(() => {
+    setCases([]);
+  }, [caseNotifications]);
+
 
   return (
     <div className={classes.root}>

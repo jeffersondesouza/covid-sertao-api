@@ -1,7 +1,7 @@
 import * as Types from '../ActionsTypes';
 
 import { request } from 'helpers/http';
-import { loadCrewUsersQuery } from 'repository/user';
+import { loadCasesQuery } from 'repository/case';
 
 import selectToken from 'store/selectors/selectToken';
 
@@ -11,7 +11,7 @@ const loadUsers = (dispatch, state) => async () => {
   try {
     const token = selectToken(state);
 
-    const { data } = await request(loadCrewUsersQuery({ token }));
+    const { data } = await request(loadCasesQuery({ token }));
 
     dispatch({ type: Types.LOAD_CASES_SUCCESS, payload: data });
   } catch (error) {

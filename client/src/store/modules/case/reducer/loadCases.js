@@ -4,8 +4,8 @@ export const request = (state, payload) => ({
   ...state,
   cases: {
     ...state.user,
-    isLoadingUsers: true,
-    users: [],
+    isLoadingCases: true,
+    caseNotifications: [],
   },
 });
 
@@ -13,8 +13,8 @@ export const success = (state, payload = []) => ({
   ...state,
   cases: {
     ...state.user,
-    isLoadingUsers: false,
-    users: payload.map(UserCrew),
+    isLoadingCases: false,
+    caseNotifications: payload.map(item => item),
   },
 });
 
@@ -22,6 +22,6 @@ export const failure = (state, payload) => ({
   ...state,
   cases: {
     ...state.user,
-    isLoadingUsers: false,
+    isLoadingCases: false,
   },
 });
