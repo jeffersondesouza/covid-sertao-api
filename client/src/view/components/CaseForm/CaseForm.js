@@ -55,8 +55,10 @@ const schema = {
   },
 };
 
-const NewCase = props => {
+const CaseForm = props => {
   const {
+    title,
+    subheader,
     className,
     city,
     uf,
@@ -129,10 +131,7 @@ const NewCase = props => {
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSave}>
-        <CardHeader
-          title="Membro da Equipe"
-          subheader="Este membro fará parte da secretaria de saúde indicada"
-        />
+        <CardHeader title={title} subheader={subheader} />
         <Divider />
         <CardContent>
           <Grid container>
@@ -314,13 +313,15 @@ const NewCase = props => {
   );
 };
 
-NewCase.propTypes = {
+CaseForm.propTypes = {
   className: PropTypes.string,
   city: PropTypes.string,
   uf: PropTypes.string,
   isSavingUser: PropTypes.bool,
+  title: PropTypes.string,
+  subheader: PropTypes.string,
   saveSuccess: PropTypes.bool,
   onSaveMember: PropTypes.func,
 };
 
-export default NewCase;
+export default CaseForm;

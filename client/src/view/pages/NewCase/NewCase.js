@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Typography } from '@material-ui/core';
 
+import { CaseForm } from 'view/components';
 import { Context, useSelector } from 'store/createContext';
-import { CrewMemberForm } from './components';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alerts } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,42 +26,22 @@ const AddCrewMember = () => {
     saveUser(user);
   };
 
-  useEffect(() => {
-    return () => {
-      cleanUpUser();
-    };
-  }, [cleanUpUser]);
-
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h3">Novo Caso</Typography>
         </Grid>
-        {saveSuccess && (
-          <Grid item xs={12}>
-            <Alert severity="success">
-              <AlertTitle>Sucesso</AlertTitle>
-              Usuário adicionado com sucesso
-            </Alert>
-          </Grid>
-        )}
-        {saveFail && (
-          <Grid item xs={12}>
-            <Alert severity="error">
-              <AlertTitle>Erro</AlertTitle>O usuário não pôde ser criado.
-              Certifique-se que o email ou telefone nao estão em uso por outro
-              membro da equipe
-            </Alert>
-          </Grid>
-        )}
+        <Alerts success={saveSuccess} fail={saveFail} />
         <Grid item xs={12}>
-          <CrewMemberForm
+          <CaseForm
+            title="Registar Caso ou Suspeito"
+            subheader="Após slavar, o boletim de sua cidade será automaticamente atualiza"
             city={user.city._id}
             uf={user.uf._id}
             isSavingUser={isSavingUser}
             saveSuccess={saveSuccess}
-            onSaveMember={handleSaveMember}
+            onSave={handleSaveMember}
           />
         </Grid>
       </Grid>
