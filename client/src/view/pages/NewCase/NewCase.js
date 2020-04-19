@@ -22,8 +22,8 @@ const AddCrewMember = () => {
   const saveFail = useSelector(state => state.user.saveUserFail);
   const isSavingUser = useSelector(state => state.user.isSavingUser);
 
-  const handleSaveMember = user => {
-    saveUser(user);
+  const handleSaveMember = caseNotification => {
+    console.log(caseNotification)
   };
 
   return (
@@ -41,7 +41,7 @@ const AddCrewMember = () => {
             uf={user.uf._id}
             isSavingUser={isSavingUser}
             saveSuccess={saveSuccess}
-            onSave={handleSaveMember}
+            onSaveCase={handleSaveMember}
           />
         </Grid>
       </Grid>

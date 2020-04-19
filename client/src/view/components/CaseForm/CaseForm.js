@@ -68,7 +68,7 @@ const CaseForm = props => {
     uf,
     saveSuccess,
     isSavingUser,
-    onSaveMember,
+    onSaveCase,
     ...rest
   } = props;
 
@@ -77,7 +77,7 @@ const CaseForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf, city, risckFactor: [], symptoms: [], birthday: null },
+    values: { uf, city, risckFactor: [], symptoms: [], birthday: null, ...MOCK },
     touched: {},
     errors: {},
   });
@@ -162,9 +162,9 @@ const CaseForm = props => {
 
   const handleSave = event => {
     event.preventDefault();
-    console.log('formState:', formState);
+    console.log(JSON.stringify(formState.values));
     if (formState.isValid) {
-      onSaveMember(formState.values);
+      onSaveCase(formState.values);
     }
   };
 
@@ -437,7 +437,7 @@ const CaseForm = props => {
                   label="Isolamento por Precaução"
                   name="covidStatus"
                   value="6"
-                  checked={formState.values.covidStatus === '4'}
+                  checked={formState.values.covidStatus === '6'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -519,7 +519,7 @@ const CaseForm = props => {
                   name="infectedContactCity"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.name || ''}
+                  value={formState.values.infectedContactCity || ''}
                   variant="outlined"
                   margin="dense"
                   disabled={formState.values.infectedContact !== '1'}
@@ -884,3 +884,30 @@ CaseForm.propTypes = {
 };
 
 export default CaseForm;
+
+const MOCK = {
+  uf: '5e8babf51c9d44000083b976',
+  city: '5e8bd73fe4196130f6c34014',
+  risckFactor: [
+    'Imunodeficiência/Imunodepressão ',
+    'Doença Cardiovascular Crônica ',
+  ],
+  symptoms: ['Febre', 'Dor de Garganta ', 'Dispneia'],
+  birthday: null,
+  fullname: 'Jefferson de Souza',
+  phoneCod: '11',
+  street: 'Rua do Prado',
+  houseNumber: '1',
+  docId: '111',
+  sus: '111',
+  healthyWorker: '0',
+  phoneNumber: '11111',
+  neighborhood: 'Centro',
+  covidStatus: '2',
+  travelFromFocus: '1',
+  focusTravelCity: '11',
+  infectedContact: '1',
+  infectedContactCity: '1111',
+  symptomatic: '1',
+  hasRiskFactor: '1',
+};
