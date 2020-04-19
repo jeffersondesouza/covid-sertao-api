@@ -26,9 +26,9 @@ mongoose.connect(keys.mongoURI, {
 });
 
 cityRoutes(app);
-caseRoutes(app);
 reportsRoutes(app);
 authRoutes(app, jwtAuth.authenticate);
+caseRoutes(app, jwtAuth.authenticate);
 userRoutes(app, jwtAuth.authenticate);
 
 /* CLIENT Routes */
