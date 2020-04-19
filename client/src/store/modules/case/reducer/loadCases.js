@@ -1,4 +1,4 @@
-import { UserCrew } from 'models';
+import { CaseNotification } from 'models';
 
 export const request = (state, payload) => ({
   ...state,
@@ -14,7 +14,7 @@ export const success = (state, payload = []) => ({
   cases: {
     ...state.user,
     isLoadingCases: false,
-    caseNotifications: payload.map(item => item),
+    caseNotifications: payload.map(CaseNotification),
   },
 });
 

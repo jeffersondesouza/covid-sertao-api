@@ -18,6 +18,7 @@ import {
 
 import { StatusBullet } from 'view/components';
 import TableHeader from './TableHeader';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -63,6 +64,7 @@ const statusColors = {
 
 const CasesList = props => {
   const { cases, className, ...rest } = props;
+  console.log('cases:', cases)
 
   const classes = useStyles();
 
@@ -77,31 +79,27 @@ const CasesList = props => {
                 {cases.map(item => (
                   <TableRow hover key={item.id}>
                     {/* <TableCell>{item.ref}</TableCell> */}
-                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.fullname}</TableCell>
                     <TableCell align="center">
                       <div className={classes.statusContainer}>
                         <StatusBullet
                           className={classes.status}
-                          color={statusColors[item.status]}
+                          color={statusColors[item.covidStatus]}
                           size="sm"
                         />
                       </div>
                     </TableCell>
                     <TableCell>{item.situation}</TableCell>
-                    <TableCell>{item.contact}</TableCell>
-                    <TableCell>{item.createdAt}</TableCell>
-                    <TableCell>{item.updateAt}</TableCell>
+                    <TableCell>
+                      ({item.phoneCod})&nbsp;{item.phoneNumber}
+                    </TableCell>
+                    <TableCell>
+                      {item.registeredAt}
+                    </TableCell>
+                    <TableCell>{item.updatedAt}</TableCell>
                     <TableCell align="center">{item.monitoringDays}</TableCell>
                     <TableCell align="center">
                       <Grid container>
-                        <div className={classes.btnAction}>
-                          <IconButton className={classes.btnDanger}>
-                            <Delete />
-                          </IconButton>
-                          <Typography className={classes.smallLabel}>
-                            Remover
-                          </Typography>
-                        </div>
                         <div className={classes.btnAction}>
                           <IconButton>
                             <Edit />

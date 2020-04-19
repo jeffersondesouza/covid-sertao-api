@@ -31,15 +31,13 @@ const CasesListPage = () => {
   const { loadCases } = useContext(Context);
 
   const caseNotifications = useSelector(state => state.cases.caseNotifications);
-  console.log('caseNotifications:', caseNotifications)
-
 
   useEffect(() => {
     loadCases();
   }, []);
 
   useEffect(() => {
-    setCases([]);
+    setCases(caseNotifications);
   }, [caseNotifications]);
 
 
