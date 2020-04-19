@@ -3,6 +3,12 @@ import validate from 'validate.js';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import locale from 'date-fns/locale/pt-BR';
 import {
   Card,
   CardHeader,
@@ -14,12 +20,30 @@ import {
   FormControlLabel,
   Typography,
   Radio,
+  Checkbox,
 } from '@material-ui/core';
+import FieldSetHeader from './FieldSetHeader';
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    paddingLeft: '10px',
+    paddingTop: '10px',
+  },
+  container: {
+    margin: '0 auto',
+  },
+  fieldset: {
+    marginBottom: '1.5rem',
+  },
+  fieldcaption: {
+    marginBottom: '15px',
+  },
   action: {
     marginTop: '1.5rem',
+  },
+  checkboxGroup: {
+    display: 'flex',
+    paddingLeft: '1.5rem',
   },
 }));
 
@@ -69,6 +93,7 @@ const CaseForm = props => {
   } = props;
 
   const classes = useStyles();
+  const [selectedDate, setSelectedDate] = useState();
 
   const [formState, setFormState] = useState({
     isValid: false,
@@ -97,6 +122,10 @@ const CaseForm = props => {
       errors: errors || {},
     }));
   }, [formState.values]);
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
 
   const handleChange = event => {
     event.persist();
@@ -133,10 +162,106 @@ const CaseForm = props => {
       <form onSubmit={handleSave}>
         <CardHeader title={title} subheader={subheader} />
         <Divider />
-
-        {/* TYPE */}
+        {/* DADOS DO PACIENTE */}
         <CardContent>
-          <Grid container>
+          <FieldSetHeader title="Dados do Paciente" />
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6} spacing={2}>
+              <TextField
+                fullWidth
+                label="Nome completo"
+                name="name"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.name || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+            <Grid item xs={12} md={6} spacing={2}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
+                <KeyboardDatePicker
+                  margin="normal"
+                  id="date-picker-dialog"
+                  label="Data de Nascimento"
+                  format="dd/MM/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  variant="outlined"
+                  margin="dense"
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="CPF"
+                name="docId"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.docId || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+            <Grid item xs={6} spacing={2} className={classes.checkboxGroup}>
+              <FormControlLabel
+                control={<Checkbox color="primary" />}
+                label="Não possui"
+                name="hasNoCPF"
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Número do SUS"
+                name="docId"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.docId || ''}
+                variant="outlined"
+                margin="dense"
+              />
+            </Grid>
+            <Grid item xs={6} spacing={2} className={classes.checkboxGroup}>
+              <FormControlLabel
+                control={<Checkbox color="primary" />}
+                label="Não possui"
+                name="hasNoSUS"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2">É profissional da Saúde?</Typography>
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Sim"
+                name="healthyWorker"
+                value="1"
+                checked={formState.values.healthyWorker === '1'}
+                onChange={handleChange}
+              />
+              <FormControlLabel
+                control={<Radio color="primary" />}
+                label="Não"
+                name="healthyWorker"
+                value="2"
+                checked={formState.values.healthyWorker === '2'}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            {/* ############################## */}
+            {/* ############################## */}
+            {/* ############################## */}
+            {/* ############################## */}
+            {/* ############################## */}
+
             <Grid item xs={12}>
               <Typography variant="body1">Tipo</Typography>
             </Grid>
