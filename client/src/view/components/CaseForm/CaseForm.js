@@ -169,8 +169,8 @@ const CaseForm = props => {
       <form onSubmit={handleSave}>
         <CardHeader title={title} subheader={subheader} />
         <Divider />
-        {/* DADOS DO PACIENTE */}
         <CardContent>
+          {/* DADOS DO PACIENTE */}
           <FieldSetHeader title="Dados do Paciente" />
           <Grid container spacing={2} className={classes.fieldsetSmall}>
             <Grid item xs={12} md={6} spacing={2}>
@@ -374,100 +374,492 @@ const CaseForm = props => {
             </Grid>
           </Grid>
 
-          {/* Dados Clínicos e Epidemiológicos  */}
-          <FieldSetHeader title="Dados Clínicos e Epidemiológicos" />
-          <Grid container>
-            <Grid container spacing={1}>
-              <Grid item xs={1}>
-                <TextField
-                  error={hasError('cod')}
-                  fullWidth
-                  label="DDD"
-                  placeholder="88"
-                  name="cod"
+          {/* AVALIAÇÃO  */}
+          <FieldSetHeader title="Avaliação premilimar com relação ao COVID" />
+          <Grid container className={classes.fieldset}>
+            <Grid container>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Confirmado"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
                   onChange={handleChange}
-                  type="text"
-                  value={formState.values.cod || ''}
-                  variant="outlined"
-                  margin="dense"
-                  helperText={
-                    hasError('cod')
-                      ? 'Informe um DDD com dois número ex: 87'
-                      : null
-                  }
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Suspeito"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
                 />
               </Grid>
 
-              <Grid item xs={11} md={5}>
-                <TextField
-                  error={hasError('phone')}
-                  fullWidth
-                  label="Telefone"
-                  placeholder="98888-8888"
-                  name="phone"
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Descartado"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
                   onChange={handleChange}
-                  type="text"
-                  value={formState.values.phone || ''}
-                  variant="outlined"
-                  margin="dense"
-                  helperText={
-                    hasError('phone') ? 'Informe o telefone do usuário' : null
-                  }
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Curado"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Óbito"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={1}>
-              <Grid item xs={12} md={5}>
-                <TextField
-                  fullWidth
-                  label="Rua"
-                  name="email"
+          </Grid>
+
+          {/* Dados Clínicos e Epidemiológicos  */}
+          <FieldSetHeader title="Dados Clínicos e Epidemiológicos" />
+          <Grid container className={classes.fieldset}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body2">
+                  Histórico de viagem para cidade com confirmação de casos nos
+                  último 14 dias?
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Sim"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
                   onChange={handleChange}
-                  type="text"
-                  value={formState.values.email || ''}
-                  variant="outlined"
-                  margin="dense"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
+                />
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Não"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
                 />
               </Grid>
-              <Grid item md={1}>
+              <Grid item xs={4}>
                 <TextField
                   fullWidth
-                  label="Número"
-                  name="email"
+                  label="Nome da Cidade"
+                  name="name"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.name || ''}
                   variant="outlined"
                   margin="dense"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Bairro"
-                name="email"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.email || ''}
-                variant="outlined"
-                margin="dense"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body2">
+                  Contato direto com pessoas vindas de cidade com confirmação de
+                  casos nos último 14 dias?
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Sim"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Não"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  label="Nome da Cidade"
+                  name="name"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.name || ''}
+                  variant="outlined"
+                  margin="dense"
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body2">Sintomático?</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Sim"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Não"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Typography variant="body2">Início dos sintomas</Typography>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
+                  <KeyboardDatePicker
+                    margin="normal"
+                    id="date-picker-dialog"
+                    format="dd/MM/yyyy"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    variant="outlined"
+                    margin="dense"
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body2">Sinais e Sintomas</Typography>
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Febre"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Tosse"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Dor de Garganta "
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Dispneia"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Desconforto Respiratório"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Saturação Oxigênio < 95%"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Diarreia"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox color="primary" />}
+                  label="Vômito"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  label="Outros"
+                  name="name"
+                  onChange={handleChange}
+                  type="text"
+                  value={formState.values.name || ''}
+                  variant="outlined"
+                  margin="dense"
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body2">
+                  Possui fatores de risco/comorbidades
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Sim"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Não"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid container>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Puérpera (até 45 dias do parto"
+                    name="healthyWorker"
+                    value="1"
+                    checked={formState.values.healthyWorker === '1'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Síndrome de Down "
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Diabetes mellitus"
+                    name="healthyWorker"
+                    value="1"
+                    checked={formState.values.healthyWorker === '1'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Imunodeficiência/Imunodepressão "
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Doença Cardiovascular Crônica "
+                    name="healthyWorker"
+                    value="1"
+                    checked={formState.values.healthyWorker === '1'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label=" Doença Hepática Crônica"
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Doença Neurológica Crônica "
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Doença Renal Crônica"
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Doença Hematológica Crônica"
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Asma"
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Outra Pneumopatia Crônica"
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox color="primary" />}
+                    label="Obesidade"
+                    name="healthyWorker"
+                    value="2"
+                    checked={formState.values.healthyWorker === '2'}
+                    onChange={handleChange}
+                  />
+                </Grid>
+
+                <Grid item xs={6}>
+                  <TextField
+                    fullWidth
+                    label="Outros"
+                    name="name"
+                    onChange={handleChange}
+                    type="text"
+                    value={formState.values.name || ''}
+                    variant="outlined"
+                    margin="dense"
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body2">
+                  Recebeu vacina contra Gripe na última campanha
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Sim"
+                  name="healthyWorker"
+                  value="1"
+                  checked={formState.values.healthyWorker === '1'}
+                  onChange={handleChange}
+                />
+                <FormControlLabel
+                  control={<Radio color="primary" />}
+                  label="Não"
+                  name="healthyWorker"
+                  value="2"
+                  checked={formState.values.healthyWorker === '2'}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <Typography variant="body2">Data da vacinação</Typography>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locale}>
+                  <KeyboardDatePicker
+                    margin="normal"
+                    id="date-picker-dialog"
+                    format="dd/MM/yyyy"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    variant="outlined"
+                    margin="dense"
+                    KeyboardButtonProps={{
+                      'aria-label': 'change date',
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </Grid>
             </Grid>
           </Grid>
         </CardContent>
