@@ -54,37 +54,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const schema = {
-  firstname: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  lastname: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  uf: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  city: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  role: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  phone: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-    length: {
-      minimum: 8,
-      maximum: 9,
-    },
-  },
-  cod: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-    length: {
-      minimum: 2,
-      maximum: 2,
-    },
-  },
-};
+const schema = {};
 
 const CaseForm = props => {
   const {
@@ -134,6 +104,25 @@ const CaseForm = props => {
     setSelectedDate(date);
   };
 
+  const handleChangeAdd = event => {
+    event.persist();
+
+    setFormState(formState => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [event.target.name]:
+          event.target.type === 'checkbox'
+            ? event.target.checked
+            : event.target.value,
+      },
+      touched: {
+        ...formState.touched,
+        [event.target.name]: true,
+      },
+    }));
+  };
+
   const handleChange = event => {
     event.persist();
 
@@ -177,10 +166,10 @@ const CaseForm = props => {
               <TextField
                 fullWidth
                 label="Nome completo"
-                name="name"
+                name="fullname"
                 onChange={handleChange}
                 type="text"
-                value={formState.values.name || ''}
+                value={formState.values.fullname || ''}
                 variant="outlined"
                 margin="dense"
               />
@@ -193,6 +182,7 @@ const CaseForm = props => {
                   label="Data de Nascimento"
                   format="dd/MM/yyyy"
                   value={selectedDate}
+                  name="birthday"
                   onChange={handleDateChange}
                   variant="outlined"
                   margin="dense"
@@ -218,7 +208,7 @@ const CaseForm = props => {
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="Não possui"
-                name="hasNoCPF"
+                name="noCPF"
                 onChange={handleChange}
               />
             </Grid>
@@ -227,7 +217,7 @@ const CaseForm = props => {
               <TextField
                 fullWidth
                 label="Número do SUS"
-                name="docId"
+                name="sus"
                 onChange={handleChange}
                 type="text"
                 value={formState.values.docId || ''}
@@ -239,23 +229,11 @@ const CaseForm = props => {
               <FormControlLabel
                 control={<Checkbox color="primary" />}
                 label="Não possui"
-                name="hasNoSUS"
+                name="noSus"
                 onChange={handleChange}
               />
             </Grid>
 
-            <Grid item xs={12} md={6}>
-              <TextField
-                fullWidth
-                label="Observações"
-                name="docId"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.docId || ''}
-                variant="outlined"
-                margin="dense"
-              />
-            </Grid>
             <Grid item xs={12}>
               <Typography variant="body2">É profissional da Saúde?</Typography>
               <FormControlLabel
@@ -283,18 +261,18 @@ const CaseForm = props => {
             <Grid container spacing={1}>
               <Grid item xs={1}>
                 <TextField
-                  error={hasError('cod')}
+                  error={hasError('phoneCod')}
                   fullWidth
                   label="DDD"
                   placeholder="88"
-                  name="cod"
+                  name="phoneCod"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.cod || ''}
+                  value={formState.values.phoneCod || ''}
                   variant="outlined"
                   margin="dense"
                   helperText={
-                    hasError('cod')
+                    hasError('phoneCod')
                       ? 'Informe um DDD com dois número ex: 87'
                       : null
                   }
@@ -306,18 +284,20 @@ const CaseForm = props => {
 
               <Grid item xs={11} md={5}>
                 <TextField
-                  error={hasError('phone')}
+                  error={hasError('phoneNumber')}
                   fullWidth
                   label="Telefone"
                   placeholder="98888-8888"
-                  name="phone"
+                  name="phoneNumber"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.phone || ''}
+                  value={formState.values.phoneNumber || ''}
                   variant="outlined"
                   margin="dense"
                   helperText={
-                    hasError('phone') ? 'Informe o telefone do usuário' : null
+                    hasError('phoneNumber')
+                      ? 'Informe o telefone do usuário'
+                      : null
                   }
                   InputLabelProps={{
                     shrink: true,
@@ -330,10 +310,10 @@ const CaseForm = props => {
                 <TextField
                   fullWidth
                   label="Rua"
-                  name="email"
+                  name="street"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.street || ''}
                   variant="outlined"
                   margin="dense"
                   InputLabelProps={{
@@ -345,10 +325,10 @@ const CaseForm = props => {
                 <TextField
                   fullWidth
                   label="Número"
-                  name="email"
+                  name="houseNumber"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.houseNumber || ''}
                   variant="outlined"
                   margin="dense"
                   InputLabelProps={{
@@ -361,10 +341,10 @@ const CaseForm = props => {
               <TextField
                 fullWidth
                 label="Bairro"
-                name="email"
+                name="neighborhood"
                 onChange={handleChange}
                 type="text"
-                value={formState.values.email || ''}
+                value={formState.values.neighborhood || ''}
                 variant="outlined"
                 margin="dense"
                 InputLabelProps={{
@@ -382,9 +362,9 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Confirmado"
-                  name="healthyWorker"
+                  name="covidStatus"
                   value="1"
-                  checked={formState.values.healthyWorker === '1'}
+                  checked={formState.values.covidStatus === '1'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -392,9 +372,9 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Suspeito"
-                  name="healthyWorker"
+                  name="covidStatus"
                   value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  checked={formState.values.covidStatus === '2'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -402,10 +382,10 @@ const CaseForm = props => {
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Radio color="primary" />}
-                  label="Descartado"
-                  name="healthyWorker"
-                  value="1"
-                  checked={formState.values.healthyWorker === '1'}
+                  label="Negativo/Descartado"
+                  name="covidStatus"
+                  value="3"
+                  checked={formState.values.covidStatus === '3'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -413,9 +393,9 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Curado"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  name="covidStatus"
+                  value="5"
+                  checked={formState.values.covidStatus === '5'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -424,9 +404,9 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Óbito"
-                  name="healthyWorker"
-                  value="1"
-                  checked={formState.values.healthyWorker === '1'}
+                  name="covidStatus"
+                  value="4"
+                  checked={formState.values.covidStatus === '4'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -447,17 +427,17 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
-                  name="healthyWorker"
+                  name="travelFromFocus"
                   value="1"
-                  checked={formState.values.healthyWorker === '1'}
+                  checked={formState.values.travelFromFocus === '1'}
                   onChange={handleChange}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Não"
-                  name="healthyWorker"
+                  name="travelFromFocus"
                   value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  checked={formState.values.travelFromFocus === '2'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -465,10 +445,10 @@ const CaseForm = props => {
                 <TextField
                   fullWidth
                   label="Nome da Cidade"
-                  name="name"
+                  name="focusTravelCity"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.name || ''}
+                  value={formState.values.focusTravelCity || ''}
                   variant="outlined"
                   margin="dense"
                 />
@@ -486,17 +466,17 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
-                  name="healthyWorker"
+                  name="conataminedContact"
                   value="1"
-                  checked={formState.values.healthyWorker === '1'}
+                  checked={formState.values.conataminedContact === '1'}
                   onChange={handleChange}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Não"
-                  name="healthyWorker"
+                  name="conataminedContact"
                   value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  checked={formState.values.conataminedContact === '2'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -522,17 +502,17 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
-                  name="healthyWorker"
+                  name="symptomatic"
                   value="1"
-                  checked={formState.values.healthyWorker === '1'}
+                  checked={formState.values.symptomatic === '1'}
                   onChange={handleChange}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Não"
-                  name="healthyWorker"
+                  name="symptomatic"
                   value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  checked={formState.values.symptomatic === '2'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -544,6 +524,7 @@ const CaseForm = props => {
                     id="date-picker-dialog"
                     format="dd/MM/yyyy"
                     value={selectedDate}
+                    name="symptomaticInit"
                     onChange={handleDateChange}
                     variant="outlined"
                     margin="dense"
@@ -563,20 +544,18 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Febre"
-                  name="healthyWorker"
-                  value="1"
-                  checked={formState.values.healthyWorker === '1'}
-                  onChange={handleChange}
+                  value="Febre"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Tosse"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
-                  onChange={handleChange}
+                  value="Tosse"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
 
@@ -584,20 +563,18 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Dor de Garganta "
-                  name="healthyWorker"
-                  value="1"
-                  checked={formState.values.healthyWorker === '1'}
-                  onChange={handleChange}
+                  value="Dor de Garganta "
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Dispneia"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
-                  onChange={handleChange}
+                  value="Dispneia"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
 
@@ -605,50 +582,46 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Desconforto Respiratório"
-                  name="healthyWorker"
-                  value="1"
-                  checked={formState.values.healthyWorker === '1'}
-                  onChange={handleChange}
+                  value="Desconforto Respiratório"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Saturação Oxigênio < 95%"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
-                  onChange={handleChange}
+                  value="Saturação Oxigênio < 95%"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Diarreia"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
-                  onChange={handleChange}
+                  value="Diarreia"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox color="primary" />}
                   label="Vômito"
-                  name="healthyWorker"
-                  value="2"
-                  checked={formState.values.healthyWorker === '2'}
-                  onChange={handleChange}
+                  value="Vômito"
+                  name="symptoms"
+                  onChange={handleChangeAdd}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   fullWidth
                   label="Outros"
-                  name="name"
+                  name="symptomsOthers"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.name || ''}
+                  value={formState.values.symptomsOthers || ''}
                   variant="outlined"
                   margin="dense"
                 />
@@ -665,17 +638,16 @@ const CaseForm = props => {
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Sim"
-                  name="healthyWorker"
+                  name="hasRiskFactor"
                   value="1"
-                  checked={formState.values.healthyWorker === '1'}
                   onChange={handleChange}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Não"
-                  name="healthyWorker"
+                  name="hasRiskFactor"
                   value="2"
-                  checked={formState.values.healthyWorker === '2'}
+                  checked={formState.values.hasRiskFactor === '2'}
                   onChange={handleChange}
                 />
               </Grid>
@@ -683,21 +655,19 @@ const CaseForm = props => {
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
-                    label="Puérpera (até 45 dias do parto"
-                    name="healthyWorker"
-                    value="1"
-                    checked={formState.values.healthyWorker === '1'}
-                    onChange={handleChange}
+                    label="Puérpera (até 45 dias do parto)"
+                    value="Puérpera (até 45 dias do parto)"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Síndrome de Down "
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Síndrome de Down "
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
 
@@ -705,20 +675,18 @@ const CaseForm = props => {
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Diabetes mellitus"
-                    name="healthyWorker"
-                    value="1"
-                    checked={formState.values.healthyWorker === '1'}
-                    onChange={handleChange}
+                    value="Diabetes mellitus"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Imunodeficiência/Imunodepressão "
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Imunodeficiência/Imunodepressão "
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
 
@@ -726,40 +694,36 @@ const CaseForm = props => {
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Doença Cardiovascular Crônica "
-                    name="healthyWorker"
-                    value="1"
-                    checked={formState.values.healthyWorker === '1'}
-                    onChange={handleChange}
+                    value="Doença Cardiovascular Crônica "
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label=" Doença Hepática Crônica"
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value=" Doença Hepática Crônica"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Doença Neurológica Crônica "
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Doença Neurológica Crônica "
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Doença Renal Crônica"
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Doença Renal Crônica"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
 
@@ -767,40 +731,36 @@ const CaseForm = props => {
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Doença Hematológica Crônica"
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Doença Hematológica Crônica"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Asma"
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Asma"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Outra Pneumopatia Crônica"
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Outra Pneumopatia Crônica"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox color="primary" />}
                     label="Obesidade"
-                    name="healthyWorker"
-                    value="2"
-                    checked={formState.values.healthyWorker === '2'}
-                    onChange={handleChange}
+                    value="Obesidade"
+                    name="risckFactor"
+                    onChange={handleChangeAdd}
                   />
                 </Grid>
 
