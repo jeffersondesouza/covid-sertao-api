@@ -78,7 +78,7 @@ const Dashboard = () => {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12} className={classes.noPadding}>
-          <ProfileWelcome />
+          <ProfileWelcome city={city} isSuperUser={user.isSuperUser} />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary

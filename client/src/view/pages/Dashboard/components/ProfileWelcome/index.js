@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import {
   Typography,
@@ -8,6 +8,7 @@ import {
   Hidden,
 } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,8 +20,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProfileWelcome = () => {
+const ProfileWelcome = ({ city, isSuperUser }) => {
+  const [updateAt, setUpdateAt] = useState();
+
   const classes = useStyles();
+
+  useEffect(() => {
+    if (city && city.updateAt) {
+      setUpdateAt(moment().format('DD/MM/YYYY [18]:[00][h]'));
+    } else {
+      setUpdateAt(
+        moment()
+          .add(-1, 'day')
+          .format('DD/MM/YYYY [18]:[00][h]')
+      );
+    }
+  }, [city]);
 
   return (
     <Grid
@@ -30,13 +45,21 @@ const ProfileWelcome = () => {
       spacing={0}
       className={classes.root}
     >
-      <Grid item>
-        <Typography variant="caption">
-          Última autalização 10/04/2021 18:30h
-        </Typography>
+      <Grid item xs={12}>
+        {isSuperUser ? (
+          <Typography variant="h3">Brasil</Typography>
+        ) : (
+          <Typography variant="h3">{city ? city.name : ''}</Typography>
+        )}
       </Grid>
       <Grid item>
-   
+        {city && (
+          <Typography variant="caption">
+            Última autalização {updateAt}
+          </Typography>
+        )}
+      </Grid>
+      <Grid item>
         <IconButton size="small">
           <RefreshIcon />
         </IconButton>

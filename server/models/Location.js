@@ -21,7 +21,7 @@ const locationSchema = new Schema({
   population: Number,
   phones: [Phone],
   report: Object,
-  updateAt: Date,
+  updateAt: { type: Date, default: new Date() },
   regionType: {
     type: String,
     default: RegionTypesEnum.CITY,
