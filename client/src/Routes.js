@@ -17,21 +17,24 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   NewCase as NewCaseView,
-  
 } from './view/pages';
 import { LoggedGuard } from 'view/guards';
 
 const Routes = () => {
   return (
     <Switch>
-      <Redirect exact from="/" to="/login" />
+      <RouteWithLayout
+        component={SignInView}
+        exact
+        layout={MinimalLayout}
+        path="/"
+      />
       <RouteWithLayout
         component={SignInView}
         exact
         layout={MinimalLayout}
         path="/login"
       />
-
       <RouteWithLayout
         exact
         path="/dashboard"
@@ -39,7 +42,6 @@ const Routes = () => {
         component={DashboardView}
         guard={LoggedGuard}
       />
-
       <RouteWithLayout
         component={CasesListView}
         exact
@@ -47,7 +49,6 @@ const Routes = () => {
         path="/cases"
         guard={LoggedGuard}
       />
-
       <RouteWithLayout
         component={NewCaseView}
         exact
@@ -55,7 +56,6 @@ const Routes = () => {
         path="/cases/new"
         guard={LoggedGuard}
       />
-
       <RouteWithLayout
         component={UserListView}
         exact
@@ -63,7 +63,6 @@ const Routes = () => {
         path="/members"
         guard={LoggedGuard}
       />
-
       <RouteWithLayout
         component={AddCrewMemberView}
         exact
@@ -71,7 +70,6 @@ const Routes = () => {
         path="/members/add"
         guard={LoggedGuard}
       />
-
       <RouteWithLayout
         component={AddCrewAdminView}
         exact
@@ -79,7 +77,6 @@ const Routes = () => {
         path="/members/admin/add"
         guard={LoggedGuard}
       />
-
       <RouteWithLayout
         component={TypographyView}
         exact
@@ -110,7 +107,6 @@ const Routes = () => {
         layout={MinimalLayout}
         path="/sign-up"
       /> */}
-
       <RouteWithLayout
         component={NotFoundView}
         exact
