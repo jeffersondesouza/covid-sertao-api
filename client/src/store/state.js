@@ -8,6 +8,7 @@ export default {
     ufs: [],
   },
   member: {},
+  reports: {},
   user: {
     users: [],
   },

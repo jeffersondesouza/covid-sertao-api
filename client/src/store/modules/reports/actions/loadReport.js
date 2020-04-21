@@ -1,17 +1,18 @@
 import * as Types from '../ActionsTypes';
 
 import { request } from 'helpers/http';
-import { loadCasesQuery } from 'repository/case';
+import { loadReportQuery } from 'repository/reports';
 
 import selectToken from 'store/selectors/selectToken';
 
-const loadUsers = (dispatch, state) => async () => {
+const loadReports = (dispatch, state) => async () => {
   dispatch({ type: Types.LOAD_REPORTS_REQUEST });
 
   try {
     const token = selectToken(state);
+    console.log('token:', token)
 
-    const { data } = await request(loadCasesQuery({ token }));
+    const { data } = await request(loadReportQuery({ token }));
 
     dispatch({ type: Types.LOAD_REPORTS_SUCCESS, payload: data });
   } catch (error) {
@@ -20,4 +21,4 @@ const loadUsers = (dispatch, state) => async () => {
   }
 };
 
-export default loadUsers;
+export default loadReports;

@@ -1,17 +1,17 @@
 import * as Types from '../ActionsTypes';
 
 import { request } from 'helpers/http';
-import { saveCaseQuery } from 'repository/case';
+import { updateReportQuery } from 'repository/reports';
 
 import selectToken from 'store/selectors/selectToken';
 
-const saveCase = (dispatch, state) => async newCase => {
+const updateReport = (dispatch, state) => async report => {
   dispatch({ type: Types.UPDATE_REPORT_REQUEST });
 
   try {
     const token = selectToken(state);
 
-    const { data } = await request(saveCaseQuery({ token, data: newCase }));
+    const { data } = await request(updateReportQuery({ token, data: report }));
     dispatch({ type: Types.UPDATE_REPORT_SUCCESS, payload: data });
   } catch (error) {
     console.log('error:', error);
@@ -19,4 +19,4 @@ const saveCase = (dispatch, state) => async newCase => {
   }
 };
 
-export default saveCase;
+export default updateReport;

@@ -1,31 +1,28 @@
 import moment from 'moment';
 import { CaseNotification } from 'models';
 
-const byRegisterAt = (itemA, itemB) => {
-  const momentA = moment(itemA.registeredAt);
-  const momentB = moment(itemB.registeredAt);
 
-  return momentB.diff(momentA, 'seconds');
-};
 
 export const request = (state, payload) => ({
   ...state,
   reports: {
     ...state.reports,
     isLoadingReports: true,
-    cityReport: {},
+    city: {},
+    uf: {},
+    country: {},
   },
 });
 
 export const success = (state, payload = []) => {
-  const sortedCases = [...payload].sort(byRegisterAt);
-
   return {
     ...state,
     reports: {
       ...state.reports,
       isLoadingReports: false,
-      cityReport: payload,
+      city: payload.city,
+      uf: payload.uf,
+      country: payload.country,
     },
   };
 };
@@ -35,6 +32,8 @@ export const failure = (state, payload) => ({
   reports: {
     ...state.reports,
     isLoadingReports: false,
-    cityReport: {},
+    city: {},
+    uf: {},
+    country: {},
   },
 });
