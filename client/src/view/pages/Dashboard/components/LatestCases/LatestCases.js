@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-import mockData from './data';
 import { CasesList } from 'view/components';
 import { Link } from 'react-router-dom';
 
@@ -36,11 +35,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LatestCases = props => {
-  const { className, ...rest } = props;
+  const { cases, className, ...rest } = props;
 
   const classes = useStyles();
-
-  const [cases] = useState(mockData);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>

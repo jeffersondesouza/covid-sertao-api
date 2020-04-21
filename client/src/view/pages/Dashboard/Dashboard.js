@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Button } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
+
+import { ProductsToolbar } from './components';
+import { Context, useSelector } from 'store/createContext';
 
 import {
   CasesSumary,
@@ -13,7 +17,6 @@ import {
   LatestCases,
   ProfileWelcome,
 } from './components';
-import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,6 +34,13 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const { loadCases } = useContext(Context);
+  
+  const cases = useSelector(state => state.cases.caseNotifications);
+
+  useEffect(() => {
+    loadCases();
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -72,7 +82,7 @@ const Dashboard = () => {
           <UsersByDevice />
         </Grid>
         <Grid item xs={12}>
-          <LatestCases />
+          <LatestCases cases={cases} />
         </Grid>
       </Grid>
     </div>
