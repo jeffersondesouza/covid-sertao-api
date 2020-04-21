@@ -76,8 +76,7 @@ const CasesList = props => {
               <TableHeader />
               <TableBody>
                 {cases.map(item => (
-                  <TableRow hover key={item.id}>
-                    {/* <TableCell>{item.ref}</TableCell> */}
+                  <TableRow hover key={item._id}>
                     <TableCell>{item.fullname}</TableCell>
                     <TableCell align="center">
                       <div className={classes.statusContainer}>

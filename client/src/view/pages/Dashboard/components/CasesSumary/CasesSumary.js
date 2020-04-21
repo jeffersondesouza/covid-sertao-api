@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CasesSumary = props => {
-  const { title, color = 'neutral', className, ...rest } = props;
+  const { value, title, color = 'neutral', className, ...rest } = props;
 
   const classes = useStyles();
 
@@ -93,7 +93,7 @@ const CasesSumary = props => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h3" className={classes.subtitle}>
-              0
+              {value}
             </Typography>
           </Grid>
           {/*           <Grid item xs={12}>
@@ -109,6 +109,7 @@ const CasesSumary = props => {
 
 CasesSumary.propTypes = {
   className: PropTypes.string,
+  value: PropTypes.number,
 };
 
 export default CasesSumary;

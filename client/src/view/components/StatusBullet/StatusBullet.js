@@ -79,6 +79,11 @@ StatusBullet.propTypes = {
     'warning',
     'danger',
     'black',
+    'suspect',
+    'confirmed',
+    'death',
+    'negative',
+    'cured',
   ]),
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

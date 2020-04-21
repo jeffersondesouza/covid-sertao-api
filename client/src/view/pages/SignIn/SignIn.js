@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { Grid, Button, TextField, Typography } from '@material-ui/core';
@@ -24,8 +24,8 @@ const schema = {
 };
 
 const SignIn = props => {
-  const { history } = props;
   const classes = useStyles();
+  const history = useHistory();
 
   const {
     state: { auth },

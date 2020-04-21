@@ -16,7 +16,6 @@ const AddCrewMember = () => {
   const classes = useStyles();
 
   const { saveUser, cleanUpUser } = useContext(Context);
-  const auth = useSelector(state => state.auth);
   const user = useSelector(state => state.auth.currentUser);
   const saveSuccess = useSelector(state => state.user.saveUserSuccess);
   const saveFail = useSelector(state => state.user.saveUserFail);

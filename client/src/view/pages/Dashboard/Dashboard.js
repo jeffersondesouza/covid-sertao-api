@@ -17,6 +17,8 @@ import {
   LatestCases,
   ProfileWelcome,
 } from './components';
+import selectCurrentUser from 'store/selectors/selectCurrentUser';
+import { Maybe } from 'helpers/functors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,20 +34,45 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const setCasesReport = location => {
+  return Maybe.of(location)
+    .map(loc => loc.report)
+    .get({
+      confirmed: 0,
+      suspects: 0,
+      negative: 0,
+      cured: 0,
+      deaths: 0,
+    });
+};
+
 const Dashboard = () => {
   const classes = useStyles();
   const { loadCases, loadReports } = useContext(Context);
+  const [caseReport, setReport] = useState(setCasesReport());
 
   const lastCases = useSelector(state => state.cases.lastCasesNotifications);
   const city = useSelector(state => state.reports.city);
   const uf = useSelector(state => state.reports.uf);
   const country = useSelector(state => state.reports.country);
-  console.log({ city, uf, country });
+  const user = useSelector(selectCurrentUser);
 
   useEffect(() => {
     loadCases();
     loadReports();
   }, []);
+
+  useEffect(() => {
+    if (!city || !uf || !country || !user) {
+      return;
+    }
+
+    if (user.isSuperUser) {
+      setReport(setCasesReport(country));
+    } else {
+      setReport(setCasesReport(city));
+    }
+  }, [city, uf, country, user]);
 
   return (
     <div className={classes.root}>
@@ -54,19 +81,35 @@ const Dashboard = () => {
           <ProfileWelcome />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Confirmados" color="confirmed" />
+          <CasesSumary
+            value={caseReport.confirmed}
+            title="Confirmados"
+            color="confirmed"
+          />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Suspeitos" color="suspect" />
+          <CasesSumary
+            value={caseReport.suspects}
+            title="Suspeitos"
+            color="suspect"
+          />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Descartados" color="negative" />
+          <CasesSumary
+            value={caseReport.negative}
+            title="Descartados"
+            color="negative"
+          />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Recuperados" color="cured" />
+          <CasesSumary
+            value={caseReport.cured}
+            title="Recuperados"
+            color="cured"
+          />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12}>
-          <CasesSumary title="Óbitos" color="death" />
+          <CasesSumary value={caseReport.deaths} title="Óbitos" color="death" />
         </Grid>
         <Grid item lg={2} sm={6} xl={3} xs={12} className={classes.editCard}>
           <NavLink to="/members/add">

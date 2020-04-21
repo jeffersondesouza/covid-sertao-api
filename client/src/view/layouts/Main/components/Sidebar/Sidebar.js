@@ -1,19 +1,15 @@
 import React, { useContext } from 'react';
-import { withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   Divider,
   Drawer,
-  IconButton,
   Hidden,
-  Badge,
   Button,
 } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import { Assignment, AssignmentInd } from '@material-ui/icons';
-import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 
@@ -30,10 +26,9 @@ import useStyles from './styles';
 const isProduction = () => process.env.NODE_ENV === 'production';
 
 const Sidebar = props => {
-  const { open, variant, onClose, history, className, ...rest } = props;
+  const { open, variant, onClose, className, ...rest } = props;
 
   const user = useSelector(state => state.auth.currentUser);
-
   const classes = useStyles();
 
   const pages = [
@@ -101,11 +96,6 @@ const Sidebar = props => {
     logout,
   } = useContext(Context);
 
-  const handleLogout = event => {
-    logout();
-    event.preventDefault();
-    history.push('/login');
-  };
 
   return (
     <Drawer
@@ -124,7 +114,7 @@ const Sidebar = props => {
           <Button
             variant="text"
             className={classes.btnLogout}
-            onClick={handleLogout}
+            onClick={logout}
           >
             <InputIcon className={classes.icon} color="inherit" />
             Sair
@@ -142,4 +132,4 @@ Sidebar.propTypes = {
   variant: PropTypes.string.isRequired,
 };
 
-export default withRouter(Sidebar);
+export default Sidebar;
