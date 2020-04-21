@@ -73,7 +73,6 @@ const Topbar = props => {
 Topbar.propTypes = {
   className: PropTypes.string,
   onSidebarOpen: PropTypes.func,
-  history: PropTypes.object,
 };
 
 export default Topbar;
