@@ -64,7 +64,6 @@ const statusColors = {
 
 const CasesList = props => {
   const { cases, className, ...rest } = props;
-  console.log('cases:', cases)
 
   const classes = useStyles();
 

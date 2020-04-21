@@ -16,7 +16,6 @@ const monitoringDays = registeredAt => {
 };
 
 const CaseNotification = params => {
-  console.log('params:', params);
   const caseNotification = Maybe.of(params).get({});
 
   return {

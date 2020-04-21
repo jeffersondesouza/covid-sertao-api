@@ -51,7 +51,6 @@ const useStyles = makeStyles(theme => ({
 
 const StatusBullet = props => {
   const { className, size, color, ...rest } = props;
-  console.log('color:', color);
 
   const classes = useStyles();
 
