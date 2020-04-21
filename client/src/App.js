@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Chart } from 'react-chartjs-2';
 import { ThemeProvider } from '@material-ui/styles';
 import validate from 'validate.js';
@@ -28,9 +28,9 @@ export default class App extends Component {
     return (
       <ContextProvider>
         <ThemeProvider theme={theme}>
-          <BrowserRouter>
+          <HashRouter>
             <Routes />
-          </BrowserRouter>
+          </HashRouter>
         </ThemeProvider>
       </ContextProvider>
     );
