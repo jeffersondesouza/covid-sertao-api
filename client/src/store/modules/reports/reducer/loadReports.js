@@ -10,11 +10,10 @@ const byRegisterAt = (itemA, itemB) => {
 
 export const request = (state, payload) => ({
   ...state,
-  cases: {
-    ...state.cases,
-    isLoadingCases: true,
-    caseNotifications: [],
-    lastCasesNotifications: [],
+  reports: {
+    ...state.reports,
+    isLoadingReports: true,
+    cityReport: {},
   },
 });
 
@@ -23,19 +22,19 @@ export const success = (state, payload = []) => {
 
   return {
     ...state,
-    cases: {
-      ...state.cases,
-      isLoadingCases: false,
-      caseNotifications: sortedCases.map(CaseNotification),
-      lastCasesNotifications: sortedCases.map(CaseNotification).slice(0, 10),
+    reports: {
+      ...state.reports,
+      isLoadingReports: false,
+      cityReport: payload,
     },
   };
 };
 
 export const failure = (state, payload) => ({
   ...state,
-  cases: {
-    ...state.cases,
-    isLoadingCases: false,
+  reports: {
+    ...state.reports,
+    isLoadingReports: false,
+    cityReport: {},
   },
 });

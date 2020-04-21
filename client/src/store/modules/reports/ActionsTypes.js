@@ -1,0 +1,13 @@
+export const CLEAN_UP = 'reports:CLEAN_UP';
+
+export const SAVE_REPORT_REQUEST = 'reports:SAVE_REPORT_REQUEST';
+export const SAVE_REPORT_SUCCESS = 'reports:SAVE_REPORT_SUCCESS';
+export const SAVE_REPORT_FAILURE = 'reports:SAVE_REPORT_FAILURE';
+
+export const UPDATE_REPORT_REQUEST = 'reports:UPDATE_REPORT_REQUEST';
+export const UPDATE_REPORT_SUCCESS = 'reports:UPDATE_REPORT_SUCCESS';
+export const UPDATE_REPORT_FAILURE = 'reports:UPDATE_REPORT_FAILURE';
+
+export const LOAD_REPORTS_REQUEST = 'reports:LOAD_REPORTS_REQUEST';
+export const LOAD_REPORTS_SUCCESS = 'reports:LOAD_REPORTS_SUCCESS';
+export const LOAD_REPORTS_FAILURE = 'reports:LOAD_REPORTS_FAILURE';
