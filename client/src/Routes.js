@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout } from './view/components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './view/layouts';
@@ -107,13 +107,14 @@ const Routes = () => {
         layout={MinimalLayout}
         path="/sign-up"
       /> */}
-      <RouteWithLayout
+      {/* <RouteWithLayout
         component={NotFoundView}
         exact
         layout={MinimalLayout}
         path="/not-found"
       />
-      <Redirect to="/not-found" />
+ */}
+      <Route path="*" component={NotFoundView} />
     </Switch>
   );
 };
