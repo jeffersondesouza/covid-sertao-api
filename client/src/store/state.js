@@ -2,7 +2,7 @@ export default {
   auth: {
     role: 3,
   },
-  cases: { caseNotifications: [] },
+  cases: { caseNotifications: [], lastCasesNotifications: [] },
   location: {
     cities: [],
     ufs: [],

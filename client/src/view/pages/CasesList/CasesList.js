@@ -30,7 +30,7 @@ const CasesListPage = () => {
 
   const { loadCases } = useContext(Context);
 
-  const caseNotifications = useSelector(state => state.cases.caseNotifications);
+  const caseNotifications = useSelector(state => state.cases.lastCasesNotifications);
 
   useEffect(() => {
     loadCases();
