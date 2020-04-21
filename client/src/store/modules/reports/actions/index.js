@@ -5,7 +5,7 @@ import updateReport from './updateReport';
 
 export default (dispatch, state) => ({
   cleanUp: cleanUp(dispatch, state),
-  loadReport: loadReport(dispatch, state),
+  loadReports: loadReport(dispatch, state),
   saveReport: saveReport(dispatch, state),
   updateReport: updateReport(dispatch, state),
 });

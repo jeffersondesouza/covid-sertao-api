@@ -34,12 +34,17 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
-  const { loadCases } = useContext(Context);
+  const { loadCases, loadReports } = useContext(Context);
 
   const lastCases = useSelector(state => state.cases.lastCasesNotifications);
+  const city = useSelector(state => state.reports.city);
+  const uf = useSelector(state => state.reports.uf);
+  const country = useSelector(state => state.reports.country);
+  console.log({ city, uf, country });
 
   useEffect(() => {
     loadCases();
+    loadReports();
   }, []);
 
   return (

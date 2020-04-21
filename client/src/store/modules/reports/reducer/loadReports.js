@@ -14,7 +14,7 @@ export const request = (state, payload) => ({
   },
 });
 
-export const success = (state, payload = []) => {
+export const success = (state, payload = {}) => {
   return {
     ...state,
     reports: {
@@ -32,8 +32,5 @@ export const failure = (state, payload) => ({
   reports: {
     ...state.reports,
     isLoadingReports: false,
-    city: {},
-    uf: {},
-    country: {},
   },
 });
