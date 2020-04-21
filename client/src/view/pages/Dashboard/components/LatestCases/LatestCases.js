@@ -43,9 +43,11 @@ const LatestCases = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardHeader
         action={
+          <Link to="/cases/new">
           <Button color="primary" size="small" variant="outlined">
             Nova Notificação
           </Button>
+          </Link>
         }
         title="Últimas Notificações"
       />
