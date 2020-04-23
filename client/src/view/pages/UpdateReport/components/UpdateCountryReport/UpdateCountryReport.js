@@ -151,8 +151,7 @@ const UpdateCountryReport = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSave}>
         <CardHeader
-          title="Gestor de Equipe"
-          subheader="Este membro fará parte da secretaria de saúde indicada"
+          title="Atualizar Boletim da Cidade"
         />
         <Divider />
         <CardContent>
