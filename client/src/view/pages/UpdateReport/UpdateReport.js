@@ -15,22 +15,36 @@ const useStyles = makeStyles(theme => ({
   alerts: {},
 }));
 
+const selectLoading = state =>
+  state.location.isLoadingUfs ||
+  state.location.isLoadingCities ||
+  state.reports.isLoadingReports;
+
 const UpdateReport = () => {
   const classes = useStyles();
 
-  const { loadUfs, cleanUpUser, loadCities, saveUser } = useContext(Context);
+  const {
+    loadUfs,
+    cleanUpUser,
+    loadCities,
+    saveUser,
+    loadCases,
+    loadReports,
+  } = useContext(Context);
 
-  const loading = useSelector(
-    state => state.location.isLoadingUfs || state.location.isLoadingCities
-  );
+  const loading = useSelector(selectLoading);
   const user = useSelector(state => state.auth.currentUser);
   const ufs = useSelector(state => state.location.ufs);
   const cities = useSelector(state => state.location.cities);
   const saveSuccess = useSelector(state => state.user.saveUserSuccess);
   const saveFail = useSelector(state => state.user.saveUserFail);
 
+  const countryReport = useSelector(state => state.reports.country || {});
+
   useEffect(() => {
     loadUfs();
+    loadCases();
+    loadReports();
     return () => {
       cleanUpUser();
     };
@@ -39,6 +53,10 @@ const UpdateReport = () => {
   const handleLoadUfCities = uf => loadCities(uf);
 
   const handleSaveAdmin = user => saveUser({ ...user, role: 1 });
+
+  const handleUpdateCountry = values => {
+    console.log('values:', values);
+  };
 
   if (!user.isSuperUser) {
     return <Redirect to="/dashboard" />;
@@ -50,16 +68,27 @@ const UpdateReport = () => {
         <Grid item xs={12}>
           <Typography variant="h3">Atualizar Boletim</Typography>
         </Grid>
-        <Messages saveSuccess={saveSuccess} saveFail={saveFail}/>
+        <Messages saveSuccess={saveSuccess} saveFail={saveFail} />
 
         <Grid item xs={12}>
-          <UpdateCountryReport
+          {/* <UpdateCountryReport
             ufs={ufs}
             cities={cities}
             loading={loading}
             onLoadUfCities={handleLoadUfCities}
             onSaveAdmin={handleSaveAdmin}
-          />
+          /> */}
+          {user.isSuperUser && (
+            <UpdateCountryReport
+              ufs={ufs}
+              cities={cities}
+              loading={loading}
+              report={countryReport}
+              localeId={countryReport.id}
+              onLoadUfCities={handleLoadUfCities}
+              onUpdateReport={handleUpdateCountry}
+            />
+          )}
         </Grid>
       </Grid>
     </div>

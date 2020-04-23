@@ -26,36 +26,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const schema = {
-  firstname: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  lastname: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  uf: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  city: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  email: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-  },
-  phone: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-    length: {
-      minimum: 8,
-      maximum: 9,
-    },
-  },
-  cod: {
-    presence: { allowEmpty: false, message: 'Informe o primeiro nome' },
-    length: {
-      minimum: 2,
-      maximum: 2,
-    },
-  },
+const LABELS = {
+  confirmed: 'Confirmados',
+  negative: 'Negativos',
+  suspects: 'Suspeito',
+  recovered: 'Recuperados',
+  deaths: 'Óbitos',
+  monitoring: 'Acompanhamentos',
 };
 
 const UpdateCountryReport = props => {
@@ -64,8 +41,10 @@ const UpdateCountryReport = props => {
     cities = [],
     loading,
     className,
-    onSaveAdmin,
+    report,
+    localeId,
     onLoadUfCities,
+    onUpdateReport,
     ...rest
   } = props;
 
@@ -76,32 +55,54 @@ const UpdateCountryReport = props => {
     values: {},
     touched: {},
     errors: {},
+    schema: {},
   });
 
+  const [inputFields, setInputFields] = useState([]);
+
   useEffect(() => {
-    if (!ufs.length) {
+    if (!report || !report.report) {
       return;
     }
 
-    const uf = ufs[0]._id;
+    const fields = Object.getOwnPropertyNames(report.report).map(item => ({
+      label: LABELS[item],
+      name: item,
+      value: report.report[item],
+    }));
 
-    onLoadUfCities(uf);
+    setInputFields(fields);
+
+    const formSchema = fields.reduce(
+      (itemA, itemB) => ({
+        ...itemA,
+        [itemB.name]: {
+          presence: {
+            allowEmpty: false,
+            message: 'O campo deve ser informado',
+          },
+        },
+      }),
+      {}
+    );
+
+    const formValue = fields.reduce(
+      (itemA, itemB) => ({
+        ...itemA,
+        [itemB.name]: itemB.value || 0,
+      }),
+      {}
+    );
 
     setFormState(formState => ({
       ...formState,
-      values: {
-        ...formState.values,
-        uf,
-      },
-      touched: {
-        ...formState.touched,
-        uf: true,
-      },
+      schema: formSchema,
+      values: formValue,
     }));
-  }, [ufs]);
+  }, [report]);
 
   useEffect(() => {
-    const errors = validate(formState.values, schema);
+    const errors = validate(formState.values, formState.schema);
 
     setFormState(formState => ({
       ...formState,
@@ -140,7 +141,7 @@ const UpdateCountryReport = props => {
     event.preventDefault();
 
     if (formState.isValid) {
-      onSaveAdmin(formState.values);
+      onUpdateReport({ ...formState.values, localeId });
     }
   };
 
@@ -150,185 +151,32 @@ const UpdateCountryReport = props => {
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSave}>
-        <CardHeader title="Atualizar Boletim da Cidade" />
+        <CardHeader title="Atualizar Boletim do Brasil" />
         <Divider />
         <CardContent>
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Selecione o Estado"
-                name="uf"
-                onChange={handleChangeUf}
-                type="text"
-                value={formState.values.uf}
-                variant="outlined"
-                margin="dense"
-                helperText={hasError('uf') ? 'Informe o Estado' : null}
-                error={hasError('uf')}
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-                className={classes.select}
-              >
-                <>
-                  <option>Selecione seu Estado</option>
-                  {[...ufs].map(option => (
-                    <option key={option._id} value={option._id}>
-                      {option.name.toUpperCase()}
-                    </option>
-                  ))}
-                </>
-              </TextField>
+          {inputFields.map(item => (
+            <Grid key={item.name} container spacing={3}>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  error={hasError(item.name)}
+                  fullWidth
+                  helperText={
+                    hasError(item.name) ? 'O campo deve ser informado' : null
+                  }
+                  label={item.label}
+                  name={item.name}
+                  onChange={handleChange}
+                  type="number"
+                  value={formState.values[item.name]}
+                  variant="outlined"
+                  margin="dense"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
             </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Selecione a Cidade"
-                name="city"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.city}
-                variant="outlined"
-                margin="dense"
-                helperText={hasError('city') ? 'Informe a Cidade' : null}
-                error={hasError('city')}
-                select
-                // eslint-disable-next-line react/jsx-sort-props
-                SelectProps={{ native: true }}
-              >
-                <>
-                  <option>Selecione sua Cidade</option>
-                  {cities.map(option => (
-                    <option key={option._id} value={option._id}>
-                      {option.name.toUpperCase()}
-                    </option>
-                  ))}
-                </>
-              </TextField>
-            </Grid>
-          </Grid>
-          {/* NAME */}
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                error={hasError('firstname')}
-                fullWidth
-                helperText={
-                  hasError('firstname') ? 'Informe o nome do Usuário' : null
-                }
-                label="Nome"
-                name="firstname"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.firstname || ''}
-                variant="outlined"
-                margin="dense"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                error={hasError('lastname')}
-                fullWidth
-                label="Sobrenome"
-                name="lastname"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.lastname || ''}
-                variant="outlined"
-                margin="dense"
-                helperText={hasError('lastname') ? 'Informe o sobrenome' : null}
-              />
-            </Grid>
-          </Grid>
-
-          {/* FUNCTION */}
-          <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Lotado em"
-                name="lotation"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.lotation || ''}
-                variant="outlined"
-                margin="dense"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Cargo"
-                name="job"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.job || ''}
-                variant="outlined"
-                margin="dense"
-              />
-            </Grid>
-          </Grid>
-
-          {/* CONTACT */}
-          <Grid container spacing={3}>
-            <Grid item md={2} xs={2}>
-              <TextField
-                error={hasError('cod')}
-                fullWidth
-                label="DDD"
-                placeholder="88"
-                name="cod"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.cod || ''}
-                variant="outlined"
-                margin="dense"
-                helperText={
-                  hasError('cod')
-                    ? 'Informe um DDD com dois número ex: 87'
-                    : null
-                }
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-            <Grid item md={4} xs={12}>
-              <TextField
-                error={hasError('phone')}
-                fullWidth
-                label="Telefone"
-                placeholder="98888-8888"
-                name="phone"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.phone || ''}
-                variant="outlined"
-                margin="dense"
-                helperText={
-                  hasError('phone') ? 'Informe o telefone do usuário' : null
-                }
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                error={hasError('email')}
-                fullWidth
-                helperText={hasError('email') ? 'Informe o email' : null}
-                label="Email"
-                name="email"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.email || ''}
-                variant="outlined"
-                margin="dense"
-              />
-            </Grid>
-          </Grid>
+          ))}
 
           <Grid container className={classes.action} justify="center">
             <Button
@@ -358,7 +206,7 @@ const UpdateCountryReport = props => {
 UpdateCountryReport.propTypes = {
   className: PropTypes.string,
   loading: PropTypes.bool,
-  onSaveAdmin: PropTypes.func,
+  onUpdateReport: PropTypes.func,
   onLoadUfCities: PropTypes.func,
 };
 
