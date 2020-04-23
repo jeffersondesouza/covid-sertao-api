@@ -48,7 +48,7 @@ const UpdateReport = () => {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Typography variant="h3">Novo Gestor</Typography>
+          <Typography variant="h3">Atualizar Boletim</Typography>
         </Grid>
 
         {saveSuccess && (
