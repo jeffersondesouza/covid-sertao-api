@@ -6,7 +6,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { Context, useSelector } from 'store/createContext';
 
-import { UpdateCountryReport } from './components';
+import { UpdateCountryReport, Messages } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,24 +50,7 @@ const UpdateReport = () => {
         <Grid item xs={12}>
           <Typography variant="h3">Atualizar Boletim</Typography>
         </Grid>
-
-        {saveSuccess && (
-          <Grid item xs={12}>
-            <Alert severity="success">
-              <AlertTitle>Sucesso</AlertTitle>
-              Usuário adicionado com sucesso
-            </Alert>
-          </Grid>
-        )}
-        {saveFail && (
-          <Grid item xs={12}>
-            <Alert severity="error">
-              <AlertTitle>Erro</AlertTitle>O usuário não pôde ser criado.
-              Certifique-se que o email ou telefone nao estão em uso por outro
-              membro da equipe
-            </Alert>
-          </Grid>
-        )}
+        <Messages saveSuccess={saveSuccess} saveFail={saveFail}/>
 
         <Grid item xs={12}>
           <UpdateCountryReport

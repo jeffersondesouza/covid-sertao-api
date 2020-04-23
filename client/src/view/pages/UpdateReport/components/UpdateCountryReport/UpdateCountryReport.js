@@ -150,9 +150,7 @@ const UpdateCountryReport = props => {
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <form onSubmit={handleSave}>
-        <CardHeader
-          title="Atualizar Boletim da Cidade"
-        />
+        <CardHeader title="Atualizar Boletim da Cidade" />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
@@ -332,7 +330,16 @@ const UpdateCountryReport = props => {
             </Grid>
           </Grid>
 
-          <Grid item className={classes.action}>
+          <Grid container className={classes.action} justify="center">
+            <Button
+              color="secondary"
+              type="button"
+              variant="contained"
+              disabled={loading}
+              style={{ marginRight: '2rem' }}
+            >
+              Não houveram alterações Hoje
+            </Button>
             <Button
               color="primary"
               type="submit"
