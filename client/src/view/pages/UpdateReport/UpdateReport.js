@@ -6,7 +6,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 
 import { Context, useSelector } from 'store/createContext';
 
-import { CrewAdminForm } from './components';
+import { UpdateCountryReport } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   alerts: {},
 }));
 
-const AddCrewAdmin = () => {
+const UpdateReport = () => {
   const classes = useStyles();
 
   const { loadUfs, cleanUpUser, loadCities, saveUser } = useContext(Context);
@@ -70,7 +70,7 @@ const AddCrewAdmin = () => {
         )}
 
         <Grid item xs={12}>
-          <CrewAdminForm
+          <UpdateCountryReport
             ufs={ufs}
             cities={cities}
             loading={loading}
@@ -83,4 +83,4 @@ const AddCrewAdmin = () => {
   );
 };
 
-export default AddCrewAdmin;
+export default UpdateReport;

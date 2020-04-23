@@ -17,6 +17,7 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   NewCase as NewCaseView,
+  UpdateReport as UpdateReportView
 } from './view/pages';
 import { LoggedGuard } from 'view/guards';
 
@@ -42,6 +43,15 @@ const Routes = () => {
         component={DashboardView}
         guard={LoggedGuard}
       />
+
+      <RouteWithLayout
+        exact
+        path="/atualizar-boletim"
+        layout={MainLayout}
+        component={UpdateReportView}
+        guard={LoggedGuard}
+      />
+
       <RouteWithLayout
         component={CasesListView}
         exact

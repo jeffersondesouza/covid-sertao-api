@@ -1,12 +1,7 @@
 import React, { useContext } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import {
-  Divider,
-  Drawer,
-  Hidden,
-  Button,
-} from '@material-ui/core';
+import { Divider, Drawer, Hidden, Button } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import { Assignment, AssignmentInd } from '@material-ui/icons';
@@ -36,6 +31,12 @@ const Sidebar = props => {
       title: 'Início',
       href: '/dashboard',
       icon: <DashboardIcon />,
+    },
+    {
+      title: 'Atualizar Boletim',
+      href: '/atualizar-boletim',
+      icon: <DashboardIcon />,
+      hide: !user.isAdmin && !user.isSuperUser,
     },
     {
       title: 'Notificações',
@@ -96,7 +97,6 @@ const Sidebar = props => {
     logout,
   } = useContext(Context);
 
-
   return (
     <Drawer
       anchor="left"
@@ -111,11 +111,7 @@ const Sidebar = props => {
         <SidebarNav className={classes.nav} pages={pages} />
         <Hidden lgUp>
           <Divider />
-          <Button
-            variant="text"
-            className={classes.btnLogout}
-            onClick={logout}
-          >
+          <Button variant="text" className={classes.btnLogout} onClick={logout}>
             <InputIcon className={classes.icon} color="inherit" />
             Sair
           </Button>
