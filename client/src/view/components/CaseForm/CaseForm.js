@@ -77,7 +77,7 @@ const CaseForm = props => {
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { uf, city, risckFactor: [], symptoms: [], birthday: null, ...MOCK },
+    values: { uf, city, risckFactor: [], symptoms: [], birthday: null },
     touched: {},
     errors: {},
   });
@@ -884,30 +884,3 @@ CaseForm.propTypes = {
 };
 
 export default CaseForm;
-
-const MOCK = {
-  uf: '5e8babf51c9d44000083b976',
-  city: '5e8bd73fe4196130f6c34014',
-  risckFactor: [
-    'Imunodeficiência/Imunodepressão ',
-    'Doença Cardiovascular Crônica ',
-  ],
-  symptoms: ['Febre', 'Dor de Garganta ', 'Dispneia'],
-  birthday: null,
-  fullname: 'Jefferson de Souza',
-  phoneCod: '11',
-  street: 'Rua do Prado',
-  houseNumber: '1',
-  docId: '111',
-  sus: '111',
-  healthyWorker: '0',
-  phoneNumber: '11111',
-  neighborhood: 'Centro',
-  covidStatus: '2',
-  travelFromFocus: '1',
-  focusTravelCity: '11',
-  infectedContact: '1',
-  infectedContactCity: '1111',
-  symptomatic: '1',
-  hasRiskFactor: '1',
-};
