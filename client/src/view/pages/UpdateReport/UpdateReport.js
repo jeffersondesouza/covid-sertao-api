@@ -40,6 +40,9 @@ const UpdateReport = () => {
   const saveFail = useSelector(state => state.user.saveUserFail);
 
   const countryReport = useSelector(state => state.reports.country || {});
+  const ufReport = useSelector(state => state.reports.uf || {});
+  const cityReport = useSelector(state => state.reports.city || {});
+  console.log('cityReport:', cityReport);
 
   useEffect(() => {
     loadUfs();
@@ -54,11 +57,19 @@ const UpdateReport = () => {
 
   const handleSaveAdmin = user => saveUser({ ...user, role: 1 });
 
-  const handleUpdateCountry = values => {
+  const handleUpdateReport = values => {
     console.log('values:', values);
   };
 
-  if (!user.isSuperUser) {
+  const handleUpdateNotChanges = id => {
+    console.log('id:', id);
+  };
+
+  const handleLoadUfReport = payload => {
+    loadReports(payload);
+  };
+
+  if (!user.isSuperUser && !user.isAdmin) {
     return <Redirect to="/dashboard" />;
   }
 
@@ -71,22 +82,45 @@ const UpdateReport = () => {
         <Messages saveSuccess={saveSuccess} saveFail={saveFail} />
 
         <Grid item xs={12}>
-          {/* <UpdateCountryReport
+          <UpdateCountryReport
+            updateCity
+            updateUf={false}
+            isSuperUser={user.isSuperUser}
+            title={ufReport.name}
             ufs={ufs}
             cities={cities}
             loading={loading}
+            report={cityReport}
+            localeId={cityReport.id}
             onLoadUfCities={handleLoadUfCities}
-            onSaveAdmin={handleSaveAdmin}
-          /> */}
+            onUpdateReport={handleUpdateReport}
+            onLoadUfCities={handleLoadUfCities}
+            onLoadUfReport={handleLoadUfReport}
+            onUpdateNotChanges={handleUpdateNotChanges}
+          />
           {user.isSuperUser && (
             <UpdateCountryReport
+              title={ufReport.name}
+              updateUf
+              isSuperUser={user.isSuperUser}
               ufs={ufs}
-              cities={cities}
+              loading={loading}
+              report={ufReport}
+              localeId={ufReport.id}
+              onLoadUfCities={handleLoadUfCities}
+              onUpdateReport={handleUpdateReport}
+              onLoadUfCities={handleLoadUfCities}
+              onLoadUfReport={handleLoadUfReport}
+              onUpdateNotChanges={handleUpdateNotChanges}
+            />
+          )}
+          {user.isSuperUser && (
+            <UpdateCountryReport
               loading={loading}
               report={countryReport}
               localeId={countryReport.id}
-              onLoadUfCities={handleLoadUfCities}
-              onUpdateReport={handleUpdateCountry}
+              onUpdateReport={handleUpdateReport}
+              onUpdateNotChanges={handleUpdateNotChanges}
             />
           )}
         </Grid>

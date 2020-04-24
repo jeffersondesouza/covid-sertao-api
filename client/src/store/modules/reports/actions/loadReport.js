@@ -10,7 +10,7 @@ import {
 import selectToken from 'store/selectors/selectToken';
 import selectCurrentUser from 'store/selectors/selectCurrentUser';
 
-const loadReports = (dispatch, state) => async () => {
+const loadReports = (dispatch, state) => async (payload = {}) => {
   dispatch({ type: Types.LOAD_REPORTS_REQUEST });
 
   try {
@@ -21,17 +21,25 @@ const loadReports = (dispatch, state) => async () => {
     let cityReport = {};
     let countryReport = {};
 
-    const countryRes = await request(loadCountryReportQuery({ token }));
-    countryReport = countryRes.data;
+    if (!payload.uf || !payload.city) {
+      const countryRes = await request(loadCountryReportQuery({ token }));
+      countryReport = countryRes.data;
+    }
 
-    if (uf) {
-      const ufRes = await request(loadUfReportQuery({ token, uf: uf._id }));
+    if (uf || payload.uf) {
+      const ufRes = await request(
+        loadUfReportQuery({ token, uf: uf._id || payload.uf })
+      );
       ufReport = ufRes.data;
     }
 
-    if (uf && city) {
+    if ((uf && city) || (payload.uf && payload.city)) {
       const cityRes = await request(
-        loadCityReportQuery({ token, uf: uf._id, city: city._id })
+        loadCityReportQuery({
+          token,
+          uf: uf._id || payload.uf,
+          city: city._id || payload.city,
+        })
       );
       cityReport = cityRes.data;
     }

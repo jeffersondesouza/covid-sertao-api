@@ -33,7 +33,7 @@ const Profile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const user = useSelector(state => state.auth.currentUser);
+  const user = useSelector(state => state.auth.currentUser || {});
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -44,9 +44,11 @@ const Profile = props => {
         src={user.avatar}
         to="/settings"
       />
-      <Typography className={classes.city} variant="body2">
-        {user.city.name}
-      </Typography>
+      {user.city && (
+        <Typography className={classes.city} variant="body2">
+          {user.city.name}
+        </Typography>
+      )}
       <Typography className={classes.name} variant="h5">
         {user.name}
       </Typography>

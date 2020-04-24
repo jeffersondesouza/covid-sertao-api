@@ -111,18 +111,28 @@ const Dashboard = () => {
         <Grid item lg={2} sm={6} xl={3} xs={12}>
           <CasesSumary value={caseReport.deaths} title="Óbitos" color="death" />
         </Grid>
-        <Grid item lg={2} sm={6} xl={3} xs={12} className={classes.editCard}>
-          <NavLink to="/members/add">
-            <Button
-              color="primary"
-              size="small"
-              variant="outlined"
-              className={classes.update}
+        {user.isAdmin ||
+          (user.isSuperUser && (
+            <Grid
+              item
+              lg={2}
+              sm={6}
+              xl={3}
+              xs={12}
+              className={classes.editCard}
             >
-              Editar
-            </Button>
-          </NavLink>
-        </Grid>
+              <NavLink to="/atualizar-boletim">
+                <Button
+                  color="primary"
+                  size="small"
+                  variant="outlined"
+                  className={classes.update}
+                >
+                  Editar
+                </Button>
+              </NavLink>
+            </Grid>
+          ))}
         {/*  <Grid item lg={8} md={12} xl={9} xs={12}>
           <LatestSales />
         </Grid>

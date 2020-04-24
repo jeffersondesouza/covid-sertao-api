@@ -11,10 +11,14 @@ import {
   Grid,
   Button,
   TextField,
+  Typography,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    padding: '10px',
+    marginBottom: '2rem',
+  },
   select: {
     textTransform: 'capitalize',
     option: {
@@ -23,6 +27,10 @@ const useStyles = makeStyles(() => ({
   },
   action: {
     marginTop: '1.5rem',
+  },
+  selectMsg: {
+    paddingTop: '1.5rem',
+    paddingBottom: '1.5rem',
   },
 }));
 
@@ -33,6 +41,7 @@ const LABELS = {
   recovered: 'Recuperados',
   deaths: 'Óbitos',
   monitoring: 'Acompanhamentos',
+  tests: 'Testes Realizados',
 };
 
 const UpdateCountryReport = props => {
@@ -43,8 +52,13 @@ const UpdateCountryReport = props => {
     className,
     report,
     localeId,
+    updateUf,
+    isSuperUser,
+    updateCity,
+    onUpdateNotChanges,
     onLoadUfCities,
     onUpdateReport,
+    onLoadUfReport,
     ...rest
   } = props;
 
@@ -59,6 +73,7 @@ const UpdateCountryReport = props => {
   });
 
   const [inputFields, setInputFields] = useState([]);
+  const [ufId, setUfId] = useState(null);
 
   useEffect(() => {
     if (!report || !report.report) {
@@ -112,10 +127,20 @@ const UpdateCountryReport = props => {
   }, [formState.values]);
 
   const handleChangeUf = event => {
-    const uf = event.target.value;
-    onLoadUfCities(uf);
+    const id = event.target.value;
+    if (updateUf) {
+      onLoadUfReport({ uf: id });
+    }
 
-    handleChange(event);
+    if (updateCity) {
+      setUfId(id);
+      onLoadUfCities(id);
+    }
+  };
+
+  const handleChangeCity = event => {
+    const id = event.target.value;
+    onLoadUfReport({ city: id, uf: ufId });
   };
 
   const handleChange = event => {
@@ -125,10 +150,7 @@ const UpdateCountryReport = props => {
       ...formState,
       values: {
         ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value,
+        [event.target.name]: +event.target.value,
       },
       touched: {
         ...formState.touched,
@@ -140,9 +162,13 @@ const UpdateCountryReport = props => {
   const handleSave = event => {
     event.preventDefault();
 
-    if (formState.isValid) {
+    if (formState.isValid && localeId) {
       onUpdateReport({ ...formState.values, localeId });
     }
+  };
+
+  const handleUpdateNotChanges = () => {
+    onUpdateNotChanges(localeId);
   };
 
   const hasError = field =>
@@ -150,10 +176,94 @@ const UpdateCountryReport = props => {
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
+      <Grid container alignItems="center" justify="space-between">
+        <Grid>
+          <CardHeader title={`Boletim: ${report.name || ''}`} />
+        </Grid>
+        <Grid>
+          <Button
+            color="secondary"
+            type="button"
+            variant="contained"
+            disabled={loading}
+            style={{ marginRight: '2rem' }}
+            onClick={handleUpdateNotChanges}
+          >
+            Clique aqui se não houveram alterações Hoje
+          </Button>
+        </Grid>
+      </Grid>
+      <Divider />
+      {isSuperUser && (
+        <Grid container spacing={4}>
+          <Grid item md={6} xs={12}>
+            <TextField
+              fullWidth
+              label="Estado"
+              name="uf"
+              onChange={handleChangeUf}
+              type="text"
+              variant="outlined"
+              margin="dense"
+              helperText={hasError('uf') ? 'Informe o Estado' : null}
+              error={hasError('uf')}
+              select
+              // eslint-disable-next-line react/jsx-sort-props
+              SelectProps={{ native: true }}
+              className={classes.select}
+            >
+              <>
+                <option>Selecione o Estado desejado</option>
+                {[...ufs].map(option => (
+                  <option key={option._id} value={option._id}>
+                    {option.name.toUpperCase()}
+                  </option>
+                ))}
+              </>
+            </TextField>
+          </Grid>
+          {updateCity && (
+            <Grid item md={6} xs={12}>
+              <TextField
+                fullWidth
+                label="Cidade"
+                onChange={handleChangeCity}
+                type="text"
+                variant="outlined"
+                margin="dense"
+                select
+                // eslint-disable-next-line react/jsx-sort-props
+                SelectProps={{ native: true }}
+                className={classes.select}
+              >
+                <>
+                  <option>Selecione a Cidde desejada</option>
+                  {[...cities].map(option => (
+                    <option key={option._id} value={option._id}>
+                      {option.name.toUpperCase()}
+                    </option>
+                  ))}
+                </>
+              </TextField>
+            </Grid>
+          )}
+        </Grid>
+      )}
       <form onSubmit={handleSave}>
-        <CardHeader title="Atualizar Boletim do Brasil" />
-        <Divider />
         <CardContent>
+          {inputFields.length <= 0 && (
+            <div className={classes.selectMsg}>
+              {updateUf ? (
+                <Typography align="center" variant="subtitle1">
+                  Selecione o estado desejado
+                </Typography>
+              ) : (
+                <Typography align="center" variant="subtitle1">
+                  Selecione o estado e a cidade
+                </Typography>
+              )}
+            </div>
+          )}
           {inputFields.map(item => (
             <Grid key={item.name} container spacing={3}>
               <Grid item md={6} xs={12}>
@@ -179,15 +289,6 @@ const UpdateCountryReport = props => {
           ))}
 
           <Grid container className={classes.action} justify="center">
-            <Button
-              color="secondary"
-              type="button"
-              variant="contained"
-              disabled={loading}
-              style={{ marginRight: '2rem' }}
-            >
-              Não houveram alterações Hoje
-            </Button>
             <Button
               color="primary"
               type="submit"
