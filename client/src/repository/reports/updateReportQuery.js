@@ -1,6 +1,6 @@
 export default data => {
   return {
-    method: 'POST',
+    method: 'PATCH',
     url: `/api/v1/report/${data.locationId}`,
     data,
   };
