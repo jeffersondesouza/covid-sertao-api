@@ -43,7 +43,6 @@ const UpdateReport = () => {
   const countryReport = useSelector(state => state.reports.country || {});
   const ufReport = useSelector(state => state.reports.uf || {});
   const cityReport = useSelector(state => state.reports.city || {});
-  console.log('cityReport:', cityReport);
 
   useEffect(() => {
     loadUfs();

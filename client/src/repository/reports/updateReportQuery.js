@@ -1,6 +1,7 @@
 export default data => {
   return {
-    method: 'GET',
-    url: '/api/v1/location/uf',
+    method: 'POST',
+    url: `/api/v1/report/${data.locationId}`,
+    data,
   };
 };
