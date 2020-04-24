@@ -61,9 +61,9 @@ const UpdateReport = () => {
     updateReport(values);
   };
 
-  const handleUpdateNotChanges = id => {
-    console.log('id:', id);
-  };
+  const handleUpdateNotChanges = values => {
+    updateReport(values);
+  }
 
   const handleLoadUfReport = payload => {
     loadReports(payload);

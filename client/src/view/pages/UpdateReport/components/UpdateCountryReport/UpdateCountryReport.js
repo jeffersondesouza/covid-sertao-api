@@ -169,7 +169,9 @@ const UpdateCountryReport = props => {
   };
 
   const handleUpdateNotChanges = () => {
-    onUpdateNotChanges(localeId);
+    if (report && report.report) {
+      onUpdateNotChanges({...report.report, localeId});
+    }
   };
 
   const hasError = field =>

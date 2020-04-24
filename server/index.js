@@ -25,8 +25,8 @@ mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
 });
 
-cityRoutes(app);
-reportsRoutes(app);
+cityRoutes(app, jwtAuth.authenticate);
+reportsRoutes(app, jwtAuth.authenticate);
 authRoutes(app, jwtAuth.authenticate);
 caseRoutes(app, jwtAuth.authenticate);
 userRoutes(app, jwtAuth.authenticate);
