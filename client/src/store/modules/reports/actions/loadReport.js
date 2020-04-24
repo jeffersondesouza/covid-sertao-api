@@ -26,7 +26,7 @@ const loadReports = (dispatch, state) => async (payload = {}) => {
       countryReport = countryRes.data;
     }
 
-    if (uf || payload.uf) {
+    if ((uf || payload.uf) && !payload.city) {
       const ufRes = await request(
         loadUfReportQuery({ token, uf: uf._id || payload.uf })
       );

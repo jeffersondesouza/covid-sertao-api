@@ -30,6 +30,7 @@ const UpdateReport = () => {
     saveUser,
     loadCases,
     loadReports,
+    updateReport,
   } = useContext(Context);
 
   const loading = useSelector(selectLoading);
@@ -58,7 +59,7 @@ const UpdateReport = () => {
   const handleSaveAdmin = user => saveUser({ ...user, role: 1 });
 
   const handleUpdateReport = values => {
-    console.log('values:', values);
+    updateReport(values);
   };
 
   const handleUpdateNotChanges = id => {
@@ -82,25 +83,19 @@ const UpdateReport = () => {
         <Messages saveSuccess={saveSuccess} saveFail={saveFail} />
 
         <Grid item xs={12}>
-          <UpdateCountryReport
-            updateCity
-            updateUf={false}
-            isSuperUser={user.isSuperUser}
-            title={ufReport.name}
-            ufs={ufs}
-            cities={cities}
-            loading={loading}
-            report={cityReport}
-            localeId={cityReport.id}
-            onLoadUfCities={handleLoadUfCities}
-            onUpdateReport={handleUpdateReport}
-            onLoadUfCities={handleLoadUfCities}
-            onLoadUfReport={handleLoadUfReport}
-            onUpdateNotChanges={handleUpdateNotChanges}
-          />
           {user.isSuperUser && (
             <UpdateCountryReport
-              title={ufReport.name}
+              title="Atualizar boletim nacional"
+              loading={loading}
+              report={countryReport}
+              localeId={countryReport.id}
+              onUpdateReport={handleUpdateReport}
+              onUpdateNotChanges={handleUpdateNotChanges}
+            />
+          )}
+          {user.isSuperUser && (
+            <UpdateCountryReport
+              title="Atualizar boletim estadual"
               updateUf
               isSuperUser={user.isSuperUser}
               ufs={ufs}
@@ -114,15 +109,23 @@ const UpdateReport = () => {
               onUpdateNotChanges={handleUpdateNotChanges}
             />
           )}
-          {user.isSuperUser && (
-            <UpdateCountryReport
-              loading={loading}
-              report={countryReport}
-              localeId={countryReport.id}
-              onUpdateReport={handleUpdateReport}
-              onUpdateNotChanges={handleUpdateNotChanges}
-            />
-          )}
+
+          <UpdateCountryReport
+            title="Atualizar boletim Municipal"
+            updateCity
+            updateUf={false}
+            isSuperUser={user.isSuperUser}
+            ufs={ufs}
+            cities={cities}
+            loading={loading}
+            report={cityReport}
+            localeId={cityReport.id}
+            onLoadUfCities={handleLoadUfCities}
+            onUpdateReport={handleUpdateReport}
+            onLoadUfCities={handleLoadUfCities}
+            onLoadUfReport={handleLoadUfReport}
+            onUpdateNotChanges={handleUpdateNotChanges}
+          />
         </Grid>
       </Grid>
     </div>

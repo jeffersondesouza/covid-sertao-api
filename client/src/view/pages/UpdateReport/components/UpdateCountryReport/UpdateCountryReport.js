@@ -54,6 +54,7 @@ const UpdateCountryReport = props => {
     localeId,
     updateUf,
     isSuperUser,
+    title,
     updateCity,
     onUpdateNotChanges,
     onLoadUfCities,
@@ -178,7 +179,7 @@ const UpdateCountryReport = props => {
     <Card {...rest} className={clsx(classes.root, className)}>
       <Grid container alignItems="center" justify="space-between">
         <Grid>
-          <CardHeader title={`Boletim: ${report.name || ''}`} />
+          <CardHeader title={`${title} - ${report.name || ''}`} />
         </Grid>
         <Grid>
           <Button
