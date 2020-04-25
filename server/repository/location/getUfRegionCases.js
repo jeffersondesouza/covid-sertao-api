@@ -59,7 +59,7 @@ const getUfRegion = async ({ id, uf }) => {
     _id: ufRegion._id,
     _parent: ufRegion._parent,
     name: ufRegion.name,
-    updateAt: new Date(),
+    updateAt: ufRegion.updateAt || new Date(),
     ...casesReport,
   };
 };
