@@ -9,6 +9,10 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
   },
   quoteContainer: {
+    backgroundImage: 'url(/images/auth.png)',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
     [theme.breakpoints.down('md')]: {
       display: 'none',
     },
@@ -19,7 +23,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: 'url(/images/auth.png)',
+    // backgroundImage: 'url(/images/auth.png)',
+    backgroundColor: 'rgba(63,83,90, 0.5)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -32,9 +37,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.white,
     fontWeight: 600,
   },
-  name: {
+  cta: {
     marginTop: theme.spacing(3),
     color: theme.palette.white,
+    maxWidth: '400px',
+    marginRight: 'auto',
+    marginLeft: 'auto',
   },
   bio: {
     color: theme.palette.white,

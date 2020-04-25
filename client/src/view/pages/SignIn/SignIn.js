@@ -91,11 +91,15 @@ const SignIn = props => {
           <div className={classes.quote}>
             <div className={classes.quoteInner}>
               <Typography className={classes.quoteText} variant="h1">
-                Portal Combate Covid Sertão
+                Pajeú Contra a
+              </Typography>
+              <Typography className={classes.quoteText} variant="h1">
+                Covid-19
               </Typography>
               <div className={classes.person}>
-                <Typography className={classes.name} variant="body1">
-                  Unidos na lutra contra a Covid-19
+                <Typography className={classes.cta} variant="body1">
+                  Portal destinado ao Profissionais de Saúde, para que possam
+                  acompanhar e gerenciar a evolução dos casos em suas cidades.
                 </Typography>
               </div>
             </div>
