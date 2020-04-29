@@ -2,7 +2,6 @@ import palette from 'theme/palette';
 import moment from 'moment';
 
 export const dataGraph = data => {
-  console.log('data:', data);
 
   /* {
         label: 'Confirmados',

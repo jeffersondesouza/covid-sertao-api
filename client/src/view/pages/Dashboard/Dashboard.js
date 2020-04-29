@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Button } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+// import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import { ProductsToolbar } from './components';
 import { Context, useSelector } from 'store/createContext';

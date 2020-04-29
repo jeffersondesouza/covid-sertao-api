@@ -61,7 +61,6 @@ const UsersByDevice = props => {
   const [dataSet, setDataSet] = useState([]);
 
   useEffect(() => {
-    console.log('caseReport:', caseReport);
     setDataSet([
       { id: 'confirmed', label: 'Confirmados', value: caseReport.confirmed },
       { id: 'suspect', label: 'Suspeitos', value: caseReport.suspects },
