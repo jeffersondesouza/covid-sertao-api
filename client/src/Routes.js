@@ -17,7 +17,8 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   NewCase as NewCaseView,
-  UpdateReport as UpdateReportView
+  UpdateReport as UpdateReportView,
+  CasesHomeIsolation as CasesHomeIsolationListView,
 } from './view/pages';
 import { LoggedGuard } from 'view/guards';
 
@@ -66,6 +67,15 @@ const Routes = () => {
         path="/cases/new"
         guard={LoggedGuard}
       />
+
+      <RouteWithLayout
+        component={CasesHomeIsolationListView}
+        exact
+        layout={MainLayout}
+        path="/isolamento-domiciliar"
+        guard={LoggedGuard}
+      />
+
       <RouteWithLayout
         component={UserListView}
         exact

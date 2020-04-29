@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
@@ -19,6 +19,7 @@ import {
 import { StatusBullet } from 'view/components';
 import TableHeader from './TableHeader';
 import moment from 'moment';
+import { Maybe } from 'helpers/functors';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -65,6 +66,16 @@ const statusColors = {
 const CasesList = props => {
   const { cases, className, ...rest } = props;
 
+  const [isolationCases, setIsolationCases] = useState([]);
+
+  useEffect(() => {
+    const isolations = Maybe.of(cases)
+      .get([])
+      .filter(item => item.covidStatus === '6');
+
+    setIsolationCases(isolations);
+  }, [cases]);
+
   const classes = useStyles();
 
   return (
@@ -75,7 +86,7 @@ const CasesList = props => {
             <Table>
               <TableHeader />
               <TableBody>
-                {cases.map(item => (
+                {isolationCases.map(item => (
                   <TableRow hover key={item._id}>
                     <TableCell>{item.fullname}</TableCell>
                     <TableCell align="center">
@@ -91,9 +102,7 @@ const CasesList = props => {
                     <TableCell>
                       ({item.phoneCod})&nbsp;{item.phoneNumber}
                     </TableCell>
-                    <TableCell>
-                      {item.registeredAt}
-                    </TableCell>
+                    <TableCell>{item.registeredAt}</TableCell>
                     <TableCell>{item.updatedAt}</TableCell>
                     <TableCell align="center">{item.monitoringDays}</TableCell>
                     <TableCell align="center">

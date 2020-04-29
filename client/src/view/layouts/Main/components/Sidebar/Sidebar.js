@@ -45,7 +45,7 @@ const Sidebar = props => {
     },
     {
       title: 'Isolamento Domiciliar',
-      href: '/cases',
+      href: '/isolamento-domiciliar',
       icon: <Assignment />,
     },
     {
