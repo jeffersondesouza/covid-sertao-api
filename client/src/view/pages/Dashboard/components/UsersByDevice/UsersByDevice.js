@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -54,24 +54,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UsersByDevice = props => {
-  const { className, ...rest } = props;
-
+  const { className, caseReport, ...rest } = props;
   const classes = useStyles();
   const theme = useTheme();
 
-  const MOCK_DATA = [
+  const [dataSet, setDataSet] = useState([]);
+
+  useEffect(() => {
+    console.log('caseReport:', caseReport);
+    setDataSet([
+      { id: 'confirmed', label: 'Confirmados', value: caseReport.confirmed },
+      { id: 'suspect', label: 'Suspeitos', value: caseReport.suspects },
+      { id: 'cured', label: 'Recuperados', value: caseReport.recovered },
+      { id: 'death', label: 'óbtos', value: caseReport.deaths },
+      { id: 'negative', label: 'descartados', value: caseReport.negative },
+    ]);
+  }, [caseReport]);
+
+  /*   const MOCK_DATA = [
     { id: 'confirmed', label: 'Confirmados', value: 5 },
     { id: 'suspect', label: 'Suspeitos', value: 10 },
     { id: 'cured', label: 'Recuperados', value: 15 },
     { id: 'death', label: 'óbtos', value: 20 },
     { id: 'negative', label: 'descartados', value: 25 },
-  ];
+  ]; */
 
   const data = {
     datasets: [
       {
-        data: MOCK_DATA.map(item => item.value),
-        backgroundColor: MOCK_DATA.map(item => theme.palette.cases[item.id]),
+        data: dataSet.map(item => item.value),
+        backgroundColor: dataSet.map(item => theme.palette.cases[item.id]),
         borderWidth: 8,
         borderColor: theme.palette.white,
         hoverBorderColor: theme.palette.white,
@@ -112,7 +124,7 @@ const UsersByDevice = props => {
         </div>
 
         <div className={classes.legends}>
-          {MOCK_DATA.map(item => (
+          {dataSet.map(item => (
             <div className={classes.iconLegend}>
               <StatusBullet color={item.id} size="md" />
               <Typography variant="caption" className={classes.iconLegendLabel}>
