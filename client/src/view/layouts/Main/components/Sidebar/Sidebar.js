@@ -44,7 +44,7 @@ const Sidebar = props => {
       icon: <Assignment />,
     },
     {
-      title: 'Monitoramentos',
+      title: 'Isolamento Domiciliar',
       href: '/cases',
       icon: <Assignment />,
     },

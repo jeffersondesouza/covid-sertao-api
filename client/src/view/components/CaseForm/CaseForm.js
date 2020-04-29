@@ -434,7 +434,7 @@ const CaseForm = props => {
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Radio color="primary" />}
-                  label="Isolamento por Precaução"
+                  label="Isolamento domiciliar"
                   name="covidStatus"
                   value="6"
                   checked={formState.values.covidStatus === '6'}
