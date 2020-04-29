@@ -4,4 +4,5 @@ module.exports = {
   3: 'negative',
   4: 'deaths',
   5: 'recovered',
+  6: 'homeIsolation',
 };

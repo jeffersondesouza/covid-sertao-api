@@ -7,6 +7,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { CasesList } from 'view/components';
 import { ProductsToolbar } from './components';
 import { Context, useSelector } from 'store/createContext';
+import { Maybe } from 'helpers/functors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +31,9 @@ const CasesListPage = () => {
 
   const { loadCases } = useContext(Context);
 
-  const caseNotifications = useSelector(state => state.cases.lastCasesNotifications);
+  const caseNotifications = useSelector(
+    state => state.cases.lastCasesNotifications
+  );
 
   useEffect(() => {
     loadCases();
@@ -40,14 +43,27 @@ const CasesListPage = () => {
     setCases(caseNotifications);
   }, [caseNotifications]);
 
+  const handleFilter = filter => {
+    const filtered = Maybe.of(caseNotifications)
+      .get([])
+      .filter(
+        item =>
+          item.fullname.toLowerCase().includes(filter.name.toLowerCase()) &&
+          (filter.status.length
+            ? filter.status.includes(item.covidStatus)
+            : true)
+      );
+
+    setCases(filtered);
+  };
 
   return (
     <div className={classes.root}>
-      <ProductsToolbar />
+      <ProductsToolbar onFilter={handleFilter} />
       <div className={classes.content}>
         <CasesList cases={cases} />
       </div>
-      <div className={classes.pagination}>
+      {/*       <div className={classes.pagination}>
         <Typography variant="caption">1-6 of 20</Typography>
         <IconButton>
           <ChevronLeftIcon />
@@ -55,7 +71,7 @@ const CasesListPage = () => {
         <IconButton>
           <ChevronRightIcon />
         </IconButton>
-      </div>
+      </div> */}
     </div>
   );
 };

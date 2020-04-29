@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
@@ -35,9 +35,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProductsToolbar = props => {
-  const { className, ...rest } = props;
-
+  const { className, onFilter, ...rest } = props;
   const classes = useStyles();
+
+  const [filter, setFilter] = useState({ status: [], name: '' });
+
+  const handleChangeName = value => {
+    const newState = { ...filter, name: value };
+    setFilter(newState);
+    onFilter(newState);
+  };
+
+  const handleChangeFilter = value => {
+    const newState = { ...filter, status: value };
+    setFilter(newState);
+    onFilter(newState);
+  };
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
@@ -52,10 +65,11 @@ const ProductsToolbar = props => {
       </div>
       <Grid container className={classes.row2}>
         <Grid item xs={12}>
-          <CasesFilter />
+          <CasesFilter onChangeFilters={handleChangeFilter} />
         </Grid>
         <Grid item xs={12} md={6}>
           <SearchInput
+            onFilter={handleChangeName}
             className={classes.searchInput}
             placeholder="Buscar por nome"
           />
@@ -67,6 +81,7 @@ const ProductsToolbar = props => {
 
 ProductsToolbar.propTypes = {
   className: PropTypes.string,
+  onFilter: PropTypes.func,
 };
 
 export default ProductsToolbar;
