@@ -49,7 +49,7 @@ const LatestCases = props => {
           </Button>
           </Link>
         }
-        title="Últimas Notificações"
+        title="Últimos Casos e Notificações"
       />
       <Divider />
       <CasesList cases={cases} />

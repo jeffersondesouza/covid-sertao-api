@@ -39,7 +39,7 @@ const Sidebar = props => {
       hide: !user.isAdmin && !user.isSuperUser,
     },
     {
-      title: 'Notificações',
+      title: 'Casos e Notificações',
       href: '/cases',
       icon: <Assignment />,
     },
