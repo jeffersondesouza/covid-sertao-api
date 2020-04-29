@@ -93,7 +93,7 @@ const CasesSumary = props => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h3" className={classes.subtitle}>
-              {value}
+              {value || 0}
             </Typography>
           </Grid>
           {/*           <Grid item xs={12}>
