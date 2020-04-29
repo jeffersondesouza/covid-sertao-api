@@ -124,7 +124,7 @@ const Dashboard = () => {
           </NavLink>
         </Grid>
         <Grid item lg={8} md={12} xl={9} xs={12}>
-          <LatestSales caseReport={caseReport} />
+          <LatestSales casesEvolution={caseReport} />
         </Grid>
         <Grid item lg={4} md={6} xl={3} xs={12}>
           <UsersByDevice caseReport={caseReport} />

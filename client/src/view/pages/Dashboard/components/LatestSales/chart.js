@@ -1,34 +1,61 @@
 import palette from 'theme/palette';
+import moment from 'moment';
 
-export const data = {
-  labels: ['1 abr', '2 abr', '3 abr', '4 abr', '5 abr', '6 abr'],
-  datasets: [
-    {
-      label: 'Confirmados',
-      backgroundColor: palette.cases.confirmed,
-      data: [18, 5, 19, 27, 29, 19, 20],
-    },
-    {
-      label: 'Suspeitos',
-      backgroundColor: palette.cases.suspect,
-      data: [11, 20, 12, 29, 30, 25, 13],
-    },
-    {
-      label: 'Descartados',
-      backgroundColor: palette.cases.cured,
-      data: [18, 5, 19, 27, 29, 19, 20],
-    },
-    {
-      label: 'Confirmados',
-      backgroundColor: palette.cases.negative,
-      data: [11, 20, 12, 29, 30, 25, 13],
-    },
-    {
-      label: 'Óbtos',
-      backgroundColor: palette.cases.death,
-      data: [11, 20, 12, 0, 30, 25, 13],
-    },
-  ],
+export const dataGraph = data => {
+  console.log('data:', data);
+
+  /* {
+        label: 'Confirmados',
+        backgroundColor: palette.cases.confirmed,
+        data: [18, 5, 19, 27, 29, 19, 20],
+      }, */
+  return {
+    labels: [
+      moment().format('DD/MM'),
+      moment()
+        .add(1, 'day')
+        .format('DD/MM'),
+      moment()
+        .add(1, 'day')
+        .format('DD/MM'),
+      moment()
+        .add(1, 'day')
+        .format('DD/MM'),
+      moment()
+        .add(1, 'day')
+        .format('DD/MM'),
+      moment()
+        .add(1, 'day')
+        .format('DD/MM'),
+    ],
+    datasets: [
+      {
+        label: 'Confirmados',
+        backgroundColor: palette.cases.confirmed,
+        data: [data.confirmed],
+      },
+      {
+        label: 'Descartados',
+        backgroundColor: palette.cases.negative,
+        data: [data.negative],
+      },
+      {
+        label: 'Suspeitos',
+        backgroundColor: palette.cases.suspect,
+        data: [data.suspects],
+      },
+      {
+        label: 'Óbtos',
+        backgroundColor: palette.cases.death,
+        data: [data.deaths],
+      },
+      {
+        label: 'Recuperados',
+        backgroundColor: palette.cases.cured,
+        data: [data.recovered],
+      },
+    ],
+  };
 };
 
 export const options = {

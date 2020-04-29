@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
@@ -12,7 +12,7 @@ import {
   Select,
 } from '@material-ui/core';
 
-import { data, options } from './chart';
+import { dataGraph, options } from './chart';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -44,10 +44,15 @@ const timesRanges = [
 ];
 
 const LatestSales = props => {
-  const { className, ...rest } = props;
+  const { className, casesEvolution, ...rest } = props;
   const classes = useStyles();
 
   const [timeRange, setTimeRange] = useState(1);
+  const [data, setDataGraph] = useState({});
+
+  useEffect(() => {
+    setDataGraph(dataGraph(casesEvolution));
+  }, [casesEvolution]);
 
   const handleChange = e => {
     setTimeRange(e.target.value);
@@ -96,6 +101,7 @@ const LatestSales = props => {
 
 LatestSales.propTypes = {
   className: PropTypes.string,
+  casesEvolution: PropTypes.any,
 };
 
 export default LatestSales;
