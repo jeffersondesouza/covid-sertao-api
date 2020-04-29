@@ -76,9 +76,14 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    if (formState.isValid) {
-      login(formState.values);
+    if (!formState.isValid) {
+      return;
     }
+
+    login({
+      password: formState.values.password.replace(/\(|\)| |\-/g, ''),
+      username: formState.values.username.replace(/\(|\)| |\-/g, ''),
+    });
   };
 
   const hasError = field =>
