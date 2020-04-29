@@ -124,10 +124,10 @@ const Dashboard = () => {
           </NavLink>
         </Grid>
         <Grid item lg={8} md={12} xl={9} xs={12}>
-          <LatestSales />
+          <LatestSales caseReport={caseReport} />
         </Grid>
         <Grid item lg={4} md={6} xl={3} xs={12}>
-          <UsersByDevice />
+          <UsersByDevice caseReport={caseReport} />
         </Grid>
         <Grid item xs={12}>
           <LatestCases cases={lastCases} />
