@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/styles';
 import { Button, Typography, Grid } from '@material-ui/core';
 
 import { SearchInput } from 'view/components';
-import CasesFilter from '../CasesFilter';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProductsToolbar = props => {
-  const { className, ...rest } = props;
+  const { className, onFilter, ...rest } = props;
 
   const classes = useStyles();
 
@@ -55,6 +54,7 @@ const ProductsToolbar = props => {
           <SearchInput
             className={classes.searchInput}
             placeholder="Buscar por nome"
+            onFilter={onFilter}
           />
         </Grid>
       </Grid>

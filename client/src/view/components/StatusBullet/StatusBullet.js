@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
   warning: {
     backgroundColor: theme.palette.warning.main,
   },
+  default: {
+    backgroundColor: theme.palette.info.main,
+  },
   danger: {
     backgroundColor: theme.palette.error.main,
   },
@@ -84,6 +87,7 @@ StatusBullet.propTypes = {
     'death',
     'negative',
     'cured',
+    'default',
   ]),
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

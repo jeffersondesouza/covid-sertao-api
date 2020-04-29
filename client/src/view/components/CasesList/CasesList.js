@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import PropTypes from 'prop-types';
@@ -66,15 +66,7 @@ const statusColors = {
 const CasesList = props => {
   const { cases, className, ...rest } = props;
 
-  const [isolationCases, setIsolationCases] = useState([]);
-
-  useEffect(() => {
-    const isolations = Maybe.of(cases)
-      .get([])
-      .filter(item => item.covidStatus === '6');
-
-    setIsolationCases(isolations);
-  }, [cases]);
+ 
 
   const classes = useStyles();
 
@@ -86,7 +78,7 @@ const CasesList = props => {
             <Table>
               <TableHeader />
               <TableBody>
-                {isolationCases.map(item => (
+                {cases.map(item => (
                   <TableRow hover key={item._id}>
                     <TableCell>{item.fullname}</TableCell>
                     <TableCell align="center">

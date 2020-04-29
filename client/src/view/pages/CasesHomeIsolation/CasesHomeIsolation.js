@@ -7,6 +7,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { CasesList } from 'view/components';
 import { ProductsToolbar } from './components';
 import { Context, useSelector } from 'store/createContext';
+import { Maybe } from 'helpers/functors';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,27 +24,36 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CasesListPage = () => {
+const CasesHomeIsolation = () => {
   const classes = useStyles();
+
+  const caseNotifications = useSelector(
+    state => state.cases.lastCasesNotifications
+  );
 
   const [cases, setCases] = useState([]);
 
   const { loadCases } = useContext(Context);
-
-  const caseNotifications = useSelector(state => state.cases.lastCasesNotifications);
 
   useEffect(() => {
     loadCases();
   }, []);
 
   useEffect(() => {
-    setCases(caseNotifications);
+    const isolations = Maybe.of(caseNotifications)
+      .get([])
+      .filter(item => item.covidStatus === '6');
+
+    setCases(isolations);
   }, [caseNotifications]);
 
+  const handleFilter = fitler => {
+    console.log('fitler:', fitler);
+  };
 
   return (
     <div className={classes.root}>
-      <ProductsToolbar />
+      <ProductsToolbar onFilter={handleFilter} />
       <div className={classes.content}>
         <CasesList cases={cases} />
       </div>
@@ -60,4 +70,4 @@ const CasesListPage = () => {
   );
 };
 
-export default CasesListPage;
+export default CasesHomeIsolation;

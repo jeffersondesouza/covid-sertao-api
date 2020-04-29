@@ -26,14 +26,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SearchInput = props => {
-  const { className, onChange, style, ...rest } = props;
+  const { className, onFilter, style, ...rest } = props;
 
   const classes = useStyles();
 
   const handleChange = e => {
     const value = e.target.value;
-    onChange(value);
+    onFilter(value);
   };
+
+  
 
   return (
     <Paper {...rest} className={clsx(classes.root, className)} style={style}>
@@ -50,7 +52,7 @@ const SearchInput = props => {
 
 SearchInput.propTypes = {
   className: PropTypes.string,
-  onChange: PropTypes.func,
+  onFilter: PropTypes.func,
   style: PropTypes.object,
 };
 
