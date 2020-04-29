@@ -32,12 +32,7 @@ const Sidebar = props => {
       href: '/dashboard',
       icon: <DashboardIcon />,
     },
-    {
-      title: 'Atualizar Boletim',
-      href: '/atualizar-boletim',
-      icon: <DashboardIcon />,
-      hide: !user.isAdmin && !user.isSuperUser,
-    },
+
     {
       title: 'Casos e Notificações',
       href: '/cases',
@@ -47,6 +42,12 @@ const Sidebar = props => {
       title: 'Isolamento Domiciliar',
       href: '/isolamento-domiciliar',
       icon: <Assignment />,
+    },
+    {
+      title: 'Atualizar Boletim',
+      href: '/atualizar-boletim',
+      icon: <DashboardIcon />,
+      hide: !user.isAdmin && !user.isSuperUser,
     },
     {
       title: 'Equipe',
