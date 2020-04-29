@@ -44,11 +44,20 @@ const CasesHomeIsolation = () => {
       .get([])
       .filter(item => item.covidStatus === '6');
 
+    console.log('isolations:', isolations);
     setCases(isolations);
   }, [caseNotifications]);
 
-  const handleFilter = fitler => {
-    console.log('fitler:', fitler);
+  const handleFilter = filter => {
+    const isolations = Maybe.of(caseNotifications)
+      .get([])
+      .filter(
+        item =>
+          item.covidStatus === '6' &&
+          item.fullname.toLowerCase().includes(filter.toLowerCase())
+      );
+
+    setCases(isolations);
   };
 
   return (
